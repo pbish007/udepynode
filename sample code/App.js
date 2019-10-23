@@ -8,12 +8,11 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-        This is my edit.
-        </p>
-        <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <p><a href ="/auth/google/">Sign in with Google</a></p>
+        <p>
+          <a href ="/auth/google/">Sign in with Google</a>
+        </p>
 
         <a
           className="App-link"
