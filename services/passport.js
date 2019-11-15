@@ -26,12 +26,20 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne( {googleId: profile.id });
+      console.log('profile', profile);
 
       if (existingUser){
          return done(null, existingUser);
       }
 
-      const user = await new User({googleId: profile.id }).save();
+      const user = await new User(
+        {googleId: profile.id,
+         fullName: profile.displayName,
+         userImg: profile.photos[0].value,
+         userEmail: profile.emails[0].value,
+         firstName: profile.name.givenName,
+         lastName: profile.name.familyName
+       }).save();
       done(null, user);
     }
   )

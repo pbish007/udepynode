@@ -7,6 +7,10 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
+//temp code for testing the survey
+import axios from 'axios';
+window.axios = axios;
+//temp code for testing
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
