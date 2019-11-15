@@ -9,3 +9,5 @@ module.exports = {
   sendGridKey: process.env.SEND_GRID_KEY,
   redirectDomain: procss.env.REDIRECT_DOMAIN
 };
+
+//fixed this fucking file
