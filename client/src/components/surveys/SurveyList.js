@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchSurveys } from '../../actions';
 
 class SurveyList extends Component {
-
   componentDidMount() {
     this.props.fetchSurveys();
   }
@@ -41,7 +40,6 @@ class SurveyList extends Component {
 
 function mapStateToProps({ surveys }) {
   return { surveys };
-
 }
 
-export default connect(mapStateToProps, { fetchSurveys})(SurveyList);
+export default connect(mapStateToProps, { fetchSurveys })(SurveyList);

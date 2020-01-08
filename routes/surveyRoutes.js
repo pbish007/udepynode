@@ -1,7 +1,6 @@
 const _ = require('lodash');
-const Path = require('path-parser').default;
+const Path = require('path-parser');
 const { URL } = require('url');
-
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
@@ -11,25 +10,20 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-  app.get('/api/surveys',requireLogin, async (req, res) => {
-    const surveys = await Survey.find({_user: req.user.id})
-    // do not provide list of recipients
-     .select({recipients: false});
+  app.get('/api/surveys', requireLogin, async (req, res) => {
+    const surveys = await Survey.find({ _user: req.user.id }).select({
+      recipients: false
+    });
 
     res.send(surveys);
   });
 
-  app.get('/api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });
 
   app.post('/api/surveys/webhooks', (req, res) => {
-
-// getting the webhook data
-//    -first removing elements that are not defined with .compact
-//    -removing dups  with .uniqBy
-
-const p = new Path('/api/surveys/:surveyId/:choice');
+    const p = new Path('/api/surveys/:surveyId/:choice');
 
     _.chain(req.body)
       .map(({ email, url }) => {
@@ -60,7 +54,6 @@ const p = new Path('/api/surveys/:surveyId/:choice');
     res.send({});
   });
 
-
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
@@ -73,18 +66,18 @@ const p = new Path('/api/surveys/:surveyId/:choice');
       dateSent: Date.now()
     });
 
-    // great place to send email!
+    // Great place to send an email!
     const mailer = new Mailer(survey, surveyTemplate(survey));
 
     try {
       await mailer.send();
-  // saving data to the database and then updating the user credits
       await survey.save();
-      req.user.credits -=1;
+      req.user.credits -= 1;
       const user = await req.user.save();
+
       res.send(user);
     } catch (err) {
-        res.status(422).send(err);
+      res.status(422).send(err);
     }
   });
 };

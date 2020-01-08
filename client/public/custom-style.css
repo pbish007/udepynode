@@ -1,0 +1,29 @@
+.iris {
+  background-image: url('../car-house.jpeg');
+  background-repeat: no-repeat;
+  height: 85vh;
+  background-size: cover;
+  text-align: center;
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
+}
+.introduction {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    bottom: auto;
+    right: auto;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+    width: 100%;
+}
+.p-container {
+    margin-top: 10px !important;
+}
+.h-padding {
+  padding-right: ($spacer * .5) !important;
+}

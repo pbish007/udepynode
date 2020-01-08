@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payments from './Payments';
-
+import Dropdown from './Dropdown';
 
 class Header extends Component {
   renderContent() {
@@ -10,35 +10,29 @@ class Header extends Component {
       case null:
           return;
       case false:
-          return;
+          return <li><a href="/auth/google">Login</a></li>;
       default:
 //returning an array for the header
           return [
-            <ul class="navbar-nav">
+            <li key="1"><Payments /></li>,
+            <li key="2" style={{ margin: '0 10px'}}> Credits: {this.props.auth.credits} </li>,
 
-            <li>
-               <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle btn-md" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img alt="User profile" class="rounded-circle" width="40" height="40" src={this.props.auth.userImg}/>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                  <a class="dropdown-item" href="/profiles">Profile</a>
-                  <a class="dropdown-item" href="/api/logout">Logout</a>
-                </div>
-              </div>
+            <li key="3"style={{ margin: '0 10px'}}><Dropdown />
+            <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+            <div class="chip">
+              <img alt="User profile" class="circle responsive-img" width="30" height="30" src={this.props.auth.userImg}/>
+              {this.props.auth.firstName}
+            </div><i className="material-icons right">arrow_drop_down</i></a>
             </li>
 
-
-
-            </ul>
         ];
     }
   }
+
+
   render() {
     return (
-      <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
           <Link to= {this.props.auth ? '/' : '/'}
           class="navbar-brand">Tamzoo</Link>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,16 +51,28 @@ class Header extends Component {
                 <Link to= {this.props.auth ? '/surveys': '/'}
                 class="nav-link">Auto</Link>
                 </li>
-              <li class="nav-item">
-                <Link to= {this.props.auth ? '/surveys': '/'}
-                class="nav-link">Boat</Link>
-                </li>
             </ul>
-               {this.renderContent()}
+            <span class="navbar-text">
+              Navbar text 
+              <img alt="User profile" class="circle responsive-img" width="30" height="30" src={this.props.auth.userImg}/>
+              {this.props.auth.firstName}
+            </span>
+
           </div>
         </nav>
-        </div>
 
+//      <nav className="blue">
+//       <div className="nav-wrapper">
+//          <Link to= {this.props.auth ? '/surveys' : '/'}
+//          style={{ margin: '0 10px'}}
+//          className="left brand-logo"
+//          ><i className="material-icons left">house</i>
+//          Tamzoo</Link>
+//          <ul className="right hide-on-med-and-down">
+//            {this.renderContent()}
+//          </ul>
+//        </div>
+//       </nav>
     );
   }
 }

@@ -4,22 +4,24 @@ import SurveyList from './surveys/SurveyList';
 
 const Dashboard = () => {
   return (
-    <div>
-    <SurveyList />
-      <div>
-            <div class="card grey darken-1">
-              <div class="card-content white-text">
-                <span class="card-title">Creat a New Survey</span>
-                <div className="btn-floating red btn-large white-text right">
-                      <Link to="/surveys/new">
-                        <i className="large material-icons">add</i>
-                      </Link>
-                    </div>
-              </div>
-            </div>
-          </div>
+
+// NEW Stuff
+
+<div class="row">
+  <div class="col s3">
+    <div className="btn-floating red btn-small white-text bottom">
+          <Link to="/surveys/new">
+            <i className="large material-icons">add</i>
+          </Link>
 
     </div>
+  </div>
+
+  <div class="col s9">
+      <p><SurveyList /></p>
+  </div>
+
+</div>
   );
 };
 
