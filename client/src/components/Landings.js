@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import * as actions from '../actions';
-
-
 
 class Landing extends Component {
 
@@ -16,7 +12,7 @@ class Landing extends Component {
       default:
           return [
               <div class="container">
-              <p class="text-white">Welcome Back : {this.props.auth.firstName} </p>
+              <p class="text-white">Welcome: {this.props.auth.firstName} </p>
               </div>
           ];
 
@@ -31,7 +27,7 @@ class Landing extends Component {
 
         <div class="jumbotron iris" >
             <div class="container introduction" >
-                <h1 class="text-white font-weight-bold">We'll help you manage your tanagibles</h1>
+                <h3 class="text-white font-weight-bold">We'll help you manage your tangibles</h3>
                 {this.renderContent()}
             </div>
         </div>

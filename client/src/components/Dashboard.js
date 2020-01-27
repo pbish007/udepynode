@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
 
 // NEW Stuff
-
+<div class="container">
 <div class="row">
   <div class="col s3">
     <div className="btn-floating red btn-small white-text bottom">
@@ -21,6 +21,7 @@ const Dashboard = () => {
       <p><SurveyList /></p>
   </div>
 
+</div>
 </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Payments from './Payments';
+//import Payments from './Payments';
 
 
 class Header extends Component {
@@ -15,22 +15,17 @@ class Header extends Component {
 //returning an array for the header
           return [
             <ul class="navbar-nav">
-
             <li>
                <div class="dropdown">
                 <button class="btn btn-dark dropdown-toggle btn-md" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img alt="User profile" class="rounded-circle" width="40" height="40" src={this.props.auth.userImg}/>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
                   <a class="dropdown-item" href="/profiles">Profile</a>
                   <a class="dropdown-item" href="/api/logout">Logout</a>
                 </div>
               </div>
             </li>
-
-
-
             </ul>
         ];
     }
@@ -47,7 +42,7 @@ class Header extends Component {
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/profiles">Dashboard <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <Link to= {this.props.auth ? '/housedb': '/'}
