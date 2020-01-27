@@ -1,41 +1,40 @@
-
 var Css = {
   pointer: {
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   gear: {
     fontSize: '1.7em',
     cursor: 'pointer',
     color: 'black',
     padding: '14px',
-    border: 'none'
+    border: 'none',
   },
   triangle: {
     fontSize: '0.9em',
     cursor: 'pointer',
     color: '#000000',
     padding: '14px',
-    border: 'none'
+    border: 'none',
   },
   imageTrigger: {
     height: '50px',
     width: '50px',
     cursor: 'pointer',
     padding: '3px',
-    border: 'none'
+    border: 'none',
   },
   textTrigger: {
     cursor: 'pointer',
     padding: '14px',
     border: 'none',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   menu: {
     position: 'relative',
-    display: 'inline-block'
+    display: 'inline-block',
   },
   menuItem: {
-    float: 'left'
+    float: 'left',
   },
   menuContent: {
     display: 'none',
@@ -46,17 +45,17 @@ var Css = {
     minWidth: '180px',
     padding: '12px',
     overflow: 'auto',
-    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)'
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
   },
   show: {
-    display: 'block'
+    display: 'block',
   },
   separator: {
     width: '100%',
     padding: '3px',
     marginTop: '10px',
-    marginBottom: '3px'
-  }
-}
+    marginBottom: '3px',
+  },
+};
 
 export default Css;

@@ -4,25 +4,17 @@ import HouseForm from './HouseForm';
 import SurveyFormReview from './HouseFormReview';
 
 class HouseNew extends Component {
-
   state = { showFormReview: false };
 
   renderContent() {
     if (this.state.showFormReview) {
-      return (
-        <HouseFormReview
-          onCancel={() => this.setState({ showFormReview: false})}
-          />
-      );
+      return <HouseFormReview onCancel={() => this.setState({ showFormReview: false })} />;
     }
-    return (
-      <HouseForm onSurveySubmit={() => this.setState({ showFormReview: true })}
-        />
-    );
+    return <HouseForm onSurveySubmit={() => this.setState({ showFormReview: true })} />;
   }
 
   render() {
-    return(
+    return (
       <div>
         <div class="row">
           <div class="col s6 m12 right">
@@ -40,5 +32,5 @@ class HouseNew extends Component {
 }
 
 export default reduxForm({
-  form:'houseForm'
+  form: 'houseForm',
 })(HouseNew);

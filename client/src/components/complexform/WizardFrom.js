@@ -25,19 +25,12 @@ class WizardForm extends Component {
     const { onSubmit } = this.props;
     const { page } = this.state;
     return (
-
       <div class="container p-container">
         {page === 1 && <WizardFormFirstPage onSubmit={this.nextPage} />}
-        {page === 2 &&
-          <WizardFormSecondPage
-            previousPage={this.previousPage}
-            onSubmit={this.nextPage}
-          />}
-        {page === 3 &&
-          <WizardFormThirdPage
-            previousPage={this.previousPage}
-            onSubmit={onSubmit}
-          />}
+        {page === 2 && (
+          <WizardFormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} />
+        )}
+        {page === 3 && <WizardFormThirdPage previousPage={this.previousPage} onSubmit={onSubmit} />}
       </div>
     );
   }
