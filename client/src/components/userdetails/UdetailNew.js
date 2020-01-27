@@ -4,10 +4,10 @@ import UdetailForm from './UdetailForm';
 class UdetailNew extends Component {
   render() {
     return (
-    <div>
-      <UdetailForm />
-    </div>
-  );
+      <div>
+        <UdetailForm />
+      </div>
+    );
   }
 }
 

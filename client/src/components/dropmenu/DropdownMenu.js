@@ -18,8 +18,8 @@ class DropdownMenu extends React.Component {
     const items = document.getElementById(this.MENUITEMS_DIV);
 
     if (items) {
-      items.classList.toggle("show");
-      if (this.props.fadeIn && this.props.fadeIn == "true") {
+      items.classList.toggle('show');
+      if (this.props.fadeIn && this.props.fadeIn == 'true') {
         this.fadeIn(document.getElementById(this.MENUITEMS_DIV));
       }
       this.toggleArrow(e);
@@ -30,11 +30,10 @@ class DropdownMenu extends React.Component {
     const carat = document.getElementById(this.CARAT_CLASS);
 
     if (carat) {
-      if (carat.className === "glyphicon glyphicon-triangle-top") {
-        carat.className = "glyphicon glyphicon-triangle-bottom";
-      }
-      else {
-        carat.className = "glyphicon glyphicon-triangle-top";
+      if (carat.className === 'glyphicon glyphicon-triangle-top') {
+        carat.className = 'glyphicon glyphicon-triangle-bottom';
+      } else {
+        carat.className = 'glyphicon glyphicon-triangle-top';
       }
     }
   }
@@ -46,7 +45,7 @@ class DropdownMenu extends React.Component {
       element.style.opacity = +element.style.opacity + 0.04;
 
       if (+element.style.opacity < 1) {
-        (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
+        (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
       }
     };
 
@@ -57,7 +56,10 @@ class DropdownMenu extends React.Component {
     if (this.props.userName) {
       return (
         <div>
-          <p>Logged in as: <br /><strong>{this.props.userName}</strong></p>
+          <p>
+            Logged in as: <br />
+            <strong>{this.props.userName}</strong>
+          </p>
           <hr style={Css.separator} />
         </div>
       );
@@ -66,37 +68,48 @@ class DropdownMenu extends React.Component {
 
   getTrigger() {
     if (this.props.triggerType && this.props.trigger) {
-      switch(this.props.triggerType.toLowerCase()) {
-        case "image":
+      switch (this.props.triggerType.toLowerCase()) {
+        case 'image':
           var triggerStyle = Css.imageTrigger;
           var caratStyle = Css.triangle;
 
-          if (this.props.triggerWidth) { triggerStyle.width = this.props.triggerWidth; }
-          if (this.props.triggerHeight) { triggerStyle.height = this.props.triggerHeight; }
-          if (this.props.caratColor) { caratStyle.color = this.props.caratColor; }
+          if (this.props.triggerWidth) {
+            triggerStyle.width = this.props.triggerWidth;
+          }
+          if (this.props.triggerHeight) {
+            triggerStyle.height = this.props.triggerHeight;
+          }
+          if (this.props.caratColor) {
+            caratStyle.color = this.props.caratColor;
+          }
 
           return (
             <div onClick={this.toggleMenu}>
               <img src={this.props.trigger} style={triggerStyle} className={this.TRIGGER_CLASS} />
-              <span id={this.CARAT_CLASS} className="glyphicon glyphicon-triangle-bottom" style={caratStyle}></span>
+              <span
+                id={this.CARAT_CLASS}
+                className="glyphicon glyphicon-triangle-bottom"
+                style={caratStyle}></span>
             </div>
           );
-        case "text":
+        case 'text':
           return (
             <div className={this.TRIGGER_CLASS} onClick={this.toggleMenu} style={Css.textTrigger}>
               {this.props.trigger}&nbsp;&nbsp;
-              <span id={this.CARAT_CLASS} className="glyphicon glyphicon-triangle-bottom" style={caratStyle}></span>
+              <span
+                id={this.CARAT_CLASS}
+                className="glyphicon glyphicon-triangle-bottom"
+                style={caratStyle}></span>
             </div>
           );
-        case "icon":
+        case 'icon':
           return (
             <span className={this.props.trigger} style={Css.gear} onClick={this.toggleMenu}></span>
           );
         default:
           throw "The value for DropdownMenu 'triggerType' is not supported for DropdownMenu. Try 'image', 'text' or 'icon'.";
       }
-    }
-    else {
+    } else {
       return (
         <span className="glyphicon glyphicon-cog" style={Css.gear} onClick={this.toggleMenu}></span>
       );
@@ -104,7 +117,7 @@ class DropdownMenu extends React.Component {
   }
 
   getMenuStyle() {
-    const menuStyle = (JSON.parse(JSON.stringify(Css.menuContent))); // Clone the current style
+    const menuStyle = JSON.parse(JSON.stringify(Css.menuContent)); // Clone the current style
     const position = this.props.position === undefined ? 'right' : this.props.position;
     const supportedPositions = ['left', 'center', 'right'];
 
@@ -113,15 +126,15 @@ class DropdownMenu extends React.Component {
     }
 
     if (position) {
-      var baseWidth = parseInt(Css.menuContent.minWidth.replace('px',''));
+      var baseWidth = parseInt(Css.menuContent.minWidth.replace('px', ''));
       var offset = 0;
       baseWidth = baseWidth - 40;
 
       // We need to use negative numbers as we are offsetting menu to the left
-      if (position === "center") {
+      if (position === 'center') {
         offset = (baseWidth / 2) * -1;
       }
-      if (position === "left") {
+      if (position === 'left') {
         offset = baseWidth * -1;
       }
 
@@ -136,18 +149,22 @@ class DropdownMenu extends React.Component {
     const MENUITEMS_DIV = this.MENUITEMS_DIV;
     const CARAT_CLASS = this.CARAT_CLASS;
 
-    window.addEventListener("click", function(e) {
+    window.addEventListener('click', function(e) {
       const klass = e.target.className;
       const carat = document.getElementById(CARAT_CLASS);
 
-      if (klass !== MENUITEMS_DIV + " show" && klass !== TRIGGER_CLASS && !klass.lastIndexOf("glyphicon", 0) == 0) {
+      if (
+        klass !== MENUITEMS_DIV + ' show' &&
+        klass !== TRIGGER_CLASS &&
+        !klass.lastIndexOf('glyphicon', 0) == 0
+      ) {
         var menuItemDiv = document.getElementById(MENUITEMS_DIV);
 
         if (menuItemDiv) {
           menuItemDiv.classList.remove('show');
 
           if (carat) {
-            carat.className = "glyphicon glyphicon-triangle-bottom";
+            carat.className = 'glyphicon glyphicon-triangle-bottom';
           }
         }
       }
@@ -156,7 +173,7 @@ class DropdownMenu extends React.Component {
 
   render() {
     if (this.props.children.length === 0) {
-      throw "DropdownMenu must have at least one MenuItem child."
+      throw 'DropdownMenu must have at least one MenuItem child.';
     }
 
     return (
@@ -169,6 +186,6 @@ class DropdownMenu extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default DropdownMenu;

@@ -15,14 +15,10 @@ const WizardFormSecondPage = props => {
         <label>Sex</label>
         <div>
           <label>
-            <Field name="sex" component="input" type="radio" value="male" />
-            {' '}
-            Male
+            <Field name="sex" component="input" type="radio" value="male" /> Male
           </label>
           <label>
-            <Field name="sex" component="input" type="radio" value="female" />
-            {' '}
-            Female
+            <Field name="sex" component="input" type="radio" value="female" /> Female
           </label>
           <Field name="sex" component={renderError} />
         </div>
@@ -31,7 +27,9 @@ const WizardFormSecondPage = props => {
         <button type="button" className="previous" onClick={previousPage}>
           Previous
         </button>
-        <button type="submit" className="next">Next</button>
+        <button type="submit" className="next">
+          Next
+        </button>
       </div>
     </form>
   );

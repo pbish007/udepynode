@@ -1,10 +1,7 @@
 //import 'materialize-css/dist/css/materialize.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import $ from 'jquery';
-//import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.css';
-
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -22,8 +19,10 @@ window.axios = axios;
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
-  <Provider store={store}><App /></Provider>,
-  document.querySelector('#root')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector('#root'),
 );
 
 console.log('STRIPE KEY IS', process.env.REACT_APP_STRIPE_KEY);
