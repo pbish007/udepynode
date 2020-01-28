@@ -11,42 +11,42 @@ class Profiles extends Component {
         return <li> NOT Authorized</li>;
       default:
         return [
-          <div class="container">
-            <div class="card mb-3">
-              <div class="row no-gutters">
-                <div class="col-md-4 text-center p-container">
+          <div className="container">
+            <div className="card mb-3">
+              <div className="row no-gutters">
+                <div className="col-md-4 text-center p-container">
                   <img
                     alt="User profile"
-                    class="rounded-circle"
+                    className="rounded-circle"
                     width="200"
                     height="200"
                     src={this.props.auth.userImg}
                   />
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Google Profile</h5>
-                    <p class="card-text">First Name: {this.props.auth.firstName} </p>
-                    <p class="card-text">Last Name: {this.props.auth.lastName} </p>
-                    <p class="card-text">email: {this.props.auth.userEmail} </p>
-                    <p class="card-text">credits: {this.props.auth.credits} </p>
-                    <p class="card-text">
-                      <small class="text-muted">Last updated 3 mins ago</small>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title">Google Profile</h5>
+                    <p className="card-text">First Name: {this.props.auth.firstName} </p>
+                    <p className="card-text">Last Name: {this.props.auth.lastName} </p>
+                    <p className="card-text">email: {this.props.auth.userEmail} </p>
+                    <p className="card-text">credits: {this.props.auth.credits} </p>
+                    <p className="card-text">
+                      <small className="text-muted">Last updated 3 mins ago</small>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="card mb-3">
-              <div class="row no-gutters">
-                <div class="col-md-2 text-center p-container">
-                  <a class="nav-link text-black-50" href="/udetail">
+            <div className="card mb-3">
+              <div className="row no-gutters">
+                <div className="col-md-2 text-center p-container">
+                  <a className="nav-link text-black-50" href="/udetail">
                     <i className="med material-icons">directions_car</i>- Auto
                   </a>
                 </div>
-                <div class="col-md-10">
-                  <div class="card-body">shit goes here</div>
+                <div className="col-md-10">
+                  <div className="card-body">shit goes here</div>
                 </div>
               </div>
             </div>
@@ -68,11 +68,11 @@ class Profiles extends Component {
 
   render() {
     return (
-      <div class="container p-container">
-        <div class="row">
-          <div class="col-2">{this.renderSideContent()}</div>
+      <div className="container p-container">
+        <div className="row">
+          <div className="col-2">{this.renderSideContent()}</div>
 
-          <div class="col-10">{this.renderContent()}</div>
+          <div className="col-10">{this.renderContent()}</div>
         </div>
       </div>
     );

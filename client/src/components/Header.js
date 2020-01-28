@@ -13,11 +13,11 @@ class Header extends Component {
       default:
         //returning an array for the header
         return [
-          <ul class="navbar-nav">
+          <ul className="navbar-nav">
             <li>
-              <div class="dropdown">
+              <div className="dropdown">
                 <button
-                  class="btn btn-dark dropdown-toggle btn-md"
+                  className="btn btn-dark dropdown-toggle btn-md"
                   type="button"
                   id="dropdownMenuButton"
                   data-toggle="dropdown"
@@ -25,17 +25,17 @@ class Header extends Component {
                   aria-expanded="false">
                   <img
                     alt="User profile"
-                    class="rounded-circle"
+                    className="rounded-circle"
                     width="40"
                     height="40"
                     src={this.props.auth.userImg}
                   />
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="/profiles">
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a className="dropdown-item" href="/profiles">
                     Profile
                   </a>
-                  <a class="dropdown-item" href="/api/logout">
+                  <a className="dropdown-item" href="/api/logout">
                     Logout
                   </a>
                 </div>
@@ -47,40 +47,40 @@ class Header extends Component {
   }
   render() {
     return (
-      <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <Link to={this.props.auth ? '/' : '/'} class="navbar-brand">
+      <div className="container">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <Link to={this.props.auth ? '/' : '/'} className="navbar-brand">
             Tamzoo
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarText"
             aria-controls="navbarText"
             aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/profiles">
-                  Dashboard <span class="sr-only">(current)</span>
+          <div className="collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <a className="nav-link" href="/profiles">
+                  Dashboard <span className="sr-only">(current)</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <Link to={this.props.auth ? '/housedb' : '/'} class="nav-link">
+              <li className="nav-item">
+                <Link to={this.props.auth ? '/housedb' : '/'} className="nav-link">
                   House
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link to={this.props.auth ? '/surveys' : '/'} class="nav-link">
+              <li className="nav-item">
+                <Link to={this.props.auth ? '/surveys' : '/'} className="nav-link">
                   Auto
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link to={this.props.auth ? '/surveys' : '/'} class="nav-link">
+              <li className="nav-item">
+                <Link to={this.props.auth ? '/surveys' : '/'} className="nav-link">
                   Boat
                 </Link>
               </li>

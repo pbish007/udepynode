@@ -16,11 +16,11 @@ class HouseNew extends Component {
   render() {
     return (
       <div>
-        <div class="row">
-          <div class="col s6 m12 right">
-            <div class="card white darken-1">
-              <div class="card-content Black-text">
-                <span class="card-title">Create a New Survey</span>
+        <div className="row">
+          <div className="col s6 m12 right">
+            <div className="card white darken-1">
+              <div className="card-content Black-text">
+                <span className="card-title">Create a New Survey</span>
                 {this.renderContent()}
               </div>
             </div>
