@@ -12,8 +12,6 @@ import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
 import Footer from './Footer';
 import Profiles from './Profiles';
-//import Housedb from './Housedb';
-//import WizardForm from './complexform/WizardFrom';
 import UdetailForm from './userdetails/UdetailForm';
 import { HouseWizard } from './houseWizard';
 
