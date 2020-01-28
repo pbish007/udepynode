@@ -13,9 +13,9 @@ import SurveyNew from './surveys/SurveyNew';
 import Footer from './Footer';
 import Profiles from './Profiles';
 //import Housedb from './Housedb';
-import WizardForm from './complexform/WizardFrom';
+//import WizardForm from './complexform/WizardFrom';
 import UdetailForm from './userdetails/UdetailForm';
-import UdetailNew from './userdetails/UdetailNew';
+import { HouseWizard } from './houseWizard';
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +28,7 @@ class App extends Component {
         <div className="container">
           <Header />
           <Route exact path="/" component={Landing} />
-          <Route exact path="/housedb" component={WizardForm} />
+          <Route exact path="/housedb" component={HouseWizard} />
           <Route exact path="/udetail" component={UdetailForm} />
           <Route exact path="/surveys" component={Dashboard} />
           <Route exact path="/surveys/new" component={SurveyNew} />

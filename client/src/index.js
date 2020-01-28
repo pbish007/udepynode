@@ -2,6 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.css';
+import {ThemeProvider, theme} from '@chakra-ui/core';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -19,9 +20,11 @@ window.axios = axios;
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
+  <ThemeProvider theme={theme}>
   <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
+  </ThemeProvider>,
   document.querySelector('#root'),
 );
 
