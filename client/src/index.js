@@ -1,8 +1,5 @@
-//import 'materialize-css/dist/css/materialize.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import 'bootstrap/dist/css/bootstrap.css';
-import { ThemeProvider, theme } from '@chakra-ui/core';
+import { ThemeProvider, theme, CSSReset } from '@chakra-ui/core';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -21,6 +18,7 @@ const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
+    <CSSReset />
     <Provider store={store}>
       <App />
     </Provider>
