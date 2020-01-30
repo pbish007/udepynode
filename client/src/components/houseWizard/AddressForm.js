@@ -10,24 +10,20 @@ import {
   Button,
   Flex,
 } from '@chakra-ui/core';
-import { exists } from './validation/rules';
 import get from 'lodash.get';
 
-function validateName(value) {
-  let error;
-  if (!exists(value)) {
-    error = 'Name is required';
-  }
-  return error || true;
-}
-
 const ADDRESS1_FIELD = 'address.street';
+const CITY_FIELD = 'address.city';
+const ZIP_FIELD = 'address.zip';
+const COUNTRY_FIELD = 'address.country';
 
 // eslint-disable-next-line react/prop-types
-const FormField = ({ errors, fieldName, label, children }) => {
+export const FormField = ({ errors, fieldName, label, children }) => {
   return (
-    <FormControl isInvalid={get(errors, fieldName)}>
-      <FormLabel htmlFor={fieldName}>{label}</FormLabel>
+    <FormControl isInvalid={get(errors, fieldName)} mb={1}>
+      <FormLabel htmlFor={fieldName} mb={0}>
+        {label}
+      </FormLabel>
       {children}
       <FormErrorMessage>{get(errors, `${fieldName}.message`)}</FormErrorMessage>
     </FormControl>
@@ -35,7 +31,6 @@ const FormField = ({ errors, fieldName, label, children }) => {
 };
 
 export const AddressForm = ({ register, errors, goToNextStep }) => {
-  console.log('values', get(errors, ADDRESS1_FIELD));
   return (
     <Box p={4}>
       <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)']} gap={[0, null, 4]}>
@@ -45,6 +40,27 @@ export const AddressForm = ({ register, errors, goToNextStep }) => {
               name={ADDRESS1_FIELD}
               placeholder="Street"
               ref={register({ required: 'Street is required' })}
+            />
+          </FormField>
+          <FormField errors={errors} fieldName={CITY_FIELD} label="City/Town">
+            <Input
+              name={CITY_FIELD}
+              placeholder="City/Town"
+              ref={register({ required: 'City/Town is required' })}
+            />
+          </FormField>
+          <FormField errors={errors} fieldName={ZIP_FIELD} label="Zip/Postal">
+            <Input
+              name={ZIP_FIELD}
+              placeholder="Zip/Postal"
+              ref={register({ required: 'Zip/Postal is required' })}
+            />
+          </FormField>
+          <FormField errors={errors} fieldName={COUNTRY_FIELD} label="Country">
+            <Input
+              name={COUNTRY_FIELD}
+              placeholder="Country"
+              ref={register({ required: 'Country is required' })}
             />
           </FormField>
         </Box>

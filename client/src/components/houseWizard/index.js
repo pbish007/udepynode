@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, Text } from '@chakra-ui/core';
+import { Box, Button, Flex } from '@chakra-ui/core';
 import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@chakra-ui/core';
 import { AddressForm } from './AddressForm';
+import { SupportForm } from './SupportForm';
+import { FinancialsForm } from './FinancialsForm';
+import { UtilitiesForm } from './UtilitiesForm';
 
 export const HouseWizard = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
-  const formProps = useForm();
-  const { handleSubmit, errors, register, formState } = formProps;
+  const formProps = useForm({ mode: 'onBlur' });
+  const { handleSubmit, errors, register } = formProps;
 
-  console.log('formState', formState.touched);
-
-  const onSubmit = () => {};
-
-  const goToNextStep = () => {
-    setCurrentStep(currentStep + 1);
+  const onSubmit = values => {
+    console.log('values', values);
   };
+
   const setStep = step => () => setCurrentStep(step);
   const setStep0 = setStep(0);
   const setStep1 = setStep(1);
@@ -25,6 +25,12 @@ export const HouseWizard = () => {
 
   return (
     <Box p="15px">
+      <Flex justifyContent="flex-start" mb={2}>
+        <Button onClick={() => {}} type="button" leftIcon="arrow-back" variant="ghost">
+          Dashboard
+        </Button>
+      </Flex>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Tabs index={currentStep}>
           <TabList>
@@ -36,16 +42,31 @@ export const HouseWizard = () => {
 
           <TabPanels>
             <TabPanel>
-              <AddressForm register={register} errors={errors} goToNextStep={goToNextStep} />
+              <AddressForm register={register} errors={errors} goToNextStep={setStep1} />
             </TabPanel>
             <TabPanel>
-              <p>Financials</p>
+              <FinancialsForm
+                register={register}
+                errors={errors}
+                goToNextStep={setStep2}
+                goToPreviousStep={setStep0}
+              />
             </TabPanel>
             <TabPanel>
-              <p>Utilities</p>
+              <UtilitiesForm
+                register={register}
+                errors={errors}
+                goToNextStep={setStep3}
+                goToPreviousStep={setStep1}
+              />
             </TabPanel>
             <TabPanel>
-              <p>Support</p>
+              <SupportForm
+                errors={errors}
+                register={register}
+                goToPreviousStep={setStep2}
+                submitForm={handleSubmit(onSubmit)}
+              />
             </TabPanel>
           </TabPanels>
         </Tabs>
