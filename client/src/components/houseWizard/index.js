@@ -10,6 +10,8 @@ export const HouseWizard = () => {
   const formProps = useForm();
   const { handleSubmit, errors, register, formState } = formProps;
 
+  console.log('formState', formState.touched);
+
   const onSubmit = values => {
     setIsSubmitting(true);
 

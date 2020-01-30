@@ -23,7 +23,7 @@ class App extends Component {
         <div className="container">
           <Header />
           <Route exact path="/" component={Landing} />
-          <Route exact path="/housedb" component={HouseWizard} />
+          <Route exact path="/house/add" component={HouseWizard} />
           <Route exact path="/udetail" component={UdetailForm} />
           <Route exact path="/surveys" component={Dashboard} />
           <Route exact path="/surveys/new" component={SurveyNew} />
