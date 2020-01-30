@@ -11,6 +11,7 @@ import {
   Flex,
 } from '@chakra-ui/core';
 import get from 'lodash.get';
+import { useForm } from 'react-hook-form';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
@@ -30,48 +31,63 @@ export const FormField = ({ errors, fieldName, label, children }) => {
   );
 };
 
-export const AddressForm = ({ register, errors, goToNextStep }) => {
-  return (
-    <Box p={4}>
-      <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)']} gap={[0, null, 4]}>
-        <Box>
-          <FormField errors={errors} fieldName={ADDRESS1_FIELD} label="Street">
-            <Input
-              name={ADDRESS1_FIELD}
-              placeholder="Street"
-              ref={register({ required: 'Street is required' })}
-            />
-          </FormField>
-          <FormField errors={errors} fieldName={CITY_FIELD} label="City/Town">
-            <Input
-              name={CITY_FIELD}
-              placeholder="City/Town"
-              ref={register({ required: 'City/Town is required' })}
-            />
-          </FormField>
-          <FormField errors={errors} fieldName={ZIP_FIELD} label="Zip/Postal">
-            <Input
-              name={ZIP_FIELD}
-              placeholder="Zip/Postal"
-              ref={register({ required: 'Zip/Postal is required' })}
-            />
-          </FormField>
-          <FormField errors={errors} fieldName={COUNTRY_FIELD} label="Country">
-            <Input
-              name={COUNTRY_FIELD}
-              placeholder="Country"
-              ref={register({ required: 'Country is required' })}
-            />
-          </FormField>
-        </Box>
-      </Grid>
+export const AddressForm = ({ goToNextStep, setIsAddressFormValid }) => {
+  const formProps = useForm({ mode: 'onBlur' });
+  const { handleSubmit, errors, register, formState } = formProps;
 
-      <Flex justifyContent="flex-end" pt={2}>
-        <Button onClick={goToNextStep} type="button" rightIcon="arrow-forward" variant="outline">
-          Financials
-        </Button>
-      </Flex>
-    </Box>
+  React.useEffect(() => {
+    setIsAddressFormValid(formState.isValid);
+  }, [formState.isValid, setIsAddressFormValid]);
+
+  const onSubmit = values => {
+    if (formState.isValid) {
+      goToNextStep();
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box p={4}>
+        <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)']} gap={[0, null, 4]}>
+          <Box>
+            <FormField errors={errors} fieldName={ADDRESS1_FIELD} label="Street">
+              <Input
+                name={ADDRESS1_FIELD}
+                placeholder="Street"
+                ref={register({ required: 'Street is required' })}
+              />
+            </FormField>
+            <FormField errors={errors} fieldName={CITY_FIELD} label="City/Town">
+              <Input
+                name={CITY_FIELD}
+                placeholder="City/Town"
+                ref={register({ required: 'City/Town is required' })}
+              />
+            </FormField>
+            <FormField errors={errors} fieldName={ZIP_FIELD} label="Zip/Postal">
+              <Input
+                name={ZIP_FIELD}
+                placeholder="Zip/Postal"
+                ref={register({ required: 'Zip/Postal is required' })}
+              />
+            </FormField>
+            <FormField errors={errors} fieldName={COUNTRY_FIELD} label="Country">
+              <Input
+                name={COUNTRY_FIELD}
+                placeholder="Country"
+                ref={register({ required: 'Country is required' })}
+              />
+            </FormField>
+          </Box>
+        </Grid>
+
+        <Flex justifyContent="flex-end" pt={2}>
+          <Button type="submit" rightIcon="arrow-forward" variant="outline">
+            Financials
+          </Button>
+        </Flex>
+      </Box>
+    </form>
   );
 };
 

@@ -9,6 +9,7 @@ import { UtilitiesForm } from './UtilitiesForm';
 
 export const HouseWizard = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isAddressFormValid, setIsAddressFormValid] = useState(false);
 
   const formProps = useForm({ mode: 'onBlur' });
   const { handleSubmit, errors, register } = formProps;
@@ -31,46 +32,50 @@ export const HouseWizard = () => {
         </Button>
       </Flex>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Tabs index={currentStep}>
-          <TabList>
-            <Tab onClick={setStep0}>Address</Tab>
-            <Tab onClick={setStep1}>Financials</Tab>
-            <Tab onClick={setStep2}>Utilities</Tab>
-            <Tab onClick={setStep3}>Support</Tab>
-          </TabList>
+      <Tabs index={currentStep}>
+        <TabList>
+          <Tab onClick={setStep0}>Address</Tab>
+          <Tab onClick={setStep1} isDisabled={!isAddressFormValid}>
+            Financials
+          </Tab>
+          <Tab onClick={setStep2} isDisabled={!isAddressFormValid}>
+            Utilities
+          </Tab>
+          <Tab onClick={setStep3} isDisabled={!isAddressFormValid}>
+            Support
+          </Tab>
+        </TabList>
 
-          <TabPanels>
-            <TabPanel>
-              <AddressForm register={register} errors={errors} goToNextStep={setStep1} />
-            </TabPanel>
-            <TabPanel>
-              <FinancialsForm
-                register={register}
-                errors={errors}
-                goToNextStep={setStep2}
-                goToPreviousStep={setStep0}
-              />
-            </TabPanel>
-            <TabPanel>
-              <UtilitiesForm
-                register={register}
-                errors={errors}
-                goToNextStep={setStep3}
-                goToPreviousStep={setStep1}
-              />
-            </TabPanel>
-            <TabPanel>
-              <SupportForm
-                errors={errors}
-                register={register}
-                goToPreviousStep={setStep2}
-                submitForm={handleSubmit(onSubmit)}
-              />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </form>
+        <TabPanels>
+          <TabPanel>
+            <AddressForm goToNextStep={setStep1} setIsAddressFormValid={setIsAddressFormValid} />
+          </TabPanel>
+          <TabPanel>
+            <FinancialsForm
+              register={register}
+              errors={errors}
+              goToNextStep={setStep2}
+              goToPreviousStep={setStep0}
+            />
+          </TabPanel>
+          <TabPanel>
+            <UtilitiesForm
+              register={register}
+              errors={errors}
+              goToNextStep={setStep3}
+              goToPreviousStep={setStep1}
+            />
+          </TabPanel>
+          <TabPanel>
+            <SupportForm
+              errors={errors}
+              register={register}
+              goToPreviousStep={setStep2}
+              submitForm={handleSubmit(onSubmit)}
+            />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </Box>
   );
 };

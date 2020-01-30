@@ -4,6 +4,7 @@
   "extends": ["plugin:react-app/recommended", "plugin:react/recommended"],
   "rules": {
     "prettier/prettier": "error",
+    "react/display-name": "off",
     "react/prop-types": "off"
   }
 }
