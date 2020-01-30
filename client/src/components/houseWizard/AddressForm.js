@@ -1,6 +1,15 @@
 import React from 'react';
 import Proptypes from 'prop-types';
-import { Box, FormControl, FormLabel, Input, FormErrorMessage, Grid } from '@chakra-ui/core';
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  Grid,
+  Button,
+  Flex,
+} from '@chakra-ui/core';
 import { exists } from './validation/rules';
 import get from 'lodash.get';
 
@@ -25,7 +34,7 @@ const FormField = ({ errors, fieldName, label, children }) => {
   );
 };
 
-export const AddressForm = ({ register, errors }) => {
+export const AddressForm = ({ register, errors, goToNextStep }) => {
   console.log('values', get(errors, ADDRESS1_FIELD));
   return (
     <Box p={4}>
@@ -40,11 +49,18 @@ export const AddressForm = ({ register, errors }) => {
           </FormField>
         </Box>
       </Grid>
+
+      <Flex justifyContent="flex-end" pt={2}>
+        <Button onClick={goToNextStep} type="button" rightIcon="arrow-forward" variant="outline">
+          Financials
+        </Button>
+      </Flex>
     </Box>
   );
 };
 
 AddressForm.propTypes = {
   register: Proptypes.func,
+  goToNextStep: Proptypes.func,
   errors: Proptypes.object,
 };
