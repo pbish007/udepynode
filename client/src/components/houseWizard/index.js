@@ -5,36 +5,38 @@ import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@chakra-ui/core';
 import { AddressForm } from './AddressForm';
 
 export const HouseWizard = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const formProps = useForm();
   const { handleSubmit, errors, register, formState } = formProps;
 
   console.log('formState', formState.touched);
 
-  const onSubmit = values => {
-    setIsSubmitting(true);
+  const onSubmit = () => {};
 
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setIsSubmitting(false);
-    }, 1000);
+  const goToNextStep = () => {
+    setCurrentStep(currentStep + 1);
   };
+  const setStep = step => () => setCurrentStep(step);
+  const setStep0 = setStep(0);
+  const setStep1 = setStep(1);
+  const setStep2 = setStep(2);
+  const setStep3 = setStep(3);
 
   return (
     <Box p="15px">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Tabs>
+        <Tabs index={currentStep}>
           <TabList>
-            <Tab>Address</Tab>
-            <Tab>Financials</Tab>
-            <Tab>Utilities</Tab>
-            <Tab>Support</Tab>
+            <Tab onClick={setStep0}>Address</Tab>
+            <Tab onClick={setStep1}>Financials</Tab>
+            <Tab onClick={setStep2}>Utilities</Tab>
+            <Tab onClick={setStep3}>Support</Tab>
           </TabList>
 
           <TabPanels>
             <TabPanel>
-              <AddressForm register={register} errors={errors} />
+              <AddressForm register={register} errors={errors} goToNextStep={goToNextStep} />
             </TabPanel>
             <TabPanel>
               <p>Financials</p>
