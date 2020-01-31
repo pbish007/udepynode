@@ -1,3 +1,4 @@
+// @flow
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box, Button, Flex } from '@chakra-ui/core';
@@ -7,7 +8,19 @@ import { SupportForm } from './SupportForm';
 import { FinancialsForm } from './FinancialsForm';
 import { UtilitiesForm } from './UtilitiesForm';
 
+function reducer(state, action) {
+  if (action.type === 'UPDATE_DATA') {
+    return {
+      ...state,
+      ...action.formData,
+    };
+  } else {
+    throw new Error();
+  }
+}
+
 export const HouseWizard = () => {
+  const [state, dispatch] = React.useReducer(reducer, {});
   const [currentStep, setCurrentStep] = useState(0);
   const [isAddressFormValid, setIsAddressFormValid] = useState(false);
 
@@ -15,10 +28,20 @@ export const HouseWizard = () => {
   const { handleSubmit, errors, register } = formProps;
 
   const onSubmit = values => {
-    console.log('values', values);
+    console.log('values', state);
   };
 
-  const setStep = step => () => setCurrentStep(step);
+  const updateFormData = React.useCallback(
+    formData => {
+      dispatch({ type: 'UPDATE_DATA', formData });
+    },
+    [dispatch],
+  );
+
+  const setStep = (step: number) => (): void => {
+    setCurrentStep(step);
+  };
+
   const setStep0 = setStep(0);
   const setStep1 = setStep(1);
   const setStep2 = setStep(2);
@@ -48,7 +71,11 @@ export const HouseWizard = () => {
 
         <TabPanels>
           <TabPanel>
-            <AddressForm goToNextStep={setStep1} setIsAddressFormValid={setIsAddressFormValid} />
+            <AddressForm
+              goToNextStep={setStep1}
+              setIsAddressFormValid={setIsAddressFormValid}
+              updateFormData={updateFormData}
+            />
           </TabPanel>
           <TabPanel>
             <FinancialsForm

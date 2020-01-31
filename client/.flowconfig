@@ -1,0 +1,26 @@
+[ignore]
+./temp
+./dist
+./build
+./jest-cache
+./circleci
+
+.*/node_modules/redux-persist/
+.*/node_modules/config-chain/
+
+[include]
+.*/src/*
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+server.max_workers=1
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+esproposal.optional_chaining=enable
+
+suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/CSSModuleStub.js'

@@ -1,5 +1,5 @@
-import React from 'react';
-import Proptypes from 'prop-types';
+// @flow
+import * as React from 'react';
 import {
   Box,
   FormControl,
@@ -12,14 +12,21 @@ import {
 } from '@chakra-ui/core';
 import get from 'lodash.get';
 import { useForm } from 'react-hook-form';
+import type { Errors } from './types';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
 const ZIP_FIELD = 'address.zip';
 const COUNTRY_FIELD = 'address.country';
 
-// eslint-disable-next-line react/prop-types
-export const FormField = ({ errors, fieldName, label, children }) => {
+type FormFieldProps = {|
+  errors: Errors,
+  fieldName: string,
+  label: string,
+  children: React.Node,
+|};
+
+export const FormField = ({ errors, fieldName, label, children }: FormFieldProps) => {
   return (
     <FormControl isInvalid={get(errors, fieldName)} mb={1}>
       <FormLabel htmlFor={fieldName} mb={0}>
@@ -31,8 +38,18 @@ export const FormField = ({ errors, fieldName, label, children }) => {
   );
 };
 
-export const AddressForm = ({ goToNextStep, setIsAddressFormValid }) => {
-  const formProps = useForm({ mode: 'onBlur' });
+type AddressFormProps = {|
+  goToNextStep: () => void,
+  setIsAddressFormValid: boolean => void,
+  updateFormData: Object => void,
+|};
+
+export const AddressForm = ({
+  goToNextStep,
+  setIsAddressFormValid,
+  updateFormData,
+}: AddressFormProps) => {
+  const formProps = useForm({ mode: 'onChange' });
   const { handleSubmit, errors, register, formState } = formProps;
 
   React.useEffect(() => {
@@ -42,6 +59,7 @@ export const AddressForm = ({ goToNextStep, setIsAddressFormValid }) => {
   const onSubmit = values => {
     if (formState.isValid) {
       goToNextStep();
+      updateFormData(values);
     }
   };
 
@@ -89,10 +107,4 @@ export const AddressForm = ({ goToNextStep, setIsAddressFormValid }) => {
       </Box>
     </form>
   );
-};
-
-AddressForm.propTypes = {
-  register: Proptypes.func,
-  goToNextStep: Proptypes.func,
-  errors: Proptypes.object,
 };
