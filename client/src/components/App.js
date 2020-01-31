@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import Header from './Header';
 import Landing from './Landings';
@@ -26,7 +23,7 @@ class App extends Component {
         <div className="container">
           <Header />
           <Route exact path="/" component={Landing} />
-          <Route exact path="/housedb" component={HouseWizard} />
+          <Route exact path="/house/add" component={HouseWizard} />
           <Route exact path="/udetail" component={UdetailForm} />
           <Route exact path="/surveys" component={Dashboard} />
           <Route exact path="/surveys/new" component={SurveyNew} />
