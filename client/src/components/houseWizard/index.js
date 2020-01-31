@@ -19,12 +19,13 @@ function reducer(state, action) {
 }
 
 export const HouseWizard = () => {
+  const addressFormRef = React.createRef();
   const [state, dispatch] = React.useReducer(reducer, {});
   const [currentStep, setCurrentStep] = useState(0);
   const [isAddressFormValid, setIsAddressFormValid] = useState(false);
 
   const onSubmit = values => {
-    console.log('values', state);
+    console.log('values', addressFormRef.current && addressFormRef.current.getValues());
   };
 
   const updateFormData = React.useCallback(
@@ -68,6 +69,7 @@ export const HouseWizard = () => {
         <TabPanels>
           <TabPanel>
             <AddressForm
+              ref={addressFormRef}
               goToNextStep={setStep1}
               setIsAddressFormValid={setIsAddressFormValid}
               updateFormData={updateFormData}
