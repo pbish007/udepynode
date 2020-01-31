@@ -1,6 +1,5 @@
 // @flow
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { Box, Button, Flex } from '@chakra-ui/core';
 import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@chakra-ui/core';
 import { AddressForm } from './AddressForm';
@@ -23,9 +22,6 @@ export const HouseWizard = () => {
   const [state, dispatch] = React.useReducer(reducer, {});
   const [currentStep, setCurrentStep] = useState(0);
   const [isAddressFormValid, setIsAddressFormValid] = useState(false);
-
-  const formProps = useForm({ mode: 'onBlur' });
-  const { handleSubmit, errors, register } = formProps;
 
   const onSubmit = values => {
     console.log('values', state);
@@ -78,28 +74,13 @@ export const HouseWizard = () => {
             />
           </TabPanel>
           <TabPanel>
-            <FinancialsForm
-              register={register}
-              errors={errors}
-              goToNextStep={setStep2}
-              goToPreviousStep={setStep0}
-            />
+            <FinancialsForm goToNextStep={setStep2} goToPreviousStep={setStep0} />
           </TabPanel>
           <TabPanel>
-            <UtilitiesForm
-              register={register}
-              errors={errors}
-              goToNextStep={setStep3}
-              goToPreviousStep={setStep1}
-            />
+            <UtilitiesForm goToNextStep={setStep3} goToPreviousStep={setStep1} />
           </TabPanel>
           <TabPanel>
-            <SupportForm
-              errors={errors}
-              register={register}
-              goToPreviousStep={setStep2}
-              submitForm={handleSubmit(onSubmit)}
-            />
+            <SupportForm goToPreviousStep={setStep2} submitForm={onSubmit} />
           </TabPanel>
         </TabPanels>
       </Tabs>

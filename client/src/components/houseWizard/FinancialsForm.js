@@ -1,8 +1,14 @@
+// @flow
 import { Box, Button, Flex } from '@chakra-ui/core';
 import Proptypes from 'prop-types';
 import React from 'react';
 
-export const FinancialsForm = ({ register, errors, goToNextStep, goToPreviousStep }) => {
+type FinancialsFormProps = {|
+  goToNextStep: () => void,
+  goToPreviousStep: boolean => void,
+|};
+
+export const FinancialsForm = ({ goToNextStep, goToPreviousStep }: FinancialsFormProps) => {
   return (
     <Box p={4}>
       <Flex justifyContent="space-between" pt={2}>
