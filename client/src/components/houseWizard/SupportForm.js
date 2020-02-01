@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { Box, Button, Flex } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/core';
+import { Footer } from './Footer';
 
 type SupportFormProps = {|
   submitForm: Object => void,
@@ -10,19 +11,10 @@ type SupportFormProps = {|
 export const SupportForm = ({ goToPreviousStep, submitForm }: SupportFormProps) => {
   return (
     <Box p={4}>
-      <Flex justifyContent="space-between" pt={2}>
-        <Button
-          onClick={goToPreviousStep}
-          type="button"
-          leftIcon="arrow-back"
-          variant="outline"
-          mr={5}>
-          Utilities
-        </Button>
-        <Button onClick={submitForm} type="button">
-          Submit
-        </Button>
-      </Flex>
+      <Footer
+        rightButton={{ text: 'Submit' }}
+        leftButton={{ text: 'Utilities', onClick: goToPreviousStep }}
+      />
     </Box>
   );
 };

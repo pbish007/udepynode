@@ -20,12 +20,20 @@ function reducer(state, action) {
 
 export const HouseWizard = () => {
   const addressFormRef = React.createRef();
+  const financialsFormRef = React.createRef();
   const [state, dispatch] = React.useReducer(reducer, {});
   const [currentStep, setCurrentStep] = useState(0);
   const [isAddressFormValid, setIsAddressFormValid] = useState(false);
 
   const onSubmit = values => {
-    console.log('values', addressFormRef.current && addressFormRef.current.getValues());
+    console.log(
+      'addressFormRef values',
+      addressFormRef.current && addressFormRef.current.getValues(),
+    );
+    console.log(
+      'financialsFormRef values',
+      financialsFormRef.current && financialsFormRef.current.getValues(),
+    );
   };
 
   const updateFormData = React.useCallback(
@@ -53,7 +61,7 @@ export const HouseWizard = () => {
       </Flex>
 
       <Tabs index={currentStep}>
-        <TabList>
+        <TabList style={{ flexWrap: 'wrap' }}>
           <Tab onClick={setStep0}>Address</Tab>
           <Tab onClick={setStep1} isDisabled={!isAddressFormValid}>
             Financials
@@ -76,7 +84,11 @@ export const HouseWizard = () => {
             />
           </TabPanel>
           <TabPanel>
-            <FinancialsForm goToNextStep={setStep2} goToPreviousStep={setStep0} />
+            <FinancialsForm
+              goToNextStep={setStep2}
+              goToPreviousStep={setStep0}
+              ref={financialsFormRef}
+            />
           </TabPanel>
           <TabPanel>
             <UtilitiesForm goToNextStep={setStep3} goToPreviousStep={setStep1} />

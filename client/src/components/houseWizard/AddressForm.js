@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
-import { Box, Button, Flex, Grid, Input } from '@chakra-ui/core';
+import { Box, Grid } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
-import { FormField, FormInput } from '../form/FormField';
+import { FormInput } from '../form/FormField';
+import { Footer } from './Footer';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
@@ -33,6 +34,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
     const onSubmit = values => {
       if (formState.isValid) {
         goToNextStep();
+        // abhi-todo remove later if not needed
         updateFormData(values);
       }
     };
@@ -69,11 +71,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
             </Box>
           </Grid>
 
-          <Flex justifyContent="flex-end" pt={2}>
-            <Button type="submit" rightIcon="arrow-forward" variant="outline">
-              Financials
-            </Button>
-          </Flex>
+          <Footer rightButton={{ text: 'Financials' }} />
         </Box>
       </form>
     );
