@@ -12,7 +12,7 @@ export const SupportForm = ({ goToPreviousStep, submitForm }: SupportFormProps) 
   return (
     <Box p={4}>
       <Footer
-        rightButton={{ text: 'Submit' }}
+        rightButton={{ text: 'Submit', onClick: submitForm, type: 'button' }}
         leftButton={{ text: 'Utilities', onClick: goToPreviousStep }}
       />
     </Box>

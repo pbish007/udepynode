@@ -48,7 +48,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 errors={errors}
                 fieldName={ADDRESS1_FIELD}
                 label="Street"
-                registerFn={register({ required: 'Street is required' })}
+                registerFn={register}
               />
               <FormInput
                 errors={errors}

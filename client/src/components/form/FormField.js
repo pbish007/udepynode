@@ -83,7 +83,12 @@ export const FormNumberInput = ({
   return (
     <FormField errors={errors} fieldName={fieldName} label={label} {...props}>
       <NumberInput step={step} min={min} max={max}>
-        <NumberInputField name={fieldName} placeholder={placeholder || label} ref={registerFn} />
+        <NumberInputField
+          name={fieldName}
+          placeholder={placeholder || label}
+          ref={registerFn}
+          type="number"
+        />
         <NumberInputStepper>
           <NumberIncrementStepper />
           <NumberDecrementStepper />
