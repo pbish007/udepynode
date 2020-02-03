@@ -69,7 +69,8 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 <CheckboxGroup
                   name={PAYMENT_FREQ_FIELD}
                   value={selectedValues}
-                  onChange={onCheckboxChange} isInline>
+                  onChange={onCheckboxChange}
+                  isInline>
                   <Checkbox value="monthly">monthly</Checkbox>
                   <Checkbox value="15/30">15/30</Checkbox>
                   <Checkbox value="bi-weekly">bi-weekly</Checkbox>

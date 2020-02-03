@@ -17,7 +17,7 @@ import type { Errors } from '../houseWizard/types';
 type FormFieldProps = {|
   errors: Errors,
   fieldName: string,
-  label: string,
+  label?: string,
   children: React.Node,
   mb?: any,
 |};
@@ -25,9 +25,11 @@ type FormFieldProps = {|
 export const FormField = ({ errors, fieldName, label, children, mb = 1 }: FormFieldProps) => {
   return (
     <FormControl isInvalid={get(errors, fieldName)} mb={mb}>
-      <FormLabel htmlFor={fieldName} mb={0}>
-        {label}
-      </FormLabel>
+      {!!label && (
+        <FormLabel htmlFor={fieldName} mb={0}>
+          {label}
+        </FormLabel>
+      )}
       {children}
       <FormErrorMessage>{get(errors, `${fieldName}.message`)}</FormErrorMessage>
     </FormControl>
@@ -37,9 +39,10 @@ export const FormField = ({ errors, fieldName, label, children, mb = 1 }: FormFi
 type FormInputProps = {|
   errors: Errors,
   fieldName: string,
-  label: string,
+  label?: string,
   registerFn?: any,
   placeholder?: string,
+  mb?: any,
 |};
 
 export const FormInput = ({
