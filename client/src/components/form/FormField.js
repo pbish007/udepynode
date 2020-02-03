@@ -63,7 +63,7 @@ export const FormInput = ({
 type FormNumberInputProps = {|
   errors: Errors,
   fieldName: string,
-  label: string,
+  label?: string,
   registerFn?: any,
   placeholder?: string,
   step?: number,
@@ -78,8 +78,8 @@ export const FormNumberInput = ({
   label,
   registerFn,
   placeholder,
-  step,
-  min,
+  step = 10,
+  min = 0,
   max,
   ...props
 }: FormNumberInputProps) => {
@@ -87,6 +87,7 @@ export const FormNumberInput = ({
     <FormField errors={errors} fieldName={fieldName} label={label} {...props}>
       <NumberInput step={step} min={min} max={max}>
         <NumberInputField
+          defaultValue={10}
           name={fieldName}
           placeholder={placeholder || label}
           ref={registerFn}
