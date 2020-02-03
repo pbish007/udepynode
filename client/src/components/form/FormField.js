@@ -17,7 +17,7 @@ import type { Errors } from '../houseWizard/types';
 type FormFieldProps = {|
   errors: Errors,
   fieldName: string,
-  label: string,
+  label?: string,
   children: React.Node,
   mb?: any,
 |};
@@ -25,9 +25,11 @@ type FormFieldProps = {|
 export const FormField = ({ errors, fieldName, label, children, mb = 1 }: FormFieldProps) => {
   return (
     <FormControl isInvalid={get(errors, fieldName)} mb={mb}>
-      <FormLabel htmlFor={fieldName} mb={0}>
-        {label}
-      </FormLabel>
+      {!!label && (
+        <FormLabel htmlFor={fieldName} mb={0}>
+          {label}
+        </FormLabel>
+      )}
       {children}
       <FormErrorMessage>{get(errors, `${fieldName}.message`)}</FormErrorMessage>
     </FormControl>
@@ -37,9 +39,10 @@ export const FormField = ({ errors, fieldName, label, children, mb = 1 }: FormFi
 type FormInputProps = {|
   errors: Errors,
   fieldName: string,
-  label: string,
+  label?: string,
   registerFn?: any,
   placeholder?: string,
+  mb?: any,
 |};
 
 export const FormInput = ({
@@ -60,7 +63,7 @@ export const FormInput = ({
 type FormNumberInputProps = {|
   errors: Errors,
   fieldName: string,
-  label: string,
+  label?: string,
   registerFn?: any,
   placeholder?: string,
   step?: number,
@@ -75,15 +78,21 @@ export const FormNumberInput = ({
   label,
   registerFn,
   placeholder,
-  step,
-  min,
+  step = 10,
+  min = 0,
   max,
   ...props
 }: FormNumberInputProps) => {
   return (
     <FormField errors={errors} fieldName={fieldName} label={label} {...props}>
       <NumberInput step={step} min={min} max={max}>
-        <NumberInputField name={fieldName} placeholder={placeholder || label} ref={registerFn} />
+        <NumberInputField
+          defaultValue={10}
+          name={fieldName}
+          placeholder={placeholder || label}
+          ref={registerFn}
+          type="number"
+        />
         <NumberInputStepper>
           <NumberIncrementStepper />
           <NumberDecrementStepper />

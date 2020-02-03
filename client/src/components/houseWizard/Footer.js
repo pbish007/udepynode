@@ -4,7 +4,8 @@ import { Button, Flex } from '@chakra-ui/core';
 
 type ButtonProps = {
   text: string,
-  onClick?: Function
+  onClick?: Function,
+  type?: 'button' | 'submit',
 };
 
 export const Footer = ({
@@ -24,11 +25,15 @@ export const Footer = ({
           leftIcon="arrow-back"
           variant="outline"
           mr={5}>
-          { leftButton.text }
+          {leftButton.text}
         </Button>
       )}
       {!!rightButton && (
-        <Button type="submit" rightIcon="arrow-forward" variant="outline">
+        <Button
+          type={rightButton.type || 'submit'}
+          rightIcon="arrow-forward"
+          variant="outline"
+          onClick={rightButton.onClick}>
           {rightButton.text}
         </Button>
       )}
