@@ -43,6 +43,7 @@ type FormInputProps = {|
   registerFn?: any,
   placeholder?: string,
   mb?: any,
+  defaultValue?: any,
 |};
 
 export const FormInput = ({
@@ -51,11 +52,12 @@ export const FormInput = ({
   label,
   placeholder,
   registerFn,
+  defaultValue,
   ...props
 }: FormInputProps) => {
   return (
     <FormField errors={errors} fieldName={fieldName} label={label} {...props}>
-      <Input name={fieldName} placeholder={placeholder || label} ref={registerFn} />
+      <Input name={fieldName} placeholder={placeholder || label} ref={registerFn} defaultValue={defaultValue} />
     </FormField>
   );
 };
@@ -85,7 +87,7 @@ export const FormNumberInput = ({
 }: FormNumberInputProps) => {
   return (
     <FormField errors={errors} fieldName={fieldName} label={label} {...props}>
-      <NumberInput step={step} min={min} max={max}>
+      <NumberInput step={step} min={min} max={max} onChange={ (val) => {console.log(val, typeof val);} }>
         <NumberInputField
           defaultValue={10}
           name={fieldName}

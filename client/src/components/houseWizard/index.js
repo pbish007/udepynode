@@ -21,8 +21,9 @@ function reducer(state, action) {
 export const HouseWizard = () => {
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
+  const utilitiesFormRef = React.createRef();
   const [state, dispatch] = React.useReducer(reducer, {});
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(3);
   const [isAddressFormValid, setIsAddressFormValid] = useState(false);
 
   const onSubmit = values => {
@@ -33,6 +34,10 @@ export const HouseWizard = () => {
     console.log(
       'financialsFormRef values',
       financialsFormRef.current && financialsFormRef.current.getValues(),
+    );
+    console.log(
+      'utilitiesFormRef values',
+      utilitiesFormRef.current && utilitiesFormRef.current.getValues(),
     );
   };
 
@@ -91,7 +96,7 @@ export const HouseWizard = () => {
             />
           </TabPanel>
           <TabPanel>
-            <UtilitiesForm goToNextStep={setStep3} goToPreviousStep={setStep1} />
+            <UtilitiesForm goToNextStep={setStep3} goToPreviousStep={setStep1} ref={utilitiesFormRef} />
           </TabPanel>
           <TabPanel>
             <SupportForm goToPreviousStep={setStep2} submitForm={onSubmit} />
