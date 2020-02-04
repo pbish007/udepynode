@@ -1,49 +1,54 @@
 // @flow
-import React from 'react';
-import get from 'lodash.get';
-import {Box, Button, Grid, Stack} from '@chakra-ui/core';
+import * as React from 'react';
+import { Box, Button, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import { Footer } from './Footer';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FormInput } from '../form/FormField';
 
 const PLUMBER_TYPE = 'plumber';
+const ELECTRICIAN_TYPE = 'electrician';
+const HVAC_TYPE = 'hvac';
+
+const FIELDS = [
+  { name: 'companyName', title: 'Company' },
+  { name: 'personName', title: 'Name' },
+  { name: 'phoneNumber', title: 'Phone Number' },
+  { name: 'mobile', title: 'Mobile Number' },
+];
+
+const createEmptyItem = () => {
+  const fieldData = {};
+  FIELDS.forEach(f => {
+    fieldData[f.name] = '';
+  });
+
+  return fieldData;
+};
 
 export const SupportFields = ({
-  type,
   errors,
   register,
+  type,
+  title,
   control,
-    append,
-    fields,
 }: {|
   type: string,
+  title: string,
   errors: Object,
   register: Function,
   control: any,
-  append: any,
-  fields: any,
 |}) => {
+  const { fields, append } = useFieldArray({ control, name: `support.${PLUMBER_TYPE}` });
 
   const addEmptyItem = () => {
-    append({ companyName: 'new' });
-  }
-
-  console.log('formData', fields);
-  /*
-
-  React.useEffect(() => {
-    register({ name: `support.${type}[0].companyName` });
-  });
-
-  React.useEffect(() => {
-    console.log('set value', data);
-    setValue(`support.${type}[0].companyName`, 'test');
-    // eslint-disable
-  });
-*/
+    append(createEmptyItem());
+  };
 
   return (
     <Stack>
+      <Flex>
+        <Text fontWeight="bold">{title}</Text>
+      </Flex>
       {!!fields &&
         fields.map((item, index) => {
           return (
@@ -51,18 +56,25 @@ export const SupportFields = ({
               templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr)']}
               gap={[0, null, 3]}
               key={item.id}>
-              <FormInput
-                errors={errors}
-                fieldName={`support.plumber[${index}].companyName`}
-                defaultValue={`${item.companyName}`}
-                placeholder="Company"
-                registerFn={register}
-                mb={[2, 0]}
-              />
-              <Button onClick={addEmptyItem}>Add</Button>
+              {FIELDS.map(field => {
+                return (
+                  <FormInput
+                    key={field.name}
+                    errors={errors}
+                    fieldName={`support.${type}[${index}].${field.name}`}
+                    defaultValue={`${item[field.name]}`}
+                    placeholder={field.title}
+                    registerFn={register}
+                    mb={[2, 0]}
+                  />
+                );
+              })}
             </Grid>
           );
         })}
+      <Flex justifyContent="flex-end">
+        <Button onClick={addEmptyItem}>Add</Button>
+      </Flex>
     </Stack>
   );
 };
@@ -77,14 +89,10 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
     const formProps = useForm({
       mode: 'onChange',
       defaultValues: {
-        support: { plumber: [{ companyName: 'test123' }] },
+        support: { [PLUMBER_TYPE]: [createEmptyItem()] },
       },
     });
     const { handleSubmit, errors, formState, register, getValues, control } = formProps;
-
-    const formData = getValues({ nest: true });
-
-    const { fields, append, prepend, remove } = useFieldArray({ control, name: 'support.plumber' });
 
     React.useImperativeHandle(ref, () => ({
       getValues: () => {
@@ -93,9 +101,9 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
     }));
 
     const onSubmit = values => {
-      console.log('formData values', formData);
+      console.log('form data', values);
       if (formState.isValid) {
-        submitForm();
+        submitForm(values);
       }
     };
 
@@ -104,12 +112,25 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
         <Box p={4}>
           <Stack>
             <SupportFields
-              type={PLUMBER_TYPE}
               errors={errors}
               register={register}
               control={control}
-              append={append}
-              fields={fields}
+              type={PLUMBER_TYPE}
+              title="Plumber"
+            />
+            <SupportFields
+              errors={errors}
+              register={register}
+              control={control}
+              type={ELECTRICIAN_TYPE}
+              title="Electrician"
+            />
+            <SupportFields
+              errors={errors}
+              register={register}
+              control={control}
+              type={HVAC_TYPE}
+              title="HVAC"
             />
           </Stack>
           <Footer

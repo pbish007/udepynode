@@ -57,7 +57,12 @@ export const FormInput = ({
 }: FormInputProps) => {
   return (
     <FormField errors={errors} fieldName={fieldName} label={label} {...props}>
-      <Input name={fieldName} placeholder={placeholder || label} ref={registerFn} defaultValue={defaultValue} />
+      <Input
+        name={fieldName}
+        placeholder={placeholder || label}
+        ref={registerFn}
+        defaultValue={defaultValue}
+      />
     </FormField>
   );
 };
@@ -87,7 +92,13 @@ export const FormNumberInput = ({
 }: FormNumberInputProps) => {
   return (
     <FormField errors={errors} fieldName={fieldName} label={label} {...props}>
-      <NumberInput step={step} min={min} max={max} onChange={ (val) => {console.log(val, typeof val);} }>
+      <NumberInput
+        step={step}
+        min={min}
+        max={max}
+        onChange={val => {
+          console.log(val, typeof val);
+        }}>
         <NumberInputField
           defaultValue={10}
           name={fieldName}

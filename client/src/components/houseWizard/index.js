@@ -26,19 +26,19 @@ export const HouseWizard = () => {
   const [currentStep, setCurrentStep] = useState(3);
   const [isAddressFormValid, setIsAddressFormValid] = useState(false);
 
-  const onSubmit = values => {
-    console.log(
-      'addressFormRef values',
-      addressFormRef.current && addressFormRef.current.getValues(),
-    );
-    console.log(
-      'financialsFormRef values',
-      financialsFormRef.current && financialsFormRef.current.getValues(),
-    );
-    console.log(
-      'utilitiesFormRef values',
-      utilitiesFormRef.current && utilitiesFormRef.current.getValues(),
-    );
+  const onSubmit = supportData => {
+    const address = addressFormRef.current ? addressFormRef.current.getValues() : {};
+    const financials = financialsFormRef.current ? financialsFormRef.current.getValues() : {};
+    const utilities = utilitiesFormRef.current ? utilitiesFormRef.current.getValues() : {};
+
+    const formData = {
+      ...address,
+      ...financials,
+      ...utilities,
+      ...supportData,
+    };
+
+    console.log('formData', formData);
   };
 
   const updateFormData = React.useCallback(
@@ -96,7 +96,11 @@ export const HouseWizard = () => {
             />
           </TabPanel>
           <TabPanel>
-            <UtilitiesForm goToNextStep={setStep3} goToPreviousStep={setStep1} ref={utilitiesFormRef} />
+            <UtilitiesForm
+              goToNextStep={setStep3}
+              goToPreviousStep={setStep1}
+              ref={utilitiesFormRef}
+            />
           </TabPanel>
           <TabPanel>
             <SupportForm goToPreviousStep={setStep2} submitForm={onSubmit} />
