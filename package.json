@@ -31,5 +31,8 @@
     "path-parser": "^4.2.0",
     "sendgrid": "^5.2.3",
     "stripe": "^7.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
