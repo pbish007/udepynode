@@ -7,23 +7,11 @@ import { SupportForm } from './SupportForm';
 import { FinancialsForm } from './FinancialsForm';
 import { UtilitiesForm } from './UtilitiesForm';
 
-function reducer(state, action) {
-  if (action.type === 'UPDATE_DATA') {
-    return {
-      ...state,
-      ...action.formData,
-    };
-  } else {
-    throw new Error();
-  }
-}
-
 export const HouseWizard = () => {
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
   const utilitiesFormRef = React.createRef();
-  const [state, dispatch] = React.useReducer(reducer, {});
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(0);
   const [isAddressFormValid, setIsAddressFormValid] = useState(false);
 
   const onSubmit = supportData => {
@@ -40,13 +28,6 @@ export const HouseWizard = () => {
 
     console.log('formData', formData);
   };
-
-  const updateFormData = React.useCallback(
-    formData => {
-      dispatch({ type: 'UPDATE_DATA', formData });
-    },
-    [dispatch],
-  );
 
   const setStep = (step: number) => (): void => {
     setCurrentStep(step);
@@ -85,7 +66,6 @@ export const HouseWizard = () => {
               ref={addressFormRef}
               goToNextStep={setStep1}
               setIsAddressFormValid={setIsAddressFormValid}
-              updateFormData={updateFormData}
             />
           </TabPanel>
           <TabPanel>

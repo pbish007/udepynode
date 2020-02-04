@@ -13,11 +13,10 @@ const COUNTRY_FIELD = 'address.country';
 type AddressFormProps = {|
   goToNextStep: () => void,
   setIsAddressFormValid: boolean => void,
-  updateFormData: Object => void,
 |};
 
 export const AddressForm = React.forwardRef<AddressFormProps, any>(
-  ({ goToNextStep, setIsAddressFormValid, updateFormData }: AddressFormProps, ref: any) => {
+  ({ goToNextStep, setIsAddressFormValid }: AddressFormProps, ref: any) => {
     const formProps = useForm({ mode: 'onChange' });
     const { handleSubmit, errors, register, formState, getValues } = formProps;
 
@@ -34,8 +33,6 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
     const onSubmit = values => {
       if (formState.isValid) {
         goToNextStep();
-        // abhi-todo remove later if not needed
-        updateFormData(values);
       }
     };
 

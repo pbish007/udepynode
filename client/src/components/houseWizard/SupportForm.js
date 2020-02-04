@@ -73,7 +73,9 @@ export const SupportFields = ({
           );
         })}
       <Flex justifyContent="flex-end">
-        <Button onClick={addEmptyItem}>Add</Button>
+        <Button onClick={addEmptyItem} variant="outline">
+          Add
+        </Button>
       </Flex>
     </Stack>
   );
@@ -134,7 +136,7 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
             />
           </Stack>
           <Footer
-            rightButton={{ text: 'Submit' }}
+            rightButton={{ text: 'Submit', variant: 'solid' }}
             leftButton={{ text: 'Utilities', onClick: goToPreviousStep }}
           />
         </Box>
