@@ -84,49 +84,57 @@ const UtilitiesFields = ({ errors, type, register, title }) => {
   );
 };
 
-export const UtilitiesForm = ({ goToNextStep, goToPreviousStep }: UtilitiesFormProps) => {
-  const formProps = useForm({ mode: 'onChange' });
-  const { handleSubmit, errors, formState, register } = formProps;
+export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
+  ({ goToNextStep, goToPreviousStep }: UtilitiesFormProps, ref: any) => {
+    const formProps = useForm({ mode: 'onChange' });
+    const { handleSubmit, errors, formState, register, getValues } = formProps;
 
-  const onSubmit = values => {
-    console.log('form values', values);
-    if (formState.isValid) {
-      // goToNextStep();
-    }
-  };
+    React.useImperativeHandle(ref, () => ({
+      getValues: () => {
+        return getValues({ nest: true });
+      },
+    }));
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box p={4}>
-        <Stack>
-          <UtilitiesFields
-            errors={errors}
-            register={register}
-            type="electricity"
-            title="Electricity"
+    const onSubmit = values => {
+      console.log('form values', values);
+      if (formState.isValid) {
+        goToNextStep();
+      }
+    };
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Box p={4}>
+          <Stack>
+            <UtilitiesFields
+              errors={errors}
+              register={register}
+              type="electricity"
+              title="Electricity"
+            />
+            <UtilitiesFields errors={errors} register={register} type="internet" title="Internet" />
+            <UtilitiesFields
+              errors={errors}
+              register={register}
+              type="tv_provider"
+              title="TV Provider"
+            />
+            <UtilitiesFields errors={errors} register={register} type="gas" title="Gas" />
+            <UtilitiesFields errors={errors} register={register} type="oil" title="Oil" />
+            <SpecialUtilitiesFields
+              errors={errors}
+              register={register}
+              type="netflix"
+              title="Netflix"
+            />
+            <SpecialUtilitiesFields errors={errors} register={register} type="hulu" title="Hulu" />
+          </Stack>
+          <Footer
+            rightButton={{ text: 'Support' }}
+            leftButton={{ text: 'Financials', onClick: goToPreviousStep }}
           />
-          <UtilitiesFields errors={errors} register={register} type="internet" title="Internet" />
-          <UtilitiesFields
-            errors={errors}
-            register={register}
-            type="tv_provider"
-            title="TV Provider"
-          />
-          <UtilitiesFields errors={errors} register={register} type="gas" title="Gas" />
-          <UtilitiesFields errors={errors} register={register} type="oil" title="Oil" />
-          <SpecialUtilitiesFields
-            errors={errors}
-            register={register}
-            type="netflix"
-            title="Netflix"
-          />
-          <SpecialUtilitiesFields errors={errors} register={register} type="hulu" title="Hulu" />
-        </Stack>
-        <Footer
-          rightButton={{ text: 'Support' }}
-          leftButton={{ text: 'Financials', onClick: goToPreviousStep }}
-        />
-      </Box>
-    </form>
-  );
-};
+        </Box>
+      </form>
+    );
+  },
+);
