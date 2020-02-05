@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from './Landings';
@@ -11,6 +10,7 @@ import Footer from './Footer';
 import Profiles from './Profiles';
 import UdetailForm from './userdetails/UdetailForm';
 import { HouseWizard } from './houseWizard';
+import { fetchUser } from '../actions';
 
 class App extends Component {
   componentDidMount() {
@@ -35,4 +35,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+export default connect(null, { fetchUser })(App);
