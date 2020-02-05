@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/user');
 require('./models/Survey');
-require('./models/House');
+require('./models/House-bk');
 require('./models/Udetail');
 
 require('./services/passport');
@@ -35,7 +35,7 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 require('./routes/surveyRoutes')(app);
-require('./routes/houseRoutes')(app);
+require('./routes/houseRoutes-bk')(app);
 require('./routes/userdetailRoutes')(app);
 
 if (process.env.NODE_ENV === 'production'){
