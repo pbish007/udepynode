@@ -6,8 +6,11 @@ import { AddressForm } from './AddressForm';
 import { SupportForm } from './SupportForm';
 import { FinancialsForm } from './FinancialsForm';
 import { UtilitiesForm } from './UtilitiesForm';
+import { addHouse } from '../../actions/house';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-export const HouseWizard = () => {
+export const HouseWizard = ({ addHouse, history }) => {
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
   const utilitiesFormRef = React.createRef();
@@ -27,6 +30,7 @@ export const HouseWizard = () => {
     };
 
     console.log('formData', formData);
+    addHouse(formData, history);
   };
 
   const setStep = (step: number) => (): void => {
@@ -90,3 +94,5 @@ export const HouseWizard = () => {
     </Box>
   );
 };
+
+export default connect(null, { addHouse })(withRouter(HouseWizard));

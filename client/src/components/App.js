@@ -9,7 +9,7 @@ import SurveyNew from './surveys/SurveyNew';
 import Footer from './Footer';
 import Profiles from './Profiles';
 import UdetailForm from './userdetails/UdetailForm';
-import { HouseWizard } from './houseWizard';
+import HouseWizard from './houseWizard';
 import { fetchUser } from '../actions';
 
 class App extends Component {
@@ -24,6 +24,7 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={Landing} />
           <Route exact path="/house/add" component={HouseWizard} />
+          <Route exact path="/house" component={HouseWizard} />
           <Route exact path="/udetail" component={UdetailForm} />
           <Route exact path="/surveys" component={Dashboard} />
           <Route exact path="/surveys/new" component={SurveyNew} />
