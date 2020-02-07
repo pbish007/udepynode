@@ -24,7 +24,7 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={Landing} />
           <Route exact path="/house/add" component={HouseWizard} />
-          <Route exact path="/house" component={HouseWizard} />
+          <Route exact path="/house" component={() => <span>Dashboard</span>} />
           <Route exact path="/udetail" component={UdetailForm} />
           <Route exact path="/surveys" component={Dashboard} />
           <Route exact path="/surveys/new" component={SurveyNew} />

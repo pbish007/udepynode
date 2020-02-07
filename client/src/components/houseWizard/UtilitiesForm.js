@@ -32,7 +32,7 @@ const SpecialUtilitiesFields = ({ errors, type, register, title }) => {
           registerFn={register}
           mb={[2, 0]}
         />
-        <FormInput
+        <FormNumberInput
           errors={errors}
           fieldName={`utilities.${type}.supportNumber`}
           placeholder="Support number"
@@ -72,7 +72,7 @@ const UtilitiesFields = ({ errors, type, register, title }) => {
           registerFn={register}
           mb={[2, 0]}
         />
-        <FormInput
+        <FormNumberInput
           errors={errors}
           fieldName={`utilities.${type}.supportNumber`}
           placeholder="Support number"

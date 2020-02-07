@@ -3,22 +3,26 @@ import * as React from 'react';
 import { Box, Button, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import { Footer } from './Footer';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { FormInput } from '../form/FormField';
+import { FormInput, FormNumberInput } from '../form/FormField';
 
 const PLUMBER_TYPE = 'plumber';
 const ELECTRICIAN_TYPE = 'electrician';
 const HVAC_TYPE = 'hvac';
 
-const FIELDS = [
-  { name: 'companyName', title: 'Company' },
-  { name: 'personName', title: 'Name' },
-  { name: 'phoneNumber', title: 'Phone Number' },
-  { name: 'mobile', title: 'Mobile Number' },
+const SUPPORT_FIELDS: Array<{
+  name: string,
+  title: string,
+  renderField: React.ComponentType<any>,
+}> = [
+  { name: 'companyName', title: 'Company', renderField: FormInput },
+  { name: 'personName', title: 'Name', renderField: FormInput },
+  { name: 'phoneNumber', title: 'Phone Number', renderField: FormNumberInput },
+  { name: 'mobile', title: 'Mobile Number', renderField: FormNumberInput },
 ];
 
 const createEmptyItem = () => {
   const fieldData = {};
-  FIELDS.forEach(f => {
+  SUPPORT_FIELDS.forEach(f => {
     fieldData[f.name] = '';
   });
 
@@ -56,9 +60,10 @@ export const SupportFields = ({
               templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr)']}
               gap={[0, null, 3]}
               key={item.id}>
-              {FIELDS.map(field => {
+              {SUPPORT_FIELDS.map(field => {
+                const Field = field.renderField || FormInput;
                 return (
-                  <FormInput
+                  <Field
                     key={field.name}
                     errors={errors}
                     fieldName={`support.${type}[${index}].${field.name}`}
