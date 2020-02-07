@@ -85,7 +85,7 @@ export const FormNumberInput = ({
   label,
   registerFn,
   placeholder,
-  step = 10,
+  step = 100,
   min = 0,
   max,
   ...props
@@ -106,10 +106,6 @@ export const FormNumberInput = ({
           ref={registerFn}
           type="number"
         />
-        <NumberInputStepper>
-          <NumberIncrementStepper />
-          <NumberDecrementStepper />
-        </NumberInputStepper>
       </NumberInput>
     </FormField>
   );

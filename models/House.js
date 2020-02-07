@@ -16,6 +16,7 @@ const financialsSchema = new Schema({
     mortgagePayment: Number,
     interest: Number,
     mortgageCompany: String,
+    mortgageCompanyPhone: Number,
     paymentFrequency: { type: String, default: '' },
 }, {
     id: false,
@@ -25,6 +26,7 @@ const financialsSchema = new Schema({
 const insuranceSchema = new Schema({
     cost: Number,
     company: String,
+    companyPhone: Number,
     broker: String,
 }, {
     id: false,
@@ -52,6 +54,7 @@ const supportSchema = new Schema({
 });
 
 const houseSchema = new Schema({
+    userId: mongoose.Types.ObjectId,
     address: addressSchema,
     financials: financialsSchema,
     insurance: insuranceSchema,

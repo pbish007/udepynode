@@ -15,7 +15,9 @@ const MORTGAGE_PAYMENT_FIELD = 'financials.mortgagePayment';
 const PAYMENT_FREQ_FIELD = 'financials.paymentFrequency';
 const INTEREST_RATE_FIELD = 'financials.interest';
 const MORTGAGE_COMPANY_FIELD = 'financials.mortgageCompany';
+const MORTGAGE_COMPANY_PHONE_FIELD = 'financials.mortgageCompanyPhone';
 const INSURANCE_COST_FIELD = 'insurance.cost';
+const INSURANCE_COMPANY_PHONE_FIELD = 'insurance.companyPhone';
 const INSURANCE_COMPANY_FIELD = 'insurance.company';
 const INSURANCE_BROKER_FIELD = 'insurance.broker';
 
@@ -90,6 +92,12 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 label="Mortgage Company"
                 registerFn={register}
               />
+              <FormNumberInput
+                errors={errors}
+                fieldName={MORTGAGE_COMPANY_PHONE_FIELD}
+                label="Mortgage Company Phone"
+                registerFn={register}
+              />
             </Box>
             <Box>
               <FormNumberInput
@@ -102,6 +110,12 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 errors={errors}
                 fieldName={INSURANCE_COMPANY_FIELD}
                 label="Insurance Company"
+                registerFn={register}
+              />
+              <FormNumberInput
+                errors={errors}
+                fieldName={INSURANCE_COMPANY_PHONE_FIELD}
+                label="Insurance Company Phone"
                 registerFn={register}
               />
               <FormInput
