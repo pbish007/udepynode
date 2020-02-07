@@ -56,6 +56,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
           <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[0, null, 10]}>
             <Box>
               <FormNumberInput
+                leftContent="$"
                 errors={errors}
                 fieldName={MORTGAGE_FIELD}
                 label="Mortgage"
@@ -63,6 +64,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
               />
               <Stack mb={5}>
                 <FormNumberInput
+                  leftContent="$"
                   registerFn={register}
                   errors={errors}
                   fieldName={MORTGAGE_PAYMENT_FIELD}
@@ -101,6 +103,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
             </Box>
             <Box>
               <FormNumberInput
+                leftContent="$"
                 errors={errors}
                 fieldName={INSURANCE_COST_FIELD}
                 label="Insurance Cost"

@@ -4,6 +4,9 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  InputGroup,
+  InputLeftAddon,
+  InputLeftElement,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
@@ -77,6 +80,7 @@ type FormNumberInputProps = {|
   min?: number,
   max?: number,
   mb?: any,
+  leftContent?: any,
 |};
 
 export const FormNumberInput = ({
@@ -88,6 +92,7 @@ export const FormNumberInput = ({
   step = 100,
   min = 0,
   max,
+  leftContent,
   ...props
 }: FormNumberInputProps) => {
   return (
@@ -99,13 +104,16 @@ export const FormNumberInput = ({
         onChange={val => {
           console.log(val, typeof val);
         }}>
-        <NumberInputField
-          defaultValue={10}
-          name={fieldName}
-          placeholder={placeholder || label}
-          ref={registerFn}
-          type="number"
-        />
+        <InputGroup>
+          {leftContent ? <InputLeftAddon>{leftContent}</InputLeftAddon> : null}
+          <NumberInputField
+            defaultValue={10}
+            name={fieldName}
+            placeholder={placeholder || label}
+            ref={registerFn}
+            type="number"
+          />
+        </InputGroup>
       </NumberInput>
     </FormField>
   );

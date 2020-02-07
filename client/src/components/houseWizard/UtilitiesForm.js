@@ -26,6 +26,7 @@ const SpecialUtilitiesFields = ({ errors, type, register, title }) => {
           mb={[2, 0]}
         />
         <FormNumberInput
+          leftContent="$"
           errors={errors}
           fieldName={`utilities.${type}.monthlyCost`}
           placeholder="Monthly Cost"
@@ -66,6 +67,7 @@ const UtilitiesFields = ({ errors, type, register, title }) => {
           mb={[2, 0]}
         />
         <FormNumberInput
+          leftContent="$"
           errors={errors}
           fieldName={`utilities.${type}.monthlyCost`}
           placeholder="Monthly Cost"
