@@ -6,12 +6,8 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  InputLeftElement,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
-  NumberInputStepper,
 } from '@chakra-ui/core';
 import get from 'lodash.get';
 import * as React from 'react';
