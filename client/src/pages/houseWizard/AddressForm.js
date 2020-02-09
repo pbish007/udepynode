@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
-import { FormInput } from '../form/FormField';
+import { FormInput } from '../../components/form/FormField';
 import { Footer } from './Footer';
 
 const ADDRESS1_FIELD = 'address.street';

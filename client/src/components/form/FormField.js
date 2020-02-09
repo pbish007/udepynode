@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/core';
 import get from 'lodash.get';
 import * as React from 'react';
-import type { Errors } from '../houseWizard/types';
+import type { Errors } from './types';
 
 type FormFieldProps = {|
   errors: Errors,

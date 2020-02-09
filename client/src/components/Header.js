@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {ROUTES} from "../constants";
 //import Payments from './Payments';
 
 class Header extends Component {
@@ -70,7 +71,7 @@ class Header extends Component {
                 </a>
               </li>
               <li className="nav-item">
-                <Link to={this.props.auth ? '/housedb' : '/'} className="nav-link">
+                <Link to={this.props.auth ? ROUTES.HOUSE : '/'} className="nav-link">
                   House
                 </Link>
               </li>

@@ -10,7 +10,13 @@ import { addHouse } from '../../actions/house';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-export const HouseWizard = ({ addHouse, history }) => {
+export const HouseWizard = ({
+  addHouse,
+  history,
+}: {
+  addHouse: Function,
+  history: { push: Function },
+}) => {
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
   const utilitiesFormRef = React.createRef();
@@ -43,7 +49,7 @@ export const HouseWizard = ({ addHouse, history }) => {
   const setStep3 = setStep(3);
 
   return (
-    <Box p="15px">
+    <Box p={4}>
       <Flex justifyContent="flex-start" mb={2}>
         <Button onClick={() => {}} type="button" leftIcon="arrow-back" variant="ghost">
           Dashboard

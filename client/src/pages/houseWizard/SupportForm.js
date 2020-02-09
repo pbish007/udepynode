@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Box, Button, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import { Footer } from './Footer';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { FormInput, FormNumberInput } from '../form/FormField';
+import { FormInput, FormNumberInput } from '../../components/form/FormField';
 
 const PLUMBER_TYPE = 'plumber';
 const ELECTRICIAN_TYPE = 'electrician';

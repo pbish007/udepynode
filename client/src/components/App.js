@@ -9,8 +9,10 @@ import SurveyNew from './surveys/SurveyNew';
 import Footer from './Footer';
 import Profiles from './Profiles';
 import UdetailForm from './userdetails/UdetailForm';
-import HouseWizard from './houseWizard';
+import HouseWizard from '../pages/houseWizard';
 import { fetchUser } from '../actions';
+import { ROUTES } from '../constants';
+import { HouseDashboard } from '../pages/house';
 
 class App extends Component {
   componentDidMount() {
@@ -23,8 +25,8 @@ class App extends Component {
         <div className="container">
           <Header />
           <Route exact path="/" component={Landing} />
-          <Route exact path="/house/add" component={HouseWizard} />
-          <Route exact path="/house" component={() => <span>Dashboard</span>} />
+          <Route exact path={ROUTES.ADD_HOUSE} component={HouseWizard} />
+          <Route exact path={ROUTES.HOUSE} component={HouseDashboard} />
           <Route exact path="/udetail" component={UdetailForm} />
           <Route exact path="/surveys" component={Dashboard} />
           <Route exact path="/surveys/new" component={SurveyNew} />
