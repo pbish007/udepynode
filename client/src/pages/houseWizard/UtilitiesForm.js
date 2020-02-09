@@ -98,7 +98,6 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
     }));
 
     const onSubmit = values => {
-      console.log('form values', values);
       if (formState.isValid) {
         goToNextStep();
       }

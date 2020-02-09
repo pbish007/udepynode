@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { Box, Button, Flex } from '@chakra-ui/core';
+import { Button, Flex } from '@chakra-ui/core';
 import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@chakra-ui/core';
 import { AddressForm } from './AddressForm';
 import { SupportForm } from './SupportForm';
@@ -9,6 +9,7 @@ import { UtilitiesForm } from './UtilitiesForm';
 import { addHouse } from '../../actions/house';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { PageContent } from '../../components/PageContent';
 
 export const HouseWizard = ({
   addHouse,
@@ -35,7 +36,6 @@ export const HouseWizard = ({
       ...supportData,
     };
 
-    console.log('formData', formData);
     addHouse(formData, history);
   };
 
@@ -49,7 +49,7 @@ export const HouseWizard = ({
   const setStep3 = setStep(3);
 
   return (
-    <Box p={4}>
+    <PageContent>
       <Flex justifyContent="flex-start" mb={2}>
         <Button onClick={() => {}} type="button" leftIcon="arrow-back" variant="ghost">
           Dashboard
@@ -97,7 +97,7 @@ export const HouseWizard = ({
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </Box>
+    </PageContent>
   );
 };
 

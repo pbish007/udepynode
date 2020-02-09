@@ -10,7 +10,7 @@ class Profiles extends Component {
       case false:
         return <li> NOT Authorized</li>;
       default:
-        return [
+        return (
           <div className="container">
             <div className="card mb-3">
               <div className="row no-gutters">
@@ -50,8 +50,8 @@ class Profiles extends Component {
                 </div>
               </div>
             </div>
-          </div>,
-        ];
+          </div>
+        );
     }
   }
 
@@ -62,7 +62,7 @@ class Profiles extends Component {
       case false:
         return <li> NOT Authorized</li>;
       default:
-        return [<Payments />];
+        return <Payments />;
     }
   }
 

@@ -108,7 +108,6 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
     }));
 
     const onSubmit = values => {
-      console.log('form data', values);
       if (formState.isValid) {
         submitForm(values);
       }

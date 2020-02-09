@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {ROUTES} from "../constants";
+import { ROUTES } from '../constants';
 //import Payments from './Payments';
 
 class Header extends Component {

@@ -38,7 +38,6 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
     }));
 
     const onSubmit = values => {
-      console.log('form values', values);
       if (formState.isValid) {
         goToNextStep();
       }
