@@ -4,10 +4,15 @@ import React from 'react';
 import { Footer } from './Footer';
 import { useForm } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../components/form/FormField';
+import type { Utilities } from '../house/models';
 
 type UtilitiesFormProps = {|
   goToNextStep: () => void,
   goToPreviousStep: boolean => void,
+|};
+
+export type UtilitiesFormModel = {|
+  utilities: Utilities,
 |};
 
 const SpecialUtilitiesFields = ({ errors, type, register, title }) => {
@@ -92,7 +97,7 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
     const { handleSubmit, errors, formState, register, getValues } = formProps;
 
     React.useImperativeHandle(ref, () => ({
-      getValues: () => {
+      getValues: (): UtilitiesFormModel => {
         return getValues({ nest: true });
       },
     }));

@@ -3,7 +3,7 @@
   "plugins": ["prettier", "flowtype"],
   "extends": ["plugin:react-app/recommended", "plugin:react/recommended", "plugin:flowtype/recommended"],
   "rules": {
-    "no-console": "error",
+    "no-console": "off",
     "no-unused-vars": "error",
     "prettier/prettier": "error",
     "react/display-name": "off",

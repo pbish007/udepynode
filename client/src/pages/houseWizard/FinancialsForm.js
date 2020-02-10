@@ -21,6 +21,11 @@ const INSURANCE_COMPANY_PHONE_FIELD = 'insurance.companyPhone';
 const INSURANCE_COMPANY_FIELD = 'insurance.company';
 const INSURANCE_BROKER_FIELD = 'insurance.broker';
 
+export type FinancialsFormModel = {|
+  financials: Object,
+  insurance: Object,
+|};
+
 export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
   ({ goToNextStep, goToPreviousStep }: FinancialsFormProps, ref: any) => {
     const [selectedValues, setSelectedValues] = useState([]);
@@ -32,7 +37,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
     }, [register]);
 
     React.useImperativeHandle(ref, () => ({
-      getValues: () => {
+      getValues: (): FinancialsFormModel => {
         return getValues({ nest: true });
       },
     }));

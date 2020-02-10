@@ -10,12 +10,18 @@ import { addHouse } from '../../actions/house';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { PageContent } from '../../components/PageContent';
+import type { House } from '../house/models';
+import { defaultAddress, defaultUtilities } from '../house/models';
+import type { AddressFormModel } from './AddressForm';
+import type { FinancialsFormModel } from './FinancialsForm';
+import type { SupportFormModel } from './SupportForm';
+import type { UtilitiesFormModel } from './UtilitiesForm';
 
 export const HouseWizard = ({
   addHouse,
   history,
 }: {
-  addHouse: Function,
+  addHouse: (House, Object) => void,
   history: { push: Function },
 }) => {
   const addressFormRef = React.createRef();
@@ -24,17 +30,25 @@ export const HouseWizard = ({
   const [currentStep, setCurrentStep] = useState(0);
   const [isAddressFormValid, setIsAddressFormValid] = useState(false);
 
-  const onSubmit = supportData => {
-    const address = addressFormRef.current ? addressFormRef.current.getValues() : {};
-    const financials = financialsFormRef.current ? financialsFormRef.current.getValues() : {};
-    const utilities = utilitiesFormRef.current ? utilitiesFormRef.current.getValues() : {};
+  const onSubmit = (supportData: SupportFormModel) => {
+    const address: AddressFormModel = addressFormRef.current
+      ? addressFormRef.current.getValues()
+      : { address: defaultAddress };
+    const financials: FinancialsFormModel = financialsFormRef.current
+      ? financialsFormRef.current.getValues()
+      : { financials: {}, insurance: {} };
+    const utilities: UtilitiesFormModel = utilitiesFormRef.current
+      ? utilitiesFormRef.current.getValues()
+      : { utilities: defaultUtilities };
 
-    const formData = {
+    const formData: House = {
       ...address,
       ...financials,
       ...utilities,
       ...supportData,
     };
+
+    console.log('formData', formData);
 
     addHouse(formData, history);
   };

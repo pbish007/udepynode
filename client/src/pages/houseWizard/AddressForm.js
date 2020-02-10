@@ -4,6 +4,7 @@ import { Box, Grid } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 import { FormInput } from '../../components/form/FormField';
 import { Footer } from './Footer';
+import type { Address } from '../house/models';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
@@ -15,13 +16,17 @@ type AddressFormProps = {|
   setIsAddressFormValid: boolean => void,
 |};
 
+export type AddressFormModel = {|
+  address: Address,
+|};
+
 export const AddressForm = React.forwardRef<AddressFormProps, any>(
   ({ goToNextStep, setIsAddressFormValid }: AddressFormProps, ref: any) => {
     const formProps = useForm({ mode: 'onChange' });
     const { handleSubmit, errors, register, formState, getValues } = formProps;
 
     React.useImperativeHandle(ref, () => ({
-      getValues: () => {
+      getValues: (): AddressFormModel => {
         return getValues({ nest: true });
       },
     }));

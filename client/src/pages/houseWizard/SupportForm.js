@@ -4,10 +4,15 @@ import { Box, Button, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import { Footer } from './Footer';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../components/form/FormField';
+import type { Support } from '../house/models';
 
 const PLUMBER_TYPE = 'plumber';
 const ELECTRICIAN_TYPE = 'electrician';
 const HVAC_TYPE = 'hvac';
+
+export type SupportFormModel = {|
+  support: Support,
+|};
 
 const SUPPORT_FIELDS: Array<{
   name: string,
@@ -102,7 +107,7 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
     const { handleSubmit, errors, formState, register, getValues, control } = formProps;
 
     React.useImperativeHandle(ref, () => ({
-      getValues: () => {
+      getValues: (): SupportFormModel => {
         return getValues({ nest: true });
       },
     }));
