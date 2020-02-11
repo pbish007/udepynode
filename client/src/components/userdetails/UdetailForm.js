@@ -7,7 +7,7 @@ const FIELDS = [
   { label: 'Street', name: 'street', placeholder: 'sample 11 Main Street' },
   { label: 'City', name: 'city', placeholder: 'City' },
   { label: 'ZipPostal', name: 'zipPostal', placeholder: 'Zip or Postal Code' },
-  { label: 'State', name: 'state', placeholder: 'State' },
+  { label: 'HouseState', name: 'state', placeholder: 'HouseState' },
   { label: 'Country', name: 'country', placeholder: 'Country' },
   { label: 'Cell', name: 'cell', placeholder: '1 505 234 1234' },
   { label: 'Phone', name: 'phone', placeholder: '1 505 234 1235' },

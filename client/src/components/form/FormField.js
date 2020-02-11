@@ -103,7 +103,6 @@ export const FormNumberInput = ({
         <InputGroup>
           {leftContent ? <InputLeftAddon>{leftContent}</InputLeftAddon> : null}
           <NumberInputField
-            defaultValue={10}
             name={fieldName}
             placeholder={placeholder || label}
             ref={registerFn}

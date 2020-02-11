@@ -17,6 +17,7 @@ flow-typed
 [lints]
 
 [options]
+exact_by_default=true
 server.max_workers=1
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable

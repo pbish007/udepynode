@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import * as React from 'react';
 import { Button, Flex } from '@chakra-ui/core';
 import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@chakra-ui/core';
 import { AddressForm } from './AddressForm';
@@ -16,19 +16,27 @@ import type { AddressFormModel } from './AddressForm';
 import type { FinancialsFormModel } from './FinancialsForm';
 import type { SupportFormModel } from './SupportForm';
 import type { UtilitiesFormModel } from './UtilitiesForm';
+import type { ReduxState } from '../../models/ReduxState';
 
-export const HouseWizard = ({
-  addHouse,
-  history,
-}: {
+type DispatchProps = $ReadOnly<{
   addHouse: (House, Object) => void,
+}>;
+
+type OwnProps = $ReadOnly<{
   history: { push: Function },
-}) => {
+}>;
+
+type Props = $ReadOnly<{
+  ...DispatchProps,
+  ...OwnProps,
+}>;
+
+export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHouse, history }) => {
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
   const utilitiesFormRef = React.createRef();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [isAddressFormValid, setIsAddressFormValid] = useState(false);
+  const [currentStep, setCurrentStep] = React.useState(0);
+  const [isAddressFormValid, setIsAddressFormValid] = React.useState(false);
 
   const onSubmit = (supportData: SupportFormModel) => {
     const address: AddressFormModel = addressFormRef.current
@@ -115,4 +123,6 @@ export const HouseWizard = ({
   );
 };
 
-export default connect(null, { addHouse })(withRouter(HouseWizard));
+export default connect<Props, OwnProps, void, *, ReduxState, *>(null, { addHouse })(
+  withRouter(HouseWizard),
+);

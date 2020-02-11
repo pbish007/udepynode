@@ -13,7 +13,7 @@ class Header extends Component {
         return;
       default:
         //returning an array for the header
-        return [
+        return (
           <ul className="navbar-nav">
             <li>
               <div className="dropdown">
@@ -42,8 +42,8 @@ class Header extends Component {
                 </div>
               </div>
             </li>
-          </ul>,
-        ];
+          </ul>
+        );
     }
   }
   render() {

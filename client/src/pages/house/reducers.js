@@ -15,13 +15,13 @@ import {
   FETCH_HOUSES_SUCCESS,
 } from '../../actions/types';
 
-type State = {
+export type HouseState = {
   isLoading: boolean,
   error: ?ErrorMessage,
   data: Array<House>,
 };
 
-const DEFAULT_STATE: State = {
+const DEFAULT_STATE: HouseState = {
   isLoading: false,
   error: null,
   data: [],
@@ -33,7 +33,7 @@ type Action =
   | FETCH_HOUSES_LOADING_ACTION
   | FETCH_HOUSES_ERROR_ACTION;
 
-export const houseReducer = (state: State = DEFAULT_STATE, action: Action): State => {
+export const houseReducer = (state: HouseState = DEFAULT_STATE, action: Action): HouseState => {
   switch (action.type) {
     case ADD_HOUSE: {
       return {

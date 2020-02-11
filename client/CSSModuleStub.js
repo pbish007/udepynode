@@ -1,4 +1,4 @@
 // @flow
 type CSSModule = { [key: string]: string };
-const emptyCSSModule: CSSModule = {};
+const emptyCSSModule: $Shape<CSSModule> = {};
 export default emptyCSSModule;

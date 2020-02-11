@@ -15,11 +15,11 @@ class Landing extends Component {
           </p>
         );
       default:
-        return [
+        return (
           <div className="container">
             <p className="text-white">Welcome: {this.props.auth.firstName} </p>
-          </div>,
-        ];
+          </div>
+        );
     }
   }
 
@@ -28,7 +28,9 @@ class Landing extends Component {
       <div className="container-fluid">
         <div className="jumbotron iris">
           <div className="container introduction">
-            <h3 className="text-white font-weight-bold">We'll help you manage your tangibles</h3>
+            <h3 className="text-white font-weight-bold">
+              We&apos;ll help you manage your tangibles
+            </h3>
             {this.renderContent()}
           </div>
         </div>
