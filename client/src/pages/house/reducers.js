@@ -1,12 +1,23 @@
 // @flow
 
 import type { House } from './models';
-import type { ADD_HOUSE_ACTION } from './types';
-import type { Error } from '../../models/Error';
+import type {
+  ADD_HOUSE_ACTION,
+  FETCH_HOUSES_ERROR_ACTION,
+  FETCH_HOUSES_LOADING_ACTION,
+  FETCH_HOUSES_SUCCESS_ACTION,
+} from './actions';
+import type { ErrorMessage } from '../../models/ErrorMessage';
+import {
+  ADD_HOUSE,
+  FETCH_HOUSES_ERROR,
+  FETCH_HOUSES_LOADING,
+  FETCH_HOUSES_SUCCESS,
+} from '../../actions/types';
 
 type State = {
   isLoading: boolean,
-  error: ?Error,
+  error: ?ErrorMessage,
   data: Array<House>,
 };
 
@@ -16,4 +27,45 @@ const DEFAULT_STATE: State = {
   data: [],
 };
 
-export const HouseReducer = (state: State = DEFAULT_STATE, action: ADD_HOUSE_ACTION) => {};
+type Action =
+  | ADD_HOUSE_ACTION
+  | FETCH_HOUSES_SUCCESS_ACTION
+  | FETCH_HOUSES_LOADING_ACTION
+  | FETCH_HOUSES_ERROR_ACTION;
+
+export const houseReducer = (state: State = DEFAULT_STATE, action: Action): State => {
+  switch (action.type) {
+    case ADD_HOUSE: {
+      return {
+        ...state,
+        data: [...state.data, action.payload],
+      };
+    }
+    case FETCH_HOUSES_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        data: [],
+      };
+    }
+    case FETCH_HOUSES_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+        data: [],
+      };
+    }
+    case FETCH_HOUSES_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        data: action.payload,
+      };
+    }
+    default:
+      return state;
+  }
+};

@@ -12,7 +12,7 @@ import UdetailForm from './userdetails/UdetailForm';
 import HouseWizard from '../pages/houseWizard';
 import { fetchUser } from '../actions';
 import { ROUTES } from '../constants';
-import { HouseDashboard } from '../pages/house';
+import HouseDashboard from '../pages/house';
 
 class App extends Component {
   componentDidMount() {
