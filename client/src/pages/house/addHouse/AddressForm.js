@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
-import { FormInput } from '../../components/form/FormField';
+import { FormInput } from '../../../components/form/FormField';
 import { Footer } from './Footer';
-import type { Address } from '../house/models';
+import type { Address } from '../models';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
@@ -50,7 +50,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 errors={errors}
                 fieldName={ADDRESS1_FIELD}
                 label="Street"
-                registerFn={register}
+                registerFn={register({ required: 'Street is required' })}
               />
               <FormInput
                 errors={errors}

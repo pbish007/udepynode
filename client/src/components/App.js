@@ -9,11 +9,11 @@ import SurveyNew from './surveys/SurveyNew';
 import Footer from './Footer';
 import Profiles from './Profiles';
 import UdetailForm from './userdetails/UdetailForm';
-import HouseWizard from '../pages/houseWizard';
+import HouseWizard from '../pages/house/addHouse';
 import { fetchUser } from '../actions';
 import { ROUTES } from '../constants';
 import HouseDashboard from '../pages/house';
-import HouseDetails from '../pages/houseDetails';
+import HouseDetails from '../pages/house/houseDetails';
 import { fetchHouses } from '../actions/house';
 
 class App extends Component {

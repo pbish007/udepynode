@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import { PageContent } from '../../components/PageContent';
+import { PageContent } from '../../../components/PageContent';
 import { connect } from 'react-redux';
-import type { ReduxState } from '../../models/ReduxState';
-import { makeSelectHouseById, selectHouses } from '../../selectors';
-import type { House } from '../house/models';
+import type { ReduxState } from '../../../models/ReduxState';
+import { makeSelectHouseById, selectHouses } from '../../../selectors';
+import type { House } from '../models';
 
 type OwnProps = {
   match: { params: { houseId?: string } },
@@ -22,7 +22,7 @@ type Props = {
 
 const HouseDetails: React.StatelessFunctionalComponent<Props> = ({ house }) => {
   console.log('house details', house);
-  return <PageContent>House Details - {house?._id}</PageContent>;
+  return <PageContent heading="House Details">House Details - {house?._id}</PageContent>;
 };
 
 const mapStateToProps = (state: ReduxState, ownProps: OwnProps): MapStateProps => {

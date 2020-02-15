@@ -13,7 +13,9 @@ export const PageContent = ({ children, heading }: { children: React.Node, headi
           <Divider />
         </React.Fragment>
       ) : null}
-      {children}
+      <Box pt={4} pb={4}>
+        {children}
+      </Box>
     </Box>
   );
 };

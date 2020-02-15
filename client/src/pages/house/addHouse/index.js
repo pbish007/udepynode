@@ -1,24 +1,24 @@
 // @flow
 import * as React from 'react';
-import { Flex, Icon, Link } from '@chakra-ui/core';
-import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@chakra-ui/core';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
+import type { AddressFormModel } from './AddressForm';
 import { AddressForm } from './AddressForm';
+import type { SupportFormModel } from './SupportForm';
 import { SupportForm } from './SupportForm';
+import type { FinancialsFormModel } from './FinancialsForm';
 import { FinancialsForm } from './FinancialsForm';
+import type { UtilitiesFormModel } from './UtilitiesForm';
 import { UtilitiesForm } from './UtilitiesForm';
-import { addHouse } from '../../actions/house';
+import { addHouse } from '../../../actions/house';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { PageContent } from '../../components/PageContent';
-import type { AddHouse } from '../house/models';
-import { defaultAddress, defaultUtilities } from '../house/models';
-import type { AddressFormModel } from './AddressForm';
-import type { FinancialsFormModel } from './FinancialsForm';
-import type { SupportFormModel } from './SupportForm';
-import type { UtilitiesFormModel } from './UtilitiesForm';
-import type { ReduxState } from '../../models/ReduxState';
-import { Link as RouterLink } from 'react-router-dom';
-import { ROUTES } from '../../constants';
+import { PageContent } from '../../../components/PageContent';
+import type { AddHouse } from '../models';
+import { defaultAddress, defaultUtilities } from '../models';
+import type { ReduxState } from '../../../models/ReduxState';
+import { ROUTES } from '../../../constants';
+import { BackLink } from '../../../components/BackLink';
+import { useTabStep } from '../useTabStep';
 
 type DispatchProps = $ReadOnly<{
   addHouse: (AddHouse, Object) => void,
@@ -37,7 +37,6 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
   const utilitiesFormRef = React.createRef();
-  const [currentStep, setCurrentStep] = React.useState(0);
   const [isAddressFormValid, setIsAddressFormValid] = React.useState(false);
 
   const onSubmit = (supportData: SupportFormModel) => {
@@ -58,28 +57,14 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
       ...supportData,
     };
 
-    console.log('formData', formData);
-
     addHouse(formData, history);
   };
 
-  const setStep = (step: number) => (): void => {
-    setCurrentStep(step);
-  };
-
-  const setStep0 = setStep(0);
-  const setStep1 = setStep(1);
-  const setStep2 = setStep(2);
-  const setStep3 = setStep(3);
+  const { setStep0, setStep1, setStep2, setStep3, currentStep } = useTabStep();
 
   return (
     <PageContent heading="Add a new House">
-      <Flex justifyContent="flex-start" mb={2} align="center">
-        <Icon name="arrow-back" mr={1} />
-        <Link as={RouterLink} to={ROUTES.HOUSE} leftIcon="arrow-back" variant="ghost">
-          Dashboard
-        </Link>
-      </Flex>
+      <BackLink route={ROUTES.HOUSE} text="Dashboard" />
 
       <Tabs index={currentStep}>
         <TabList style={{ flexWrap: 'wrap' }}>

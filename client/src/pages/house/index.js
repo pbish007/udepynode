@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import type { ReduxState } from '../../models/ReduxState';
 import type { HouseState } from './reducers';
 import { Spinner, Text } from '@chakra-ui/core';
-import { HouseList } from './HouseList';
+import { HouseList } from './houseList';
 
 type MapStateProps = $ReadOnly<{|
   houseData: HouseState,

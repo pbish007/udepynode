@@ -3,8 +3,8 @@ import { Box, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import React from 'react';
 import { Footer } from './Footer';
 import { useForm } from 'react-hook-form';
-import { FormInput, FormNumberInput } from '../../components/form/FormField';
-import type { Utilities } from '../house/models';
+import { FormInput, FormNumberInput } from '../../../components/form/FormField';
+import type { Utilities } from '../models';
 
 type UtilitiesFormProps = {|
   goToNextStep: () => void,

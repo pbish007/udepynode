@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react';
-import type { House } from './models';
-import { Box, Flex, Grid, Icon, Image, Text } from '@chakra-ui/core';
-import { ROUTES } from '../../constants';
-import { StyledLink } from '../../components/StyledLink';
+import type { House } from '../models';
+import { Box, Flex, Grid, Image, Text } from '@chakra-ui/core';
+import { ROUTES } from '../../../constants';
+import { StyledLink } from '../../../components/StyledLink';
+import { ValueCard } from './ValueCard';
+import { AddHouseButton, AddHouseButtonWithText } from './AddHouseButton';
 
 type Props = {
   houses: ?Array<House>,
@@ -21,20 +23,6 @@ const cardProps = {
   justifyContent: 'space-between',
   p: 2,
   _hover: { textDecoration: 'none' },
-};
-
-const ValueCard: React.StatelessFunctionalComponent<{ label: string, value: number }> = ({
-  label,
-  value,
-}) => {
-  return (
-    <Flex p={1} direction="column" bg="blackAlpha.200" align="center" borderRadius={4}>
-      <Text mb={0} fontSize="sm" fontWeight={600}>
-        {label}
-      </Text>
-      <Text fontSize="sm">£{value}</Text>
-    </Flex>
-  );
 };
 
 export const HouseCard = ({ house }: { house: House }) => {
@@ -70,41 +58,6 @@ export const HouseCard = ({ house }: { house: House }) => {
           <ValueCard label="Equity" value={30000} />
         </Grid>
       </Flex>
-    </StyledLink>
-  );
-};
-
-const buttonProps = {
-  display: 'inline-flex',
-  direction: 'row',
-  alignItems: 'center',
-  justifyContent: 'center',
-  border: '1px',
-  borderColor: 'blackAlpha.200',
-  boxShadow: 'md',
-  bg: 'blackAlpha.800',
-  color: 'white',
-  height: '48px',
-};
-
-export const AddHouseButton = (props: any) => {
-  return (
-    <StyledLink to={ROUTES.ADD_HOUSE}>
-      <Box {...buttonProps} p={2} borderRadius="50%" width="48px" {...props}>
-        <React.Fragment>
-          <Icon name="add" />
-        </React.Fragment>
-      </Box>
-    </StyledLink>
-  );
-};
-
-export const AddHouseButtonWithText = () => {
-  return (
-    <StyledLink to={ROUTES.ADD_HOUSE}>
-      <Box {...buttonProps} p={4} borderRadius="24px" width="auto">
-        <React.Fragment>Add New</React.Fragment>
-      </Box>
     </StyledLink>
   );
 };
