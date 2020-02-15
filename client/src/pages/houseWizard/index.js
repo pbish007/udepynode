@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Button, Flex } from '@chakra-ui/core';
+import { Flex, Icon, Link } from '@chakra-ui/core';
 import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@chakra-ui/core';
 import { AddressForm } from './AddressForm';
 import { SupportForm } from './SupportForm';
@@ -10,16 +10,18 @@ import { addHouse } from '../../actions/house';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { PageContent } from '../../components/PageContent';
-import type { House } from '../house/models';
+import type { AddHouse } from '../house/models';
 import { defaultAddress, defaultUtilities } from '../house/models';
 import type { AddressFormModel } from './AddressForm';
 import type { FinancialsFormModel } from './FinancialsForm';
 import type { SupportFormModel } from './SupportForm';
 import type { UtilitiesFormModel } from './UtilitiesForm';
 import type { ReduxState } from '../../models/ReduxState';
+import { Link as RouterLink } from 'react-router-dom';
+import { ROUTES } from '../../constants';
 
 type DispatchProps = $ReadOnly<{
-  addHouse: (House, Object) => void,
+  addHouse: (AddHouse, Object) => void,
 }>;
 
 type OwnProps = $ReadOnly<{
@@ -49,7 +51,7 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
       ? utilitiesFormRef.current.getValues()
       : { utilities: defaultUtilities };
 
-    const formData: House = {
+    const formData: AddHouse = {
       ...address,
       ...financials,
       ...utilities,
@@ -71,11 +73,12 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
   const setStep3 = setStep(3);
 
   return (
-    <PageContent>
-      <Flex justifyContent="flex-start" mb={2}>
-        <Button onClick={() => {}} type="button" leftIcon="arrow-back" variant="ghost">
+    <PageContent heading="Add a new House">
+      <Flex justifyContent="flex-start" mb={2} align="center">
+        <Icon name="arrow-back" mr={1} />
+        <Link as={RouterLink} to={ROUTES.HOUSE} leftIcon="arrow-back" variant="ghost">
           Dashboard
-        </Button>
+        </Link>
       </Flex>
 
       <Tabs index={currentStep}>

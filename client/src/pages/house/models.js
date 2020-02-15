@@ -40,10 +40,15 @@ export type Utilities = {|
   tv_provider: Object,
 |};
 
-export type House = {|
+export type AddHouse = {|
   address: Address,
   financials: Object,
   insurance: Object,
   support: Support,
   utilities: Utilities,
+|};
+
+export type House = {|
+  _id: string,
+  ...AddHouse,
 |};

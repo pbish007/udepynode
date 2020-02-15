@@ -16,6 +16,9 @@ flow-typed
 
 [lints]
 
+[untyped]
+.*/node_modules/@emotion
+
 [options]
 exact_by_default=true
 server.max_workers=1

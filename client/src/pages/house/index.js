@@ -49,7 +49,7 @@ export const HouseDashboard: React.StatelessFunctionalComponent<Props> = ({
   }
 
   return (
-    <PageContent>
+    <PageContent heading="House Dashboard">
       <HouseList houses={data} />
     </PageContent>
   );

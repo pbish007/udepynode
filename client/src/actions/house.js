@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { ROUTES } from '../constants';
 import { API_ROUTES } from './apiRoutes';
-import type { House } from '../pages/house/models';
+import type { House, AddHouse } from '../pages/house/models';
 import type {
   ADD_HOUSE_ACTION,
   FETCH_HOUSES_ERROR_ACTION,
@@ -12,7 +12,7 @@ import type {
 import type { Dispatch } from './types';
 import { ADD_HOUSE, FETCH_HOUSES_ERROR, FETCH_HOUSES_LOADING, FETCH_HOUSES_SUCCESS } from './types';
 
-export const addHouse = (values: House, history: { push: Function }) => async (
+export const addHouse = (values: AddHouse, history: { push: Function }) => async (
   dispatch: Dispatch,
 ) => {
   try {
