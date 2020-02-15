@@ -6,7 +6,7 @@ import { ROUTES } from '../../constants';
 import { StyledLink } from '../../components/StyledLink';
 
 type Props = {
-  houses: Array<House>,
+  houses: ?Array<House>,
 };
 
 const cardProps = {
@@ -116,13 +116,15 @@ export const HouseList: React.StatelessFunctionalComponent<Props> = ({ houses })
         <AddHouseButton mr={2} />
         <AddHouseButtonWithText />
       </Flex>
-      <Grid
-        templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)', null, 'repeat(3, 1fr)']}
-        gap={[4, 6]}>
-        {houses.map((house: House) => {
-          return <HouseCard key={house._id} house={house} />;
-        })}
-      </Grid>
+      {houses && houses.length ? (
+        <Grid
+          templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)', null, 'repeat(3, 1fr)']}
+          gap={[4, 6]}>
+          {houses.map((house: House) => {
+            return <HouseCard key={house._id} house={house} />;
+          })}
+        </Grid>
+      ) : null}
     </React.Fragment>
   );
 };

@@ -18,13 +18,13 @@ import {
 export type HouseState = {
   isLoading: boolean,
   error: ?ErrorMessage,
-  data: Array<House>,
+  data: Array<House> | null,
 };
 
 const DEFAULT_STATE: HouseState = {
   isLoading: false,
   error: null,
-  data: [],
+  data: null,
 };
 
 type Action =
@@ -38,7 +38,7 @@ export const houseReducer = (state: HouseState = DEFAULT_STATE, action: Action):
     case ADD_HOUSE: {
       return {
         ...state,
-        data: [...state.data, action.payload],
+        data: [...(state.data || []), action.payload],
       };
     }
     case FETCH_HOUSES_LOADING: {

@@ -13,6 +13,7 @@ import HouseWizard from '../pages/houseWizard';
 import { fetchUser } from '../actions';
 import { ROUTES } from '../constants';
 import HouseDashboard from '../pages/house';
+import HouseDetails from '../pages/houseDetails';
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route exact path={ROUTES.ADD_HOUSE} component={HouseWizard} />
           <Route exact path={ROUTES.HOUSE} component={HouseDashboard} />
+          <Route exact path={ROUTES.HOUSE_DETAILS} component={HouseDetails} />
           <Route exact path="/udetail" component={UdetailForm} />
           <Route exact path="/surveys" component={Dashboard} />
           <Route exact path="/surveys/new" component={SurveyNew} />
