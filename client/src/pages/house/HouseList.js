@@ -3,8 +3,7 @@ import * as React from 'react';
 import type { House } from './models';
 import { Box, Flex, Grid, Icon, Image, Text } from '@chakra-ui/core';
 import { ROUTES } from '../../constants';
-import { Link } from 'react-router-dom';
-import styled from '@emotion/styled';
+import { StyledLink } from '../../components/StyledLink';
 
 type Props = {
   houses: Array<House>,
@@ -13,6 +12,7 @@ type Props = {
 const cardProps = {
   borderTop: '1px',
   borderColor: 'gray.100',
+  bg: 'blackAlpha.50',
   borderRadius: 2,
   height: 40,
   shadow: 'lg',
@@ -37,14 +37,6 @@ const ValueCard: React.StatelessFunctionalComponent<{ label: string, value: numb
   );
 };
 
-const StyledLink: React.StatelessFunctionalComponent<any> = styled(Link)`
-  &:hover {
-    text-decoration: none;
-    color: inherit;
-    opacity: 0.9;
-  }
-`;
-
 export const HouseCard = ({ house }: { house: House }) => {
   const route = `${ROUTES.HOUSE}/view/${house._id}`;
 
@@ -55,8 +47,7 @@ export const HouseCard = ({ house }: { house: House }) => {
         direction="column"
         alignItems="stretch"
         justifyContent="space-between"
-        p={2}
-        _hover={{ textDecoration: 'none' }}>
+        p={2}>
         <Flex direction="row" justify="space-between">
           <Image
             size="70px"
