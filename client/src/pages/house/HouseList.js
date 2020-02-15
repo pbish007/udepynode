@@ -10,7 +10,7 @@ type Props = {
 };
 
 const cardProps = {
-  borderTop: '1px',
+  border: '1px',
   borderColor: 'gray.100',
   bg: 'blackAlpha.50',
   borderRadius: 2,
@@ -83,14 +83,14 @@ const buttonProps = {
   borderColor: 'blackAlpha.200',
   boxShadow: 'md',
   bg: 'blackAlpha.800',
-  color: 'whiteAlpha.800',
+  color: 'white',
   height: '48px',
 };
 
 export const AddHouseButton = (props: any) => {
   return (
     <StyledLink to={ROUTES.ADD_HOUSE}>
-      <Box {...buttonProps} p={2} borderRadius="50%" mt={4} mb={4} width="48px" {...props}>
+      <Box {...buttonProps} p={2} borderRadius="50%" width="48px" {...props}>
         <React.Fragment>
           <Icon name="add" />
         </React.Fragment>
@@ -102,7 +102,7 @@ export const AddHouseButton = (props: any) => {
 export const AddHouseButtonWithText = () => {
   return (
     <StyledLink to={ROUTES.ADD_HOUSE}>
-      <Box {...buttonProps} p={4} borderRadius="24px" mt={4} mb={4} width="auto">
+      <Box {...buttonProps} p={4} borderRadius="24px" width="auto">
         <React.Fragment>Add New</React.Fragment>
       </Box>
     </StyledLink>
@@ -112,7 +112,7 @@ export const AddHouseButtonWithText = () => {
 export const HouseList: React.StatelessFunctionalComponent<Props> = ({ houses }) => {
   return (
     <React.Fragment>
-      <Flex>
+      <Flex mt={6} mb={6}>
         <AddHouseButton mr={2} />
         <AddHouseButtonWithText />
       </Flex>
