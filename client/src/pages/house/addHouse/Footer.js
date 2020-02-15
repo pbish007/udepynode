@@ -41,3 +41,34 @@ export const Footer = ({
     </Flex>
   );
 };
+
+export const SupportFooter = ({ goToPreviousStep }: { goToPreviousStep: () => void }) => {
+  return (
+    <Footer
+      rightButton={{ text: 'Submit', variant: 'solid' }}
+      leftButton={{ text: 'Utilities', onClick: goToPreviousStep }}
+    />
+  );
+};
+
+export const UtilitiesFooter = ({ goToPreviousStep }: { goToPreviousStep: () => void }) => {
+  return (
+    <Footer
+      rightButton={{ text: 'Support' }}
+      leftButton={{ text: 'Financials', onClick: goToPreviousStep }}
+    />
+  );
+};
+
+export const FinancialsFooter = ({ goToPreviousStep }: { goToPreviousStep: () => void }) => {
+  return (
+    <Footer
+      rightButton={{ text: 'Utilities' }}
+      leftButton={{ text: 'Address', onClick: goToPreviousStep }}
+    />
+  );
+};
+
+export const AddressFooter = ({ goToNextStep }: { goToNextStep?: () => void }) => (
+  <Footer rightButton={{ text: 'Financials', onClick: goToNextStep }} />
+);

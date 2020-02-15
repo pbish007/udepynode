@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 import { FormInput } from '../../../components/form/FormField';
-import { Footer } from './Footer';
+import { AddressFooter } from './Footer';
 import type { Address } from '../models';
 
 const ADDRESS1_FIELD = 'address.street';
@@ -35,7 +35,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       setIsAddressFormValid(formState.isValid);
     }, [formState.isValid, setIsAddressFormValid]);
 
-    const onSubmit = values => {
+    const onSubmit = () => {
       if (formState.isValid) {
         goToNextStep();
       }
@@ -73,7 +73,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
             </Box>
           </Grid>
 
-          <Footer rightButton={{ text: 'Financials' }} />
+          <AddressFooter />
         </Box>
       </form>
     );

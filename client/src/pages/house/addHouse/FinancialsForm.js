@@ -3,11 +3,11 @@ import { Box, CheckboxGroup, Grid, Stack, Checkbox } from '@chakra-ui/core';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../../components/form/FormField';
-import { Footer } from './Footer';
+import { FinancialsFooter } from './Footer';
 
 type FinancialsFormProps = {|
   goToNextStep: () => void,
-  goToPreviousStep: boolean => void,
+  goToPreviousStep: () => void,
 |};
 
 const MORTGAGE_FIELD = 'financials.mortgage';
@@ -42,7 +42,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
       },
     }));
 
-    const onSubmit = values => {
+    const onSubmit = () => {
       if (formState.isValid) {
         goToNextStep();
       }
@@ -134,10 +134,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
             </Box>
           </Grid>
 
-          <Footer
-            rightButton={{ text: 'Utilities' }}
-            leftButton={{ text: 'Address', onClick: goToPreviousStep }}
-          />
+          <FinancialsFooter goToPreviousStep={goToPreviousStep} />
         </Box>
       </form>
     );

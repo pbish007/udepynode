@@ -1,14 +1,14 @@
 // @flow
 import { Box, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import React from 'react';
-import { Footer } from './Footer';
+import { UtilitiesFooter } from './Footer';
 import { useForm } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../../components/form/FormField';
 import type { Utilities } from '../models';
 
 type UtilitiesFormProps = {|
   goToNextStep: () => void,
-  goToPreviousStep: boolean => void,
+  goToPreviousStep: () => void,
 |};
 
 export type UtilitiesFormModel = {|
@@ -102,7 +102,7 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
       },
     }));
 
-    const onSubmit = values => {
+    const onSubmit = () => {
       if (formState.isValid) {
         goToNextStep();
       }
@@ -135,10 +135,7 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
             />
             <SpecialUtilitiesFields errors={errors} register={register} type="hulu" title="Hulu" />
           </Stack>
-          <Footer
-            rightButton={{ text: 'Support' }}
-            leftButton={{ text: 'Financials', onClick: goToPreviousStep }}
-          />
+          <UtilitiesFooter goToPreviousStep={goToPreviousStep} />
         </Box>
       </form>
     );

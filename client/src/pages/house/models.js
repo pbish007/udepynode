@@ -40,10 +40,26 @@ export type Utilities = {|
   tv_provider: Object,
 |};
 
+export type Financials = {|
+  mortgage: string,
+  mortgagePayment: string,
+  interest: string,
+  mortgageCompany: string,
+  mortgageCompanyPhone: string,
+  paymentFrequency: string,
+|};
+
+export type Insurance = {|
+  cost: string,
+  company: string,
+  companyPhone: string,
+  broker: string,
+|};
+
 export type AddHouse = {|
   address: Address,
-  financials: Object,
-  insurance: Object,
+  financials: Financials,
+  insurance: Insurance,
   support: Support,
   utilities: Utilities,
 |};

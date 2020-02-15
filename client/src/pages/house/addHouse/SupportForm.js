@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Box, Button, Flex, Grid, Stack, Text } from '@chakra-ui/core';
-import { Footer } from './Footer';
+import { SupportFooter } from './Footer';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../../components/form/FormField';
 import type { Support } from '../models';
@@ -93,7 +93,7 @@ export const SupportFields = ({
 
 type SupportFormProps = {|
   submitForm: Object => void,
-  goToPreviousStep: boolean => void,
+  goToPreviousStep: () => void,
 |};
 
 export const SupportForm = React.forwardRef<SupportFormProps, any>(
@@ -144,10 +144,7 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
               title="HVAC"
             />
           </Stack>
-          <Footer
-            rightButton={{ text: 'Submit', variant: 'solid' }}
-            leftButton={{ text: 'Utilities', onClick: goToPreviousStep }}
-          />
+          <SupportFooter goToPreviousStep={goToPreviousStep} />
         </Box>
       </form>
     );
