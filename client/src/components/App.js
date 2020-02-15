@@ -14,10 +14,12 @@ import { fetchUser } from '../actions';
 import { ROUTES } from '../constants';
 import HouseDashboard from '../pages/house';
 import HouseDetails from '../pages/houseDetails';
+import { fetchHouses } from '../actions/house';
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchHouses();
   }
 
   render() {
@@ -40,4 +42,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, { fetchUser })(App);
+export default connect(null, { fetchUser, fetchHouses })(App);
