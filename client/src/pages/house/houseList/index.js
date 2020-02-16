@@ -5,7 +5,7 @@ import { Box, Flex, Grid, Image, Text } from '@chakra-ui/core';
 import { ROUTES } from '../../../constants';
 import { StyledLink } from '../../../components/StyledLink';
 import { ValueCard } from './ValueCard';
-import { AddHouseButton, AddHouseButtonWithText } from './AddHouseButton';
+import { AddHouseButtonWithText } from './AddHouseButton';
 
 type Props = {
   houses: ?Array<House>,
@@ -65,8 +65,7 @@ export const HouseCard = ({ house }: { house: House }) => {
 export const HouseList: React.StatelessFunctionalComponent<Props> = ({ houses }) => {
   return (
     <React.Fragment>
-      <Flex mt={6} mb={6}>
-        <AddHouseButton mr={2} />
+      <Flex mt={6} mb={6} justify="flex-end">
         <AddHouseButtonWithText />
       </Flex>
       {houses && houses.length ? (
