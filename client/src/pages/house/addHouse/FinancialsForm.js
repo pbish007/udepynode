@@ -4,6 +4,17 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../../components/form/FormField';
 import { FinancialsFooter } from './Footer';
+import {
+  INSURANCE_BROKER_LABEL,
+  INSURANCE_COMPANY_LABEL,
+  INSURANCE_COMPANY_PHONE_LABEL,
+  INSURANCE_COST_LABEL,
+  INTEREST_RATE_LABEL,
+  MORTGAGE_COMPANY_LABEL,
+  MORTGAGE_COMPANY_PHONE_LABEL,
+  MORTGAGE_LABEL,
+  MORTGAGE_PAYMENT_LABEL,
+} from '../constants';
 
 type FinancialsFormProps = {|
   goToNextStep: () => void,
@@ -63,7 +74,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 leftContent="$"
                 errors={errors}
                 fieldName={MORTGAGE_FIELD}
-                label="Mortgage"
+                label={MORTGAGE_LABEL}
                 registerFn={register}
               />
               <Stack mb={5}>
@@ -72,7 +83,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                   registerFn={register}
                   errors={errors}
                   fieldName={MORTGAGE_PAYMENT_FIELD}
-                  label="Mortgage Payment"
+                  label={MORTGAGE_PAYMENT_LABEL}
                 />
                 <CheckboxGroup
                   name={PAYMENT_FREQ_FIELD}
@@ -87,7 +98,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
               <FormNumberInput
                 errors={errors}
                 fieldName={INTEREST_RATE_FIELD}
-                label="Interest Rate"
+                label={INTEREST_RATE_LABEL}
                 step={0.01}
                 max={100}
                 registerFn={register}
@@ -95,13 +106,13 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
               <FormInput
                 errors={errors}
                 fieldName={MORTGAGE_COMPANY_FIELD}
-                label="Mortgage Company"
+                label={MORTGAGE_COMPANY_LABEL}
                 registerFn={register}
               />
               <FormNumberInput
                 errors={errors}
                 fieldName={MORTGAGE_COMPANY_PHONE_FIELD}
-                label="Mortgage Company Phone"
+                label={MORTGAGE_COMPANY_PHONE_LABEL}
                 registerFn={register}
               />
             </Box>
@@ -110,25 +121,25 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 leftContent="$"
                 errors={errors}
                 fieldName={INSURANCE_COST_FIELD}
-                label="Insurance Cost"
+                label={INSURANCE_COST_LABEL}
                 registerFn={register}
               />
               <FormInput
                 errors={errors}
                 fieldName={INSURANCE_COMPANY_FIELD}
-                label="Insurance Company"
+                label={INSURANCE_COMPANY_LABEL}
                 registerFn={register}
               />
               <FormNumberInput
                 errors={errors}
                 fieldName={INSURANCE_COMPANY_PHONE_FIELD}
-                label="Insurance Company Phone"
+                label={INSURANCE_COMPANY_PHONE_LABEL}
                 registerFn={register}
               />
               <FormInput
                 errors={errors}
                 fieldName={INSURANCE_BROKER_FIELD}
-                label="Insurance Broker"
+                label={INSURANCE_BROKER_LABEL}
                 registerFn={register}
               />
             </Box>

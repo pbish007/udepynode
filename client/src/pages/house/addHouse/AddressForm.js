@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { FormInput } from '../../../components/form/FormField';
 import { AddressFooter } from './Footer';
 import type { Address } from '../models';
+import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, ZIP_LABEL } from '../constants';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
@@ -49,25 +50,25 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
               <FormInput
                 errors={errors}
                 fieldName={ADDRESS1_FIELD}
-                label="Street"
+                label={STREET_LABEL}
                 registerFn={register({ required: 'Street is required' })}
               />
               <FormInput
                 errors={errors}
                 fieldName={CITY_FIELD}
-                label="City/Town"
+                label={CITY_LABEL}
                 registerFn={register({ required: 'City/Town is required' })}
               />
               <FormInput
                 errors={errors}
                 fieldName={ZIP_FIELD}
-                label="Zip/Postal"
+                label={ZIP_LABEL}
                 registerFn={register({ required: 'Zip/Postal is required' })}
               />
               <FormInput
                 errors={errors}
                 fieldName={COUNTRY_FIELD}
-                label="Country"
+                label={COUNTRY_LABEL}
                 registerFn={register({ required: 'Country is required' })}
               />
             </Box>

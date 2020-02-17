@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Box } from '@chakra-ui/core';
-import type {Support} from "../models";
+import type { Support } from '../models';
 
 type SupportProps = {|
   data: Support,
