@@ -16,12 +16,14 @@ export const addHouse = (values: AddHouse, history: { push: Function }) => async
   dispatch: Dispatch,
 ) => {
   try {
-    const res: { data: House } = await axios.post(API_ROUTES.HOUSE, values);
+    const res: { data: { meta: House } } = await axios.post(API_ROUTES.HOUSE, values);
+
+    console.log('res.data', res.data.meta);
 
     history.push(ROUTES.HOUSE);
-    dispatch<ADD_HOUSE_ACTION>({ type: ADD_HOUSE, payload: res.data });
+    dispatch<ADD_HOUSE_ACTION>({ type: ADD_HOUSE, payload: res.data.meta });
   } catch (err) {
-    console.log('error adding', Object.keys(err), err.toJSON());
+    //console.log('error adding', Object.keys(err), err.toJSON());
     //console.log('error', Object.keys(err));
   }
 };
