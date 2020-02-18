@@ -9,8 +9,8 @@ type Props = {
   setStep3: () => void,
   currentStep: number,
 };
-export const useTabStep = (): Props => {
-  const [currentStep, setCurrentStep] = React.useState(0);
+export const useTabStep = (initialStep: number = 0): Props => {
+  const [currentStep, setCurrentStep] = React.useState(initialStep);
 
   const setStep = (step: number) => (): void => {
     setCurrentStep(step);

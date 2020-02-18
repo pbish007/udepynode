@@ -7,14 +7,17 @@ export const defaultAddress = {
   country: '',
 };
 
+const defaultNamedUtility = { account: '', monthlyCost: '', supportNumber: '', companyName: '' };
+const defaultUtility = { account: '', monthlyCost: '', supportNumber: '' };
+
 export const defaultUtilities = {
-  electricity: {},
-  gas: {},
-  hulu: {},
-  netflix: {},
-  internet: {},
-  oil: {},
-  tv_provider: {},
+  electricity: defaultNamedUtility,
+  gas: defaultNamedUtility,
+  hulu: defaultUtility,
+  netflix: defaultUtility,
+  internet: defaultNamedUtility,
+  oil: defaultNamedUtility,
+  tv_provider: defaultNamedUtility,
 };
 
 export type Address = {|
@@ -30,14 +33,25 @@ export type Support = {|
   hvac: Array<Object>,
 |};
 
+export type Utility = {
+  account: string,
+  monthlyCost: string,
+  supportNumber: string,
+};
+
+export type NamedUtility = {
+  companyName: string,
+  ...Utility,
+};
+
 export type Utilities = {|
-  electricity: Object,
-  gas: Object,
-  hulu: Object,
-  netflix: Object,
-  internet: Object,
-  oil: Object,
-  tv_provider: Object,
+  electricity: NamedUtility,
+  gas: NamedUtility,
+  hulu: Utility,
+  netflix: Utility,
+  internet: NamedUtility,
+  oil: NamedUtility,
+  tv_provider: NamedUtility,
 |};
 
 export type Financials = {|
