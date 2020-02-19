@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Box, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import type { NamedUtility, Utilities, Utility } from '../models';
+import { DetailListItem } from '../../../components/DetailListItem';
 
 interface UtilitiesProps {
   data: Utilities;
@@ -12,11 +13,9 @@ const UtilityColumn: React.StatelessFunctionalComponent<{ title: string, value: 
   value,
 }) => {
   return (
-    <Flex direction="column">
-      <Text fontSize="sm" fontWeight="bold">
-        {title}:
-      </Text>
-      <Text fontSize="sm">{value}</Text>
+    <Flex direction="column" fontSize="sm">
+      <Text fontWeight="bold">{title}:</Text>
+      <Text>{value}</Text>
     </Flex>
   );
 };
@@ -32,10 +31,7 @@ const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, labe
   }
 
   return (
-    <Flex mb={8} borderRadius={2} shadow="md" direction="column">
-      <Text fontWeight="bold" bg="blackAlpha.100" p={2}>
-        {label}
-      </Text>
+    <DetailListItem title={label}>
       <Grid
         templateColumns={['repeat(1, 1fr)', null, 'repeat(4, 1fr)']}
         gap={[0, null, 3]}
@@ -46,7 +42,7 @@ const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, labe
         <UtilityColumn value={monthlyCost || '-'} title="Cost" />
         <UtilityColumn value={supportNumber || '-'} title="Support Number" />
       </Grid>
-    </Flex>
+    </DetailListItem>
   );
 };
 
