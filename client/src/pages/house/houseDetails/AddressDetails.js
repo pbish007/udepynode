@@ -12,7 +12,7 @@ type AddressFormProps = {|
 export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps> = ({ data }) => {
   const { street, city, zip, country } = data;
   return (
-    <Box p={4}>
+    <Box pt={8}>
       <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)']} gap={[0, null, 4]}>
         <Box>
           <DisplayField text={street} label={STREET_LABEL} />

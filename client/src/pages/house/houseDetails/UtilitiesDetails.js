@@ -49,7 +49,7 @@ const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, labe
 export const UtilitiesDetails: React.StatelessFunctionalComponent<UtilitiesProps> = ({ data }) => {
   const { electricity, gas, hulu, internet, netflix, oil, tv_provider } = data;
   return (
-    <Box p={4}>
+    <Box pt={8}>
       <Stack>
         <UtilityInfo utility={electricity} label="Electricity" />
         <UtilityInfo utility={internet} label="Internet" />

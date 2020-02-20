@@ -34,7 +34,7 @@ export const FinancialsDetails: React.StatelessFunctionalComponent<FinancialsPro
   const { cost, broker, company, companyPhone } = insurance;
 
   return (
-    <Box p={4}>
+    <Box pt={8}>
       <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[0, null, 10]}>
         <Box>
           <DisplayField label={MORTGAGE_LABEL} text={`$${mortgage || 0}`} />

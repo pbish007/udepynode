@@ -27,10 +27,17 @@ export type Address = {|
   country: string,
 |};
 
+export type SupportType = {
+  companyName?: string,
+  personName?: string,
+  phoneNumber?: string,
+  mobile?: string,
+};
+
 export type Support = {|
-  plumber: Array<Object>,
-  electrician: Array<Object>,
-  hvac: Array<Object>,
+  plumber: Array<SupportType>,
+  electrician: Array<SupportType>,
+  hvac: Array<SupportType>,
 |};
 
 export type Utility = {
