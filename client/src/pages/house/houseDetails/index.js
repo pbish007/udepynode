@@ -6,11 +6,14 @@ import type { ReduxState } from '../../../models/ReduxState';
 import { makeSelectHouseById, selectHouses } from '../../../selectors';
 import type { House } from '../models';
 import { useTabStep } from '../useTabStep';
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
+import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
 import { AddressDetails } from './AddressDetails';
 import { FinancialsDetails } from './FinancialsDetails';
 import { UtilitiesDetails } from './UtilitiesDetails';
 import { SupportDetails } from './SupportDetails';
+import { BackToDashboard } from '../../../components/BackLink';
+import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
+import { getHouseEditRoute } from '../../../constants';
 
 type OwnProps = {
   match: { params: { houseId?: string } },
@@ -35,8 +38,14 @@ const HouseDetails: React.StatelessFunctionalComponent<Props> = ({ house }) => {
 
   const { address, financials, insurance, support, utilities } = house;
 
+  const editRoute = getHouseEditRoute(house._id);
+
   return (
     <PageContent heading="House Details">
+      <Flex justify="space-between">
+        <BackToDashboard />
+        <RoundedLinkButton to={editRoute} text="Edit" icon="edit" />
+      </Flex>
       <Tabs index={currentStep}>
         <TabList style={{ flexWrap: 'wrap' }}>
           <Tab onClick={setStep0}>Address</Tab>

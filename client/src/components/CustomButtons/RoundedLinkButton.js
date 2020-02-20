@@ -1,7 +1,6 @@
 // @flow
-import { StyledLink } from '../../../components/StyledLink';
-import { ROUTES } from '../../../constants';
 import { Box, Flex, Icon, Text } from '@chakra-ui/core';
+import { StyledLink } from '../StyledLink';
 import * as React from 'react';
 
 const buttonProps = {
@@ -17,13 +16,19 @@ const buttonProps = {
   height: '48px',
 };
 
-export const AddHouseButtonWithText: React.StatelessFunctionalComponent<any> = () => {
+type Props = {
+  to: string,
+  text: string,
+  icon?: string,
+};
+
+export const RoundedLinkButton: React.StatelessFunctionalComponent<Props> = ({ to, text, icon }) => {
   return (
-    <StyledLink to={ROUTES.ADD_HOUSE}>
+    <StyledLink to={to}>
       <Box {...buttonProps} p={4} borderRadius="24px" width="auto">
         <Flex align="center">
-          <Icon name="add" mr={2} />
-          <Text>Add New</Text>
+          {icon ? <Icon name={icon} mr={2} /> : null}
+          <Text>{text}</Text>
         </Flex>
       </Box>
     </StyledLink>

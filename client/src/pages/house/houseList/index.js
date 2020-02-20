@@ -2,10 +2,10 @@
 import * as React from 'react';
 import type { House } from '../models';
 import { Box, Flex, Grid, Image, Text } from '@chakra-ui/core';
-import { ROUTES } from '../../../constants';
+import {getHouseDetailsRoute, ROUTES} from '../../../constants';
 import { StyledLink } from '../../../components/StyledLink';
 import { ValueCard } from './ValueCard';
-import { AddHouseButtonWithText } from './AddHouseButton';
+import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
 
 type Props = {
   houses: ?Array<House>,
@@ -26,7 +26,7 @@ const cardProps = {
 };
 
 export const HouseCard = ({ house }: { house: House }) => {
-  const route = `${ROUTES.HOUSE}/view/${house._id}`;
+  const route = getHouseDetailsRoute(house._id);
 
   return (
     <StyledLink to={route}>
@@ -66,7 +66,7 @@ export const HouseList: React.StatelessFunctionalComponent<Props> = ({ houses })
   return (
     <React.Fragment>
       <Flex mt={6} mb={6} justify="flex-end">
-        <AddHouseButtonWithText />
+        <RoundedLinkButton to={ROUTES.ADD_HOUSE} text="Add New" icon="add" />
       </Flex>
       {houses && houses.length ? (
         <Grid

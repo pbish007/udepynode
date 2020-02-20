@@ -16,8 +16,7 @@ import { PageContent } from '../../../components/PageContent';
 import type { AddHouse } from '../models';
 import { defaultAddress, defaultUtilities } from '../models';
 import type { ReduxState } from '../../../models/ReduxState';
-import { ROUTES } from '../../../constants';
-import { BackLink } from '../../../components/BackLink';
+import { BackToDashboard } from '../../../components/BackLink';
 import { useTabStep } from '../useTabStep';
 
 type DispatchProps = $ReadOnly<{
@@ -64,7 +63,7 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
 
   return (
     <PageContent heading="Add a new House">
-      <BackLink route={ROUTES.HOUSE} text="Dashboard" />
+      <BackToDashboard />
 
       <Tabs index={currentStep}>
         <TabList style={{ flexWrap: 'wrap' }}>

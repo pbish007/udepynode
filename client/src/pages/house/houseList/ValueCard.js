@@ -11,7 +11,7 @@ export const ValueCard: React.StatelessFunctionalComponent<{ label: string, valu
       <Text mb={0} fontSize="sm" fontWeight={600}>
         {label}
       </Text>
-      <Text fontSize="sm">£{value}</Text>
+      <Text fontSize="sm">${value}</Text>
     </Flex>
   );
 };
