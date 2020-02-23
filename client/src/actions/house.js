@@ -8,9 +8,16 @@ import type {
   FETCH_HOUSES_ERROR_ACTION,
   FETCH_HOUSES_LOADING_ACTION,
   FETCH_HOUSES_SUCCESS_ACTION,
+  UPDATE_HOUSE_ACTION,
 } from '../pages/house/actions';
 import type { Dispatch } from './types';
-import { ADD_HOUSE, FETCH_HOUSES_ERROR, FETCH_HOUSES_LOADING, FETCH_HOUSES_SUCCESS } from './types';
+import {
+  ADD_HOUSE,
+  FETCH_HOUSES_ERROR,
+  FETCH_HOUSES_LOADING,
+  FETCH_HOUSES_SUCCESS,
+  UPDATE_HOUSE,
+} from './types';
 
 export const addHouse = (values: AddHouse, history: { push: Function }) => async (
   dispatch: Dispatch,
@@ -22,6 +29,22 @@ export const addHouse = (values: AddHouse, history: { push: Function }) => async
 
     history.push(ROUTES.HOUSE);
     dispatch<ADD_HOUSE_ACTION>({ type: ADD_HOUSE, payload: res.data.meta });
+  } catch (err) {
+    //console.log('error adding', Object.keys(err), err.toJSON());
+    //console.log('error', Object.keys(err));
+  }
+};
+
+export const updateHouse = (values: House, history: { push: Function }) => async (
+  dispatch: Dispatch,
+) => {
+  try {
+    const res: { data: { meta: House } } = await axios.put(API_ROUTES.HOUSE, values);
+
+    console.log('res.data', res.data.meta);
+
+    history.push(ROUTES.HOUSE);
+    dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
   } catch (err) {
     //console.log('error adding', Object.keys(err), err.toJSON());
     //console.log('error', Object.keys(err));

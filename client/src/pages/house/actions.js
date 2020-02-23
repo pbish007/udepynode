@@ -7,6 +7,11 @@ export type ADD_HOUSE_ACTION = {
   payload: House,
 };
 
+export type UPDATE_HOUSE_ACTION = {
+  type: 'UPDATE_HOUSE',
+  payload: House,
+};
+
 export type FETCH_HOUSES_SUCCESS_ACTION = {
   type: 'FETCH_HOUSES_SUCCESS',
   payload: Array<House>,

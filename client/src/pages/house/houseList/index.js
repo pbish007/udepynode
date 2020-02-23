@@ -2,7 +2,7 @@
 import * as React from 'react';
 import type { House } from '../models';
 import { Box, Flex, Grid, Image, Text } from '@chakra-ui/core';
-import {getHouseDetailsRoute, ROUTES} from '../../../constants';
+import { getHouseDetailsRoute, ROUTES } from '../../../constants';
 import { StyledLink } from '../../../components/StyledLink';
 import { ValueCard } from './ValueCard';
 import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';

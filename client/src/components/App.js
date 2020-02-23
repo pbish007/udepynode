@@ -15,7 +15,7 @@ import { ROUTES } from '../constants';
 import HouseDashboard from '../pages/house';
 import HouseDetails from '../pages/house/houseDetails';
 import { fetchHouses } from '../actions/house';
-import { EditHouse } from '../pages/house/editHouse';
+import EditHouse from '../pages/house/editHouse';
 
 class App extends Component {
   componentDidMount() {

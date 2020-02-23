@@ -22,7 +22,11 @@ type Props = {
   icon?: string,
 };
 
-export const RoundedLinkButton: React.StatelessFunctionalComponent<Props> = ({ to, text, icon }) => {
+export const RoundedLinkButton: React.StatelessFunctionalComponent<Props> = ({
+  to,
+  text,
+  icon,
+}) => {
   return (
     <StyledLink to={to}>
       <Box {...buttonProps} p={4} borderRadius="24px" width="auto">
