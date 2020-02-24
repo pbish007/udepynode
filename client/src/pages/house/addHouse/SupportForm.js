@@ -94,13 +94,14 @@ export const SupportFields = ({
 type SupportFormProps = {|
   submitForm: Object => void,
   goToPreviousStep: () => void,
+  initialValues?: Object,
 |};
 
 export const SupportForm = React.forwardRef<SupportFormProps, any>(
-  ({ goToPreviousStep, submitForm }: SupportFormProps, ref: any) => {
+  ({ goToPreviousStep, submitForm, initialValues }: SupportFormProps, ref: any) => {
     const formProps = useForm({
       mode: 'onChange',
-      defaultValues: {
+      defaultValues: initialValues || {
         support: { [PLUMBER_TYPE]: [createEmptyItem()] },
       },
     });

@@ -13,6 +13,7 @@ const ZIP_FIELD = 'address.zip';
 const COUNTRY_FIELD = 'address.country';
 
 type AddressFormProps = {|
+  initialValues?: Object,
   goToNextStep: () => void,
   setIsAddressFormValid: boolean => void,
 |};
@@ -22,8 +23,8 @@ export type AddressFormModel = {|
 |};
 
 export const AddressForm = React.forwardRef<AddressFormProps, any>(
-  ({ goToNextStep, setIsAddressFormValid }: AddressFormProps, ref: any) => {
-    const formProps = useForm({ mode: 'onChange' });
+  ({ goToNextStep, setIsAddressFormValid, initialValues }: AddressFormProps, ref: any) => {
+    const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const { handleSubmit, errors, register, formState, getValues } = formProps;
 
     React.useImperativeHandle(ref, () => ({

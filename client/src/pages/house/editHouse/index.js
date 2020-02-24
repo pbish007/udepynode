@@ -19,6 +19,11 @@ import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
 import { updateHouse } from '../../../actions/house';
 
+type StateProps = $ReadOnly<{
+  isLoading: boolean,
+  houses: ?Array<House>,
+}>;
+
 type DispatchProps = $ReadOnly<{
   updateHouse: (House, Object) => void,
 }>;
@@ -28,13 +33,24 @@ type OwnProps = $ReadOnly<{
 }>;
 
 type Props = $ReadOnly<{
+  ...StateProps,
   ...DispatchProps,
   ...OwnProps,
 }>;
 
-export const EditHouse: React.StatelessFunctionalComponent<Props> = ({ updateHouse, history }) => {
+export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
+  isLoading,
+  houses,
+  updateHouse,
+  history,
+}) => {
   const { houseId } = useParams();
   console.log('routeParams', houseId);
+
+  const houseById: ?House = React.useMemo((): ?House => houses?.find(h => h._id === houseId), [
+    houseId,
+    houses,
+  ]);
 
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
@@ -67,6 +83,16 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({ updateHou
     updateHouse(formData);
   };
 
+  if (isLoading) {
+    return null;
+  }
+
+  if (!houseById) {
+    return <PageContent>Sorry! No house found for the selected ID</PageContent>;
+  }
+
+  const { address, insurance, financials, utilities, support } = houseById;
+
   return (
     <PageContent heading="Edit House">
       <BackToDashboard />
@@ -90,6 +116,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({ updateHou
               ref={addressFormRef}
               goToNextStep={setStep1}
               setIsAddressFormValid={setIsAddressFormValid}
+              initialValues={{ address }}
             />
           </TabPanel>
           <TabPanel>
@@ -97,6 +124,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({ updateHou
               goToNextStep={setStep2}
               goToPreviousStep={setStep0}
               ref={financialsFormRef}
+              initialValues={{ financials, insurance }}
             />
           </TabPanel>
           <TabPanel>
@@ -104,10 +132,15 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({ updateHou
               goToNextStep={setStep3}
               goToPreviousStep={setStep1}
               ref={utilitiesFormRef}
+              initialValues={{ utilities }}
             />
           </TabPanel>
           <TabPanel>
-            <SupportForm goToPreviousStep={setStep2} submitForm={onSubmit} />
+            <SupportForm
+              goToPreviousStep={setStep2}
+              initialValues={{ support }}
+              submitForm={onSubmit}
+            />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -115,6 +148,13 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({ updateHou
   );
 };
 
-export default connect<Props, OwnProps, void, *, ReduxState, *>(null, { updateHouse })(
-  withRouter(EditHouse),
-);
+const mapStateToProps = (state: ReduxState): StateProps => {
+  return {
+    isLoading: state.houses.isLoading,
+    houses: state.houses.data,
+  };
+};
+
+export default connect<Props, OwnProps, StateProps, *, ReduxState, *>(mapStateToProps, {
+  updateHouse,
+})(withRouter(EditHouse));

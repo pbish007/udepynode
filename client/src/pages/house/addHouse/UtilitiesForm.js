@@ -9,6 +9,7 @@ import type { Utilities } from '../models';
 type UtilitiesFormProps = {|
   goToNextStep: () => void,
   goToPreviousStep: () => void,
+  initialValues?: Object,
 |};
 
 export type UtilitiesFormModel = {|
@@ -92,8 +93,8 @@ const UtilitiesFields = ({ errors, type, register, title }) => {
 };
 
 export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
-  ({ goToNextStep, goToPreviousStep }: UtilitiesFormProps, ref: any) => {
-    const formProps = useForm({ mode: 'onChange' });
+  ({ goToNextStep, goToPreviousStep, initialValues }: UtilitiesFormProps, ref: any) => {
+    const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const { handleSubmit, errors, formState, register, getValues } = formProps;
 
     React.useImperativeHandle(ref, () => ({

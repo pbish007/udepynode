@@ -15,10 +15,12 @@ import {
   MORTGAGE_LABEL,
   MORTGAGE_PAYMENT_LABEL,
 } from '../constants';
+import type { Financials, Insurance } from '../models';
 
 type FinancialsFormProps = {|
   goToNextStep: () => void,
   goToPreviousStep: () => void,
+  initialValues?: { financials: Financials, insurance: Insurance },
 |};
 
 const MORTGAGE_FIELD = 'financials.mortgage';
@@ -38,9 +40,9 @@ export type FinancialsFormModel = {|
 |};
 
 export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
-  ({ goToNextStep, goToPreviousStep }: FinancialsFormProps, ref: any) => {
+  ({ goToNextStep, goToPreviousStep, initialValues }: FinancialsFormProps, ref: any) => {
     const [selectedValues, setSelectedValues] = useState([]);
-    const formProps = useForm({ mode: 'onChange' });
+    const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const { handleSubmit, errors, formState, getValues, register, setValue } = formProps;
 
     React.useEffect(() => {
@@ -76,6 +78,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 fieldName={MORTGAGE_FIELD}
                 label={MORTGAGE_LABEL}
                 registerFn={register}
+                defaultValue={initialValues?.financials?.mortgage}
               />
               <Stack mb={5}>
                 <FormNumberInput
@@ -84,6 +87,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                   errors={errors}
                   fieldName={MORTGAGE_PAYMENT_FIELD}
                   label={MORTGAGE_PAYMENT_LABEL}
+                  defaultValue={initialValues?.financials?.mortgagePayment}
                 />
                 <CheckboxGroup
                   name={PAYMENT_FREQ_FIELD}
@@ -102,6 +106,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 step={0.01}
                 max={100}
                 registerFn={register}
+                defaultValue={initialValues?.financials?.interest}
               />
               <FormInput
                 errors={errors}
@@ -114,6 +119,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 fieldName={MORTGAGE_COMPANY_PHONE_FIELD}
                 label={MORTGAGE_COMPANY_PHONE_LABEL}
                 registerFn={register}
+                defaultValue={initialValues?.financials?.mortgageCompanyPhone}
               />
             </Box>
             <Box>
@@ -123,6 +129,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 fieldName={INSURANCE_COST_FIELD}
                 label={INSURANCE_COST_LABEL}
                 registerFn={register}
+                defaultValue={initialValues?.insurance?.cost}
               />
               <FormInput
                 errors={errors}
@@ -135,6 +142,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
                 fieldName={INSURANCE_COMPANY_PHONE_FIELD}
                 label={INSURANCE_COMPANY_PHONE_LABEL}
                 registerFn={register}
+                defaultValue={initialValues?.insurance?.companyPhone}
               />
               <FormInput
                 errors={errors}

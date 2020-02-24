@@ -77,6 +77,7 @@ type FormNumberInputProps = {|
   max?: number,
   mb?: any,
   leftContent?: any,
+  defaultValue?: any,
 |};
 
 export const FormNumberInput = ({
@@ -89,6 +90,7 @@ export const FormNumberInput = ({
   min = 0,
   max,
   leftContent,
+    defaultValue,
   ...props
 }: FormNumberInputProps) => {
   return (
@@ -97,6 +99,7 @@ export const FormNumberInput = ({
         step={step}
         min={min}
         max={max}
+        defaultValue={defaultValue}
         onChange={val => {
           console.log(val, typeof val);
         }}>
