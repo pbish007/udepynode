@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import { PageContent } from '../../../components/PageContent';
 import { useTabStep } from '../useTabStep';
-import { Tab, TabList, Tabs, TabPanels, TabPanel } from '@chakra-ui/core';
+import {Tab, TabList, Tabs, TabPanels, TabPanel, Text, Box} from '@chakra-ui/core';
 import { BackToDashboard } from '../../../components/BackLink';
 import { AddressForm } from '../addHouse/AddressForm';
 import { FinancialsForm } from '../addHouse/FinancialsForm';
@@ -88,7 +88,14 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   }
 
   if (!houseById) {
-    return <PageContent>Sorry! No house found for the selected ID</PageContent>;
+    return (
+      <PageContent heading="Edit House">
+        <BackToDashboard />
+        <Box p={4} fontSize="xl" textAlign="center">
+          Sorry! No house found for the selected id!!
+        </Box>
+      </PageContent>
+    );
   }
 
   const { address, insurance, financials, utilities, support } = houseById;

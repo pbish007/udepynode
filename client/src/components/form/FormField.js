@@ -90,7 +90,7 @@ export const FormNumberInput = ({
   min = 0,
   max,
   leftContent,
-    defaultValue,
+  defaultValue,
   ...props
 }: FormNumberInputProps) => {
   return (
