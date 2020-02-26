@@ -39,7 +39,10 @@ export const updateHouse = (houseId: string, values: House, history: { push: Fun
   dispatch: Dispatch,
 ) => {
   try {
-    const res: { data: { meta: House } } = await axios.put(API_ROUTES.HOUSE, { _id: houseId, updatedHouse: values });
+    const res: { data: { meta: House } } = await axios.put(API_ROUTES.HOUSE, {
+      _id: houseId,
+      updatedHouse: values,
+    });
 
     console.log('res.data', res.data.meta);
 
