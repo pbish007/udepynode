@@ -35,18 +35,18 @@ export const addHouse = (values: AddHouse, history: { push: Function }) => async
   }
 };
 
-export const updateHouse = (values: House, history: { push: Function }) => async (
+export const updateHouse = (houseId: string, values: House, history: { push: Function }) => async (
   dispatch: Dispatch,
 ) => {
   try {
-    const res: { data: { meta: House } } = await axios.put(API_ROUTES.HOUSE, values);
+    const res: { data: { meta: House } } = await axios.put(API_ROUTES.HOUSE, { _id: houseId, updatedHouse: values });
 
     console.log('res.data', res.data.meta);
 
     history.push(ROUTES.HOUSE);
     dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
   } catch (err) {
-    //console.log('error adding', Object.keys(err), err.toJSON());
+    console.log('error updating', Object.keys(err), err);
     //console.log('error', Object.keys(err));
   }
 };

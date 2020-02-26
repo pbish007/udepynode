@@ -47,7 +47,7 @@ export const SupportFields = ({
   register: Function,
   control: any,
 |}) => {
-  const { fields, append } = useFieldArray({ control, name: `support.${PLUMBER_TYPE}` });
+  const { fields, append } = useFieldArray({ control, name: `support.${type}` });
 
   const addEmptyItem = () => {
     append(createEmptyItem());
@@ -102,7 +102,11 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
     const formProps = useForm({
       mode: 'onChange',
       defaultValues: initialValues || {
-        support: { [PLUMBER_TYPE]: [createEmptyItem()] },
+        support: {
+          [PLUMBER_TYPE]: [createEmptyItem()],
+          [HVAC_TYPE]: [createEmptyItem()],
+          [ELECTRICIAN_TYPE]: [createEmptyItem()],
+        },
       },
     });
     const { handleSubmit, errors, formState, register, getValues, control } = formProps;

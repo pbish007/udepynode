@@ -48,7 +48,7 @@ export const FinancialsDetails: React.StatelessFunctionalComponent<FinancialsPro
         </Box>
         <Box>
           <DisplayField label={INSURANCE_COST_LABEL} text={`$${cost || 0}`} />
-          <DisplayField label={INSURANCE_COMPANY_LABEL} text={`$${company || 0}`} />
+          <DisplayField label={INSURANCE_COMPANY_LABEL} text={`${company}`} />
           <DisplayField label={INSURANCE_COMPANY_PHONE_LABEL} text={companyPhone} />
           <DisplayField label={INSURANCE_BROKER_LABEL} text={broker} />
         </Box>

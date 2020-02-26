@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import { PageContent } from '../../../components/PageContent';
 import { useTabStep } from '../useTabStep';
-import {Tab, TabList, Tabs, TabPanels, TabPanel, Text, Box} from '@chakra-ui/core';
+import { Tab, TabList, Tabs, TabPanels, TabPanel, Box } from '@chakra-ui/core';
 import { BackToDashboard } from '../../../components/BackLink';
 import { AddressForm } from '../addHouse/AddressForm';
 import { FinancialsForm } from '../addHouse/FinancialsForm';
@@ -25,7 +25,7 @@ type StateProps = $ReadOnly<{
 }>;
 
 type DispatchProps = $ReadOnly<{
-  updateHouse: (House, Object) => void,
+  updateHouse: (string, House, Object) => void,
 }>;
 
 type OwnProps = $ReadOnly<{
@@ -45,8 +45,6 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   history,
 }) => {
   const { houseId } = useParams();
-  console.log('routeParams', houseId);
-
   const houseById: ?House = React.useMemo((): ?House => houses?.find(h => h._id === houseId), [
     houseId,
     houses,
@@ -80,7 +78,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
     };
 
     console.log('formData', formData);
-    updateHouse(formData);
+    updateHouse(houseId, formData, history);
   };
 
   if (isLoading) {

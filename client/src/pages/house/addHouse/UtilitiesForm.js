@@ -9,14 +9,14 @@ import type { Utilities } from '../models';
 type UtilitiesFormProps = {|
   goToNextStep: () => void,
   goToPreviousStep: () => void,
-  initialValues?: Object,
+  initialValues?: { utilities: Utilities },
 |};
 
 export type UtilitiesFormModel = {|
   utilities: Utilities,
 |};
 
-const SpecialUtilitiesFields = ({ errors, type, register, title }) => {
+const SpecialUtilitiesFields = ({ errors, type, register, title, defaultValue }) => {
   return (
     <Flex direction="column" mb={2} mt={6}>
       <Grid
@@ -38,6 +38,7 @@ const SpecialUtilitiesFields = ({ errors, type, register, title }) => {
           placeholder="Monthly Cost"
           registerFn={register}
           mb={[2, 0]}
+          defaultValue={defaultValue?.monthlyCost}
         />
         <FormNumberInput
           errors={errors}
@@ -45,13 +46,16 @@ const SpecialUtilitiesFields = ({ errors, type, register, title }) => {
           placeholder="Support number"
           registerFn={register}
           mb={[2, 0]}
+          defaultValue={defaultValue?.supportNumber}
         />
       </Grid>
     </Flex>
   );
 };
 
-const UtilitiesFields = ({ errors, type, register, title }) => {
+const UtilitiesFields = ({ errors, type, register, title, defaultValue }) => {
+  console.log('defaultValue', defaultValue);
+
   return (
     <Flex direction="column" mb={2}>
       <Text fontWeight="bold" mb={1}>
@@ -79,6 +83,7 @@ const UtilitiesFields = ({ errors, type, register, title }) => {
           placeholder="Monthly Cost"
           registerFn={register}
           mb={[2, 0]}
+          defaultValue={defaultValue?.monthlyCost}
         />
         <FormNumberInput
           errors={errors}
@@ -86,6 +91,7 @@ const UtilitiesFields = ({ errors, type, register, title }) => {
           placeholder="Support number"
           registerFn={register}
           mb={[2, 0]}
+          defaultValue={defaultValue?.supportNumber}
         />
       </Grid>
     </Flex>
@@ -96,6 +102,8 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
   ({ goToNextStep, goToPreviousStep, initialValues }: UtilitiesFormProps, ref: any) => {
     const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const { handleSubmit, errors, formState, register, getValues } = formProps;
+
+    console.log('initialValues', initialValues);
 
     React.useImperativeHandle(ref, () => ({
       getValues: (): UtilitiesFormModel => {
@@ -118,23 +126,50 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
               register={register}
               type="electricity"
               title="Electricity"
+              defaultValue={initialValues?.utilities?.electricity}
             />
-            <UtilitiesFields errors={errors} register={register} type="internet" title="Internet" />
+            <UtilitiesFields
+              errors={errors}
+              register={register}
+              type="internet"
+              title="Internet"
+              defaultValue={initialValues?.utilities?.internet}
+            />
             <UtilitiesFields
               errors={errors}
               register={register}
               type="tv_provider"
               title="TV Provider"
+              defaultValue={initialValues?.utilities?.tv_provider}
             />
-            <UtilitiesFields errors={errors} register={register} type="gas" title="Gas" />
-            <UtilitiesFields errors={errors} register={register} type="oil" title="Oil" />
+            <UtilitiesFields
+              errors={errors}
+              register={register}
+              type="gas"
+              title="Gas"
+              defaultValue={initialValues?.utilities?.gas}
+            />
+            <UtilitiesFields
+              errors={errors}
+              register={register}
+              type="oil"
+              title="Oil"
+              defaultValue={initialValues?.utilities?.oil}
+            />
             <SpecialUtilitiesFields
               errors={errors}
               register={register}
               type="netflix"
               title="Netflix"
+              defaultValue={initialValues?.utilities?.netflix}
             />
-            <SpecialUtilitiesFields errors={errors} register={register} type="hulu" title="Hulu" />
+            <SpecialUtilitiesFields
+              errors={errors}
+              register={register}
+              type="hulu"
+              title="Hulu"
+              defaultValue={initialValues?.utilities?.hulu}
+            />
           </Stack>
           <UtilitiesFooter goToPreviousStep={goToPreviousStep} />
         </Box>

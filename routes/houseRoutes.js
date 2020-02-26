@@ -10,10 +10,14 @@ module.exports = app => {
     res.send(house);
   });
 
+  app.put("/api/house", requireLogin, async (req, res) => {
+    const { _id, updatedHouse } = req.body;
+    await House.updateOne({ _id }, { $set: updatedHouse });
+    res.send({ success: true, meta: updatedHouse });
+  });
+
   app.post("/api/house", requireLogin, async (req, res) => {
     const { address, financials, insurance, utilities, support } = req.body;
-
-    console.log("user", req.user);
 
     if (!req.user) {
       res

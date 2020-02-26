@@ -5,14 +5,14 @@ import type {
   ADD_HOUSE_ACTION,
   FETCH_HOUSES_ERROR_ACTION,
   FETCH_HOUSES_LOADING_ACTION,
-  FETCH_HOUSES_SUCCESS_ACTION,
+  FETCH_HOUSES_SUCCESS_ACTION, UPDATE_HOUSE_ACTION,
 } from './actions';
 import type { ErrorMessage } from '../../models/ErrorMessage';
 import {
   ADD_HOUSE,
   FETCH_HOUSES_ERROR,
   FETCH_HOUSES_LOADING,
-  FETCH_HOUSES_SUCCESS,
+  FETCH_HOUSES_SUCCESS, UPDATE_HOUSE,
 } from '../../actions/types';
 
 export type HouseState = {
@@ -29,6 +29,7 @@ const DEFAULT_STATE: HouseState = {
 
 type Action =
   | ADD_HOUSE_ACTION
+  | UPDATE_HOUSE_ACTION
   | FETCH_HOUSES_SUCCESS_ACTION
   | FETCH_HOUSES_LOADING_ACTION
   | FETCH_HOUSES_ERROR_ACTION;
@@ -39,6 +40,20 @@ export const houseReducer = (state: HouseState = DEFAULT_STATE, action: Action):
       return {
         ...state,
         data: [...(state.data || []), action.payload],
+      };
+    }
+    case UPDATE_HOUSE: {
+      const updatedHouse = action.payload;
+      const updatedData = state.data.map((house: House) => {
+        if (house._id === updatedHouse._id) {
+          return updatedHouse;
+        }
+
+        return house;
+      });
+      return {
+        ...state,
+        data: updatedData,
       };
     }
     case FETCH_HOUSES_LOADING: {
