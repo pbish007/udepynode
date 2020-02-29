@@ -27,11 +27,18 @@ export type Address = {|
   country: string,
 |};
 
-export type SupportType = {
+export type SupportType = {|
   companyName?: string,
   personName?: string,
   phoneNumber?: string,
   mobile?: string,
+|};
+
+const defaultSupportType: SupportType = {
+  companyName: '',
+  personName: '',
+  phoneNumber: '',
+  mobile: '',
 };
 
 export type Support = {|
@@ -39,6 +46,12 @@ export type Support = {|
   electrician: Array<SupportType>,
   hvac: Array<SupportType>,
 |};
+
+export const defaultSupportData = {
+  plumber: [{ ...defaultSupportType }],
+  electrician: [{ ...defaultSupportType }],
+  hvac: [{ ...defaultSupportType }],
+};
 
 export type Utility = {
   account: string,

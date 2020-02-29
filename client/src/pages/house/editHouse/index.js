@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import { PageContent } from '../../../components/PageContent';
 import { useTabStep } from '../useTabStep';
-import { Tab, TabList, Tabs, TabPanels, TabPanel, Box } from '@chakra-ui/core';
+import { Tab, TabList, Tabs, TabPanels, TabPanel, Box, Flex } from '@chakra-ui/core';
 import { BackToDashboard } from '../../../components/BackLink';
 import { AddressForm } from '../addHouse/AddressForm';
 import { FinancialsForm } from '../addHouse/FinancialsForm';
@@ -11,13 +11,16 @@ import { UtilitiesForm } from '../addHouse/UtilitiesForm';
 import { SupportForm } from '../addHouse/SupportForm';
 import type { SupportFormModel } from '../addHouse/SupportForm';
 import type { AddressFormModel } from '../addHouse/AddressForm';
-import { defaultAddress, defaultUtilities } from '../models';
+import { defaultAddress, defaultSupportData, defaultUtilities } from '../models';
 import type { FinancialsFormModel } from '../addHouse/FinancialsForm';
 import type { UtilitiesFormModel } from '../addHouse/UtilitiesForm';
 import type { House } from '../models';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
 import { updateHouse } from '../../../actions/house';
+import {
+  RoundedButton,
+} from '../../../components/CustomButtons/RoundedLinkButton';
 
 type StateProps = $ReadOnly<{
   isLoading: boolean,
@@ -53,12 +56,13 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
   const utilitiesFormRef = React.createRef();
+  const supportFormRef = React.createRef();
 
   const [isAddressFormValid, setIsAddressFormValid] = React.useState(false);
 
   const { setStep0, setStep1, setStep2, setStep3, currentStep } = useTabStep();
 
-  const onSubmit = (supportData: SupportFormModel) => {
+  const getFormData = (): House => {
     const address: AddressFormModel = addressFormRef.current
       ? addressFormRef.current.getValues()
       : { address: defaultAddress };
@@ -68,14 +72,21 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
     const utilities: UtilitiesFormModel = utilitiesFormRef.current
       ? utilitiesFormRef.current.getValues()
       : { utilities: defaultUtilities };
+    const supportData: SupportFormModel = supportFormRef.current
+      ? supportFormRef.current.getValues()
+      : { support: defaultSupportData };
 
-    const formData: House = {
+    return {
       _id: houseId,
       ...address,
       ...financials,
       ...utilities,
       ...supportData,
     };
+  };
+
+  const onSubmit = () => {
+    const formData: House = getFormData();
 
     console.log('formData', formData);
     updateHouse(houseId, formData, history);
@@ -96,12 +107,20 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
     );
   }
 
+  const handleSave = () => {
+    const formData: House = getFormData();
+    console.log('handleSave', formData);
+    updateHouse(houseId, formData, history);
+  };
+
   const { address, insurance, financials, utilities, support } = houseById;
 
   return (
     <PageContent heading="Edit House">
-      <BackToDashboard />
-
+      <Flex justify="space-between">
+        <BackToDashboard />
+        <RoundedButton text="Save" onClick={handleSave} />
+      </Flex>
       <Tabs index={currentStep}>
         <TabList style={{ flexWrap: 'wrap' }}>
           <Tab onClick={setStep0}>Address</Tab>
@@ -142,6 +161,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
           </TabPanel>
           <TabPanel>
             <SupportForm
+              ref={supportFormRef}
               goToPreviousStep={setStep2}
               initialValues={{ support }}
               submitForm={onSubmit}

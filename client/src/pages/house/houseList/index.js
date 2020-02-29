@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { House } from '../models';
 import { Box, Flex, Grid, Image, Text } from '@chakra-ui/core';
 import { getHouseDetailsRoute, ROUTES } from '../../../constants';
-import { StyledLink } from '../../../components/StyledLink';
+import { StyledRouterLink } from '../../../components/StyledLink';
 import { ValueCard } from './ValueCard';
 import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
 
@@ -29,7 +29,7 @@ export const HouseCard = ({ house }: { house: House }) => {
   const route = getHouseDetailsRoute(house._id);
 
   return (
-    <StyledLink to={route}>
+    <StyledRouterLink to={route}>
       <Flex
         {...cardProps}
         direction="column"
@@ -58,7 +58,7 @@ export const HouseCard = ({ house }: { house: House }) => {
           <ValueCard label="Equity" value={30000} />
         </Grid>
       </Flex>
-    </StyledLink>
+    </StyledRouterLink>
   );
 };
 
