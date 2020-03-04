@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
-import { Box, Grid } from '@chakra-ui/core';
+import { Box, Button, Grid } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 import { FormInput } from '../../../components/form/FormField';
 import { AddressFooter } from './Footer';
 import type { Address } from '../models';
 import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, ZIP_LABEL } from '../constants';
+import { fetchLocationFromAddress } from '../../../api/map';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
@@ -25,6 +26,7 @@ export type AddressFormModel = {|
 export const AddressForm = React.forwardRef<AddressFormProps, any>(
   ({ goToNextStep, setIsAddressFormValid, initialValues }: AddressFormProps, ref: any) => {
     const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
+    const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
     const { handleSubmit, errors, register, formState, getValues } = formProps;
 
     React.useImperativeHandle(ref, () => ({
@@ -42,6 +44,17 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
         goToNextStep();
       }
     };
+
+    const fetchImages = async () => {
+      const address: AddressFormModel = getValues({ nest: true });
+      const data = await fetchLocationFromAddress(address);
+
+      if (data) {
+        setLocation(data);
+      }
+    };
+
+    console.log('state', location);
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -72,6 +85,9 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 label={COUNTRY_LABEL}
                 registerFn={register({ required: 'Country is required' })}
               />
+            </Box>
+            <Box>
+              <Button onClick={fetchImages}>Get images from Google</Button>
             </Box>
           </Grid>
 

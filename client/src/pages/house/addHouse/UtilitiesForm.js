@@ -54,8 +54,6 @@ const SpecialUtilitiesFields = ({ errors, type, register, title, defaultValue })
 };
 
 const UtilitiesFields = ({ errors, type, register, title, defaultValue }) => {
-  console.log('defaultValue', defaultValue);
-
   return (
     <Flex direction="column" mb={2}>
       <Text fontWeight="bold" mb={1}>
@@ -102,8 +100,6 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
   ({ goToNextStep, goToPreviousStep, initialValues }: UtilitiesFormProps, ref: any) => {
     const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const { handleSubmit, errors, formState, register, getValues } = formProps;
-
-    console.log('initialValues', initialValues);
 
     React.useImperativeHandle(ref, () => ({
       getValues: (): UtilitiesFormModel => {
