@@ -15,6 +15,8 @@ export const fetchLocationFromAddress = async (
   const stringifiedAddress = encodeURI(`${street} ${city} ${zip} ${country}`);
   const url = getGeocodingUrl(stringifiedAddress);
 
+  console.log('stringifiedAddress', stringifiedAddress);
+
   const {
     data: { results },
   } = await axios.get(url);
