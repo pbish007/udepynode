@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import { PageContent } from '../../../components/PageContent';
@@ -9,47 +8,14 @@ import { AddressForm } from '../addHouse/AddressForm';
 import { FinancialsForm } from '../addHouse/FinancialsForm';
 import { UtilitiesForm } from '../addHouse/UtilitiesForm';
 import { SupportForm } from '../addHouse/SupportForm';
-import type { SupportFormModel } from '../addHouse/SupportForm';
-import type { AddressFormModel } from '../addHouse/AddressForm';
 import { defaultAddress, defaultSupportData, defaultUtilities } from '../models';
-import type { FinancialsFormModel } from '../addHouse/FinancialsForm';
-import type { UtilitiesFormModel } from '../addHouse/UtilitiesForm';
-import type { House } from '../models';
 import { connect } from 'react-redux';
-import type { ReduxState } from '../../../models/ReduxState';
 import { updateHouse } from '../../../actions/house';
 import { RoundedButton } from '../../../components/CustomButtons/RoundedLinkButton';
 
-type StateProps = $ReadOnly<{
-  isLoading: boolean,
-  houses: ?Array<House>,
-}>;
-
-type DispatchProps = $ReadOnly<{
-  updateHouse: (string, House, Object) => void,
-}>;
-
-type OwnProps = $ReadOnly<{
-  history: { push: Function },
-}>;
-
-type Props = $ReadOnly<{
-  ...StateProps,
-  ...DispatchProps,
-  ...OwnProps,
-}>;
-
-export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
-  isLoading,
-  houses,
-  updateHouse,
-  history,
-}) => {
+export const EditHouse = ({ isLoading, houses, updateHouse, history }) => {
   const { houseId } = useParams();
-  const houseById: ?House = React.useMemo((): ?House => houses?.find(h => h._id === houseId), [
-    houseId,
-    houses,
-  ]);
+  const houseById = React.useMemo(() => houses?.find(h => h._id === houseId), [houseId, houses]);
 
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
@@ -60,17 +26,17 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
 
   const { setStep0, setStep1, setStep2, setStep3, currentStep } = useTabStep();
 
-  const getFormData = (): House => {
-    const address: AddressFormModel = addressFormRef.current
+  const getFormData = () => {
+    const address = addressFormRef.current
       ? addressFormRef.current.getValues()
       : { address: defaultAddress };
-    const financials: FinancialsFormModel = financialsFormRef.current
+    const financials = financialsFormRef.current
       ? financialsFormRef.current.getValues()
       : { financials: {}, insurance: {} };
-    const utilities: UtilitiesFormModel = utilitiesFormRef.current
+    const utilities = utilitiesFormRef.current
       ? utilitiesFormRef.current.getValues()
       : { utilities: defaultUtilities };
-    const supportData: SupportFormModel = supportFormRef.current
+    const supportData = supportFormRef.current
       ? supportFormRef.current.getValues()
       : { support: defaultSupportData };
 
@@ -84,7 +50,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   };
 
   const onSubmit = () => {
-    const formData: House = getFormData();
+    const formData = getFormData();
 
     console.log('formData', formData);
     updateHouse(houseId, formData, history);
@@ -106,7 +72,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   }
 
   const handleSave = () => {
-    const formData: House = getFormData();
+    const formData = getFormData();
     console.log('handleSave', formData);
     updateHouse(houseId, formData, history);
   };
@@ -171,13 +137,13 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   );
 };
 
-const mapStateToProps = (state: ReduxState): StateProps => {
+const mapStateToProps = state => {
   return {
     isLoading: state.houses.isLoading,
     houses: state.houses.data,
   };
 };
 
-export default connect<Props, OwnProps, StateProps, *, ReduxState, *>(mapStateToProps, {
+export default connect(mapStateToProps, {
   updateHouse,
 })(withRouter(EditHouse));

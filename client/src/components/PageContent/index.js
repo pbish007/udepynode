@@ -1,8 +1,7 @@
-// @flow
 import * as React from 'react';
 import { Box, Divider, Text } from '@chakra-ui/core';
 
-export const PageContent = ({ children, heading }: { children: React.Node, heading?: string }) => {
+export const PageContent = ({ children, heading }) => {
   return (
     <Box pl={15} pr={15} pt={6} pb={6}>
       {heading ? (

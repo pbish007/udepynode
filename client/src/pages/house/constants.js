@@ -1,4 +1,3 @@
-// @flow
 export const STREET_LABEL = 'Street';
 export const CITY_LABEL = 'City/Town';
 export const ZIP_LABEL = 'Zip/Postal';

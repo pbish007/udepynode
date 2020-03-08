@@ -1,21 +1,10 @@
-// @flow
 import * as React from 'react';
 import { PageContent } from '../../components/PageContent';
 import { connect } from 'react-redux';
-import type { ReduxState } from '../../models/ReduxState';
-import type { HouseState } from './reducers';
 import { Spinner, Text } from '@chakra-ui/core';
 import { HouseList } from './houseList';
 
-type MapStateProps = $ReadOnly<{|
-  houseData: HouseState,
-|}>;
-
-type Props = $ReadOnly<{|
-  ...MapStateProps,
-|}>;
-
-export const HouseDashboard: React.StatelessFunctionalComponent<Props> = ({ houseData }) => {
+export const HouseDashboard = ({ houseData }) => {
   const { data, error, isLoading } = houseData;
 
   if (isLoading) {
@@ -41,11 +30,8 @@ export const HouseDashboard: React.StatelessFunctionalComponent<Props> = ({ hous
   );
 };
 
-const mapStateToProps = (state: ReduxState): MapStateProps => ({
+const mapStateToProps = state => ({
   houseData: state?.houses,
 });
 
-export default connect<Props, *, MapStateProps, *, ReduxState, *>(
-  mapStateToProps,
-  null,
-)(HouseDashboard);
+export default connect(mapStateToProps, null)(HouseDashboard);

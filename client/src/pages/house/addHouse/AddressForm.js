@@ -1,11 +1,9 @@
-// @flow
 import * as React from 'react';
 import { Box, Button, Grid } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 
 import { FormInput } from '../../../components/form/FormField';
 import { AddressFooter } from './Footer';
-import type { Address } from '../models';
 import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, ZIP_LABEL } from '../constants';
 import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticMap, StaticStreetMap } from '../../../components/Map';
@@ -15,24 +13,14 @@ const CITY_FIELD = 'address.city';
 const ZIP_FIELD = 'address.zip';
 const COUNTRY_FIELD = 'address.country';
 
-type AddressFormProps = {|
-  initialValues?: Object,
-  goToNextStep: () => void,
-  setIsAddressFormValid: boolean => void,
-|};
-
-export type AddressFormModel = {|
-  address: Address,
-|};
-
-export const AddressForm = React.forwardRef<AddressFormProps, any>(
-  ({ goToNextStep, setIsAddressFormValid, initialValues }: AddressFormProps, ref: any) => {
+export const AddressForm = React.forwardRef(
+  ({ goToNextStep, setIsAddressFormValid, initialValues }, ref) => {
     const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
-    const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
+    const [location, setLocation] = React.useState(null);
     const { handleSubmit, errors, register, formState, getValues } = formProps;
 
     React.useImperativeHandle(ref, () => ({
-      getValues: (): AddressFormModel => {
+      getValues: () => {
         return getValues({ nest: true });
       },
     }));
@@ -48,15 +36,13 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
     };
 
     const fetchImages = async () => {
-      const address: AddressFormModel = getValues({ nest: true });
+      const address = getValues({ nest: true });
       const data = await fetchLocationFromAddress(address);
 
       if (data) {
         setLocation(data);
       }
     };
-
-    console.log('state', location);
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>

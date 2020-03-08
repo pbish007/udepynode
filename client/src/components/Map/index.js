@@ -1,15 +1,9 @@
-// @flow
 import { GOOGLE_MAPS_API_KEY } from '../../constants';
 import * as React from 'react';
 import { Marker, StaticGoogleMap } from 'react-static-google-map';
 import { Box } from '@chakra-ui/core';
 
-type Props = $Shape<{
-  location: ?{ lat: string, lng: string },
-  [string]: any,
-}>;
-
-export const StaticStreetMap = ({ location, ...props }: Props) => {
+export const StaticStreetMap = ({ location, ...props }) => {
   if (!location) {
     return null;
   }
@@ -23,7 +17,7 @@ export const StaticStreetMap = ({ location, ...props }: Props) => {
   );
 };
 
-export const StaticMap = ({ location, ...props }: Props) => {
+export const StaticMap = ({ location, ...props }) => {
   if (!location) {
     return null;
   }

@@ -1,16 +1,6 @@
-// @flow
 import axios from 'axios';
 import { ROUTES } from '../constants';
 import { API_ROUTES } from './apiRoutes';
-import type { House, AddHouse } from '../pages/house/models';
-import type {
-  ADD_HOUSE_ACTION,
-  FETCH_HOUSES_ERROR_ACTION,
-  FETCH_HOUSES_LOADING_ACTION,
-  FETCH_HOUSES_SUCCESS_ACTION,
-  UPDATE_HOUSE_ACTION,
-} from '../pages/house/actions';
-import type { Dispatch } from './types';
 import {
   ADD_HOUSE,
   FETCH_HOUSES_ERROR,
@@ -19,27 +9,23 @@ import {
   UPDATE_HOUSE,
 } from './types';
 
-export const addHouse = (values: AddHouse, history: { push: Function }) => async (
-  dispatch: Dispatch,
-) => {
+export const addHouse = (values, history) => async dispatch => {
   try {
-    const res: { data: { meta: House } } = await axios.post(API_ROUTES.HOUSE, values);
+    const res = await axios.post(API_ROUTES.HOUSE, values);
 
     console.log('res.data', res.data.meta);
 
     history.push(ROUTES.HOUSE);
-    dispatch<ADD_HOUSE_ACTION>({ type: ADD_HOUSE, payload: res.data.meta });
+    dispatch({ type: ADD_HOUSE, payload: res.data.meta });
   } catch (err) {
     //console.log('error adding', Object.keys(err), err.toJSON());
     //console.log('error', Object.keys(err));
   }
 };
 
-export const updateHouse = (houseId: string, values: House, history: { push: Function }) => async (
-  dispatch: Dispatch,
-) => {
+export const updateHouse = (houseId, values, history) => async dispatch => {
   try {
-    const res: { data: { meta: House } } = await axios.put(API_ROUTES.HOUSE, {
+    const res = await axios.put(API_ROUTES.HOUSE, {
       _id: houseId,
       updatedHouse: values,
     });
@@ -47,23 +33,23 @@ export const updateHouse = (houseId: string, values: House, history: { push: Fun
     console.log('res.data', res.data.meta);
 
     history.push(ROUTES.HOUSE);
-    dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
+    dispatch({ type: UPDATE_HOUSE, payload: res.data.meta });
   } catch (err) {
     console.log('error updating', Object.keys(err), err);
     //console.log('error', Object.keys(err));
   }
 };
 
-export const fetchHouses = () => async (dispatch: Dispatch) => {
+export const fetchHouses = () => async dispatch => {
   try {
-    dispatch<FETCH_HOUSES_LOADING_ACTION>({ type: FETCH_HOUSES_LOADING });
-    const res: { data: Array<House> } = await axios.get(API_ROUTES.HOUSE);
+    dispatch({ type: FETCH_HOUSES_LOADING });
+    const res = await axios.get(API_ROUTES.HOUSE);
 
     console.log('houses', res);
 
-    dispatch<FETCH_HOUSES_SUCCESS_ACTION>({ type: FETCH_HOUSES_SUCCESS, payload: res.data });
+    dispatch({ type: FETCH_HOUSES_SUCCESS, payload: res.data });
   } catch (err) {
-    dispatch<FETCH_HOUSES_ERROR_ACTION>({
+    dispatch({
       type: FETCH_HOUSES_ERROR,
       payload: 'Error loading houses.',
     });

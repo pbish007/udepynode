@@ -10,7 +10,6 @@
     "bootstrap": "4.4.1",
     "bootstrap-icons": "^1.0.0-alpha2",
     "emotion-theming": "10.0.27",
-    "eslint-plugin-flowtype": "4.6.0",
     "http-proxy-middleware": "^0.20.0",
     "jquery": "3.4.1",
     "lodash.get": "4.4.2",
@@ -35,9 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext js",
-    "lint:watch": "onchange 'src/**/*.js' -- npm run lint",
-    "flow": "flow",
-    "flow:watch": "flow-watch --ignore node_modules/"
+    "lint:watch": "onchange 'src/**/*.js' -- yarn lint"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,9 +56,6 @@
     "eslint": "6.8.0",
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react-app": "6.1.0",
-    "flow-bin": "0.118.0",
-    "flow-typed": "2.6.2",
-    "flow-watch": "1.1.5",
     "onchange": "6.1.0",
     "prettier": "1.19.1",
     "typescript": "3.7.5"

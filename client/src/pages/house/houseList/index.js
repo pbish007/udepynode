@@ -1,15 +1,9 @@
-// @flow
 import * as React from 'react';
-import type { House } from '../models';
 import { Box, Flex, Grid, Image, Text } from '@chakra-ui/core';
 import { getHouseDetailsRoute, ROUTES } from '../../../constants';
 import { StyledRouterLink } from '../../../components/StyledLink';
 import { ValueCard } from './ValueCard';
 import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
-
-type Props = {
-  houses: ?Array<House>,
-};
 
 const cardProps = {
   border: '1px',
@@ -25,7 +19,7 @@ const cardProps = {
   _hover: { textDecoration: 'none' },
 };
 
-export const HouseCard = ({ house }: { house: House }) => {
+export const HouseCard = ({ house }) => {
   const route = getHouseDetailsRoute(house._id);
 
   return (
@@ -62,7 +56,7 @@ export const HouseCard = ({ house }: { house: House }) => {
   );
 };
 
-export const HouseList: React.StatelessFunctionalComponent<Props> = ({ houses }) => {
+export const HouseList = ({ houses }) => {
   return (
     <React.Fragment>
       <Flex mt={6} mb={6} justify="flex-end">
@@ -72,7 +66,7 @@ export const HouseList: React.StatelessFunctionalComponent<Props> = ({ houses })
         <Grid
           templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)', null, 'repeat(3, 1fr)']}
           gap={[4, 6]}>
-          {houses.map((house: House) => {
+          {houses.map(house => {
             return <HouseCard key={house._id} house={house} />;
           })}
         </Grid>

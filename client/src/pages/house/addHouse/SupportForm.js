@@ -1,24 +1,14 @@
-// @flow
 import * as React from 'react';
 import { Box, Button, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import { SupportFooter } from './Footer';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../../components/form/FormField';
-import type { Support } from '../models';
 
 const PLUMBER_TYPE = 'plumber';
 const ELECTRICIAN_TYPE = 'electrician';
 const HVAC_TYPE = 'hvac';
 
-export type SupportFormModel = {|
-  support: Support,
-|};
-
-const SUPPORT_FIELDS: Array<{
-  name: string,
-  title: string,
-  renderField: React.ComponentType<any>,
-}> = [
+const SUPPORT_FIELDS = [
   { name: 'companyName', title: 'Company', renderField: FormInput },
   { name: 'personName', title: 'Name', renderField: FormInput },
   { name: 'phoneNumber', title: 'Phone Number', renderField: FormNumberInput },
@@ -34,19 +24,7 @@ const createEmptyItem = () => {
   return fieldData;
 };
 
-export const SupportFields = ({
-  errors,
-  register,
-  type,
-  title,
-  control,
-}: {|
-  type: string,
-  title: string,
-  errors: Object,
-  register: Function,
-  control: any,
-|}) => {
+export const SupportFields = ({ errors, register, type, title, control }) => {
   const { fields, append } = useFieldArray({ control, name: `support.${type}` });
 
   const addEmptyItem = () => {
@@ -91,14 +69,8 @@ export const SupportFields = ({
   );
 };
 
-type SupportFormProps = {|
-  submitForm: Object => void,
-  goToPreviousStep: () => void,
-  initialValues?: Object,
-|};
-
-export const SupportForm = React.forwardRef<SupportFormProps, any>(
-  ({ goToPreviousStep, submitForm, initialValues }: SupportFormProps, ref: any) => {
+export const SupportForm = React.forwardRef(
+  ({ goToPreviousStep, submitForm, initialValues }, ref) => {
     const formProps = useForm({
       mode: 'onChange',
       defaultValues: initialValues || {
@@ -112,7 +84,7 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
     const { handleSubmit, errors, formState, register, getValues, control } = formProps;
 
     React.useImperativeHandle(ref, () => ({
-      getValues: (): SupportFormModel => {
+      getValues: () => {
         return getValues({ nest: true });
       },
     }));

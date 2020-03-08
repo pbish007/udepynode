@@ -1,55 +1,35 @@
-// @flow
 import * as React from 'react';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
-import type { AddressFormModel } from './AddressForm';
 import { AddressForm } from './AddressForm';
-import type { SupportFormModel } from './SupportForm';
 import { SupportForm } from './SupportForm';
-import type { FinancialsFormModel } from './FinancialsForm';
 import { FinancialsForm } from './FinancialsForm';
-import type { UtilitiesFormModel } from './UtilitiesForm';
 import { UtilitiesForm } from './UtilitiesForm';
 import { addHouse } from '../../../actions/house';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { PageContent } from '../../../components/PageContent';
-import type { AddHouse } from '../models';
 import { defaultAddress, defaultUtilities } from '../models';
-import type { ReduxState } from '../../../models/ReduxState';
 import { BackToDashboard } from '../../../components/BackLink';
 import { useTabStep } from '../useTabStep';
 
-type DispatchProps = $ReadOnly<{
-  addHouse: (AddHouse, Object) => void,
-}>;
-
-type OwnProps = $ReadOnly<{
-  history: { push: Function },
-}>;
-
-type Props = $ReadOnly<{
-  ...DispatchProps,
-  ...OwnProps,
-}>;
-
-export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHouse, history }) => {
+export const HouseWizard = ({ addHouse, history }) => {
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
   const utilitiesFormRef = React.createRef();
   const [isAddressFormValid, setIsAddressFormValid] = React.useState(false);
 
-  const onSubmit = (supportData: SupportFormModel) => {
-    const address: AddressFormModel = addressFormRef.current
+  const onSubmit = supportData => {
+    const address = addressFormRef.current
       ? addressFormRef.current.getValues()
       : { address: defaultAddress };
-    const financials: FinancialsFormModel = financialsFormRef.current
+    const financials = financialsFormRef.current
       ? financialsFormRef.current.getValues()
       : { financials: {}, insurance: {} };
-    const utilities: UtilitiesFormModel = utilitiesFormRef.current
+    const utilities = utilitiesFormRef.current
       ? utilitiesFormRef.current.getValues()
       : { utilities: defaultUtilities };
 
-    const formData: AddHouse = {
+    const formData = {
       ...address,
       ...financials,
       ...utilities,
@@ -110,6 +90,4 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
   );
 };
 
-export default connect<Props, OwnProps, void, *, ReduxState, *>(null, { addHouse })(
-  withRouter(HouseWizard),
-);
+export default connect(null, { addHouse })(withRouter(HouseWizard));

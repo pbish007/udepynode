@@ -1,5 +1,3 @@
-// @flow
-
 export const defaultAddress = {
   street: '',
   city: '',
@@ -20,85 +18,15 @@ export const defaultUtilities = {
   tv_provider: defaultNamedUtility,
 };
 
-export type Address = {|
-  street: string,
-  city: string,
-  zip: string,
-  country: string,
-|};
-
-export type SupportType = {|
-  companyName?: string,
-  personName?: string,
-  phoneNumber?: string,
-  mobile?: string,
-|};
-
-const defaultSupportType: SupportType = {
+const defaultSupportType = {
   companyName: '',
   personName: '',
   phoneNumber: '',
   mobile: '',
 };
 
-export type Support = {|
-  plumber: Array<SupportType>,
-  electrician: Array<SupportType>,
-  hvac: Array<SupportType>,
-|};
-
 export const defaultSupportData = {
   plumber: [{ ...defaultSupportType }],
   electrician: [{ ...defaultSupportType }],
   hvac: [{ ...defaultSupportType }],
 };
-
-export type Utility = {
-  account: string,
-  monthlyCost: string,
-  supportNumber: string,
-};
-
-export type NamedUtility = {
-  companyName: string,
-  ...Utility,
-};
-
-export type Utilities = {|
-  electricity: NamedUtility,
-  gas: NamedUtility,
-  hulu: Utility,
-  netflix: Utility,
-  internet: NamedUtility,
-  oil: NamedUtility,
-  tv_provider: NamedUtility,
-|};
-
-export type Financials = {|
-  mortgage: string,
-  mortgagePayment: string,
-  interest: string,
-  mortgageCompany: string,
-  mortgageCompanyPhone: string,
-  paymentFrequency: string,
-|};
-
-export type Insurance = {|
-  cost: string,
-  company: string,
-  companyPhone: string,
-  broker: string,
-|};
-
-export type AddHouse = {|
-  address: Address,
-  financials: Financials,
-  insurance: Insurance,
-  support: Support,
-  utilities: Utilities,
-|};
-
-export type House = {|
-  _id: string,
-  ...AddHouse,
-|};

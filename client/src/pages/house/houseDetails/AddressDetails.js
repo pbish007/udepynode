@@ -1,18 +1,12 @@
-// @flow
 import * as React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
-import type { Address } from '../models';
 import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, ZIP_LABEL } from '../constants';
 import { DisplayField } from '../../../components/DisplayField';
 import { fetchLocationFromAddress } from '../../../api/map';
-import {StaticMap, StaticStreetMap} from "../../../components/Map";
+import { StaticMap, StaticStreetMap } from '../../../components/Map';
 
-type AddressFormProps = {|
-  data: Address,
-|};
-
-export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps> = ({ data }) => {
-  const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
+export const AddressDetails = ({ data }) => {
+  const [location, setLocation] = React.useState(null);
 
   const { street, city, zip, country } = data;
 

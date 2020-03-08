@@ -1,7 +1,5 @@
-// @flow
 import * as React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
-import type { Financials, Insurance } from '../models';
 import { DisplayField } from '../../../components/DisplayField';
 import {
   INSURANCE_BROKER_LABEL,
@@ -15,13 +13,7 @@ import {
   MORTGAGE_PAYMENT_LABEL,
 } from '../constants';
 
-type FinancialsProps = {|
-  data: { financials: Financials, insurance: Insurance },
-|};
-
-export const FinancialsDetails: React.StatelessFunctionalComponent<FinancialsProps> = ({
-  data,
-}) => {
+export const FinancialsDetails = ({ data }) => {
   const { financials, insurance } = data;
   const {
     interest,

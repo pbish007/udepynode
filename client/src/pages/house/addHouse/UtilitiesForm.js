@@ -1,20 +1,8 @@
-// @flow
 import { Box, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import React from 'react';
 import { UtilitiesFooter } from './Footer';
 import { useForm } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../../components/form/FormField';
-import type { Utilities } from '../models';
-
-type UtilitiesFormProps = {|
-  goToNextStep: () => void,
-  goToPreviousStep: () => void,
-  initialValues?: { utilities: Utilities },
-|};
-
-export type UtilitiesFormModel = {|
-  utilities: Utilities,
-|};
 
 const SpecialUtilitiesFields = ({ errors, type, register, title, defaultValue }) => {
   return (
@@ -96,13 +84,13 @@ const UtilitiesFields = ({ errors, type, register, title, defaultValue }) => {
   );
 };
 
-export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
-  ({ goToNextStep, goToPreviousStep, initialValues }: UtilitiesFormProps, ref: any) => {
+export const UtilitiesForm = React.forwardRef(
+  ({ goToNextStep, goToPreviousStep, initialValues }, ref) => {
     const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const { handleSubmit, errors, formState, register, getValues } = formProps;
 
     React.useImperativeHandle(ref, () => ({
-      getValues: (): UtilitiesFormModel => {
+      getValues: () => {
         return getValues({ nest: true });
       },
     }));

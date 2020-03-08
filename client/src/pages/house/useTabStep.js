@@ -1,18 +1,9 @@
-// @flow
 import * as React from 'react';
 
-type Props = {
-  setStep: (step: number) => () => void,
-  setStep0: () => void,
-  setStep1: () => void,
-  setStep2: () => void,
-  setStep3: () => void,
-  currentStep: number,
-};
-export const useTabStep = (initialStep: number = 0): Props => {
+export const useTabStep = (initialStep = 0) => {
   const [currentStep, setCurrentStep] = React.useState(initialStep);
 
-  const setStep = (step: number) => (): void => {
+  const setStep = step => () => {
     setCurrentStep(step);
   };
 

@@ -1,10 +1,7 @@
-// @flow
 import * as React from 'react';
 import { PageContent } from '../../../components/PageContent';
 import { connect } from 'react-redux';
-import type { ReduxState } from '../../../models/ReduxState';
 import { makeSelectHouseById, selectHouses } from '../../../selectors';
-import type { House } from '../models';
 import { useTabStep } from '../useTabStep';
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
 import { AddressDetails } from './AddressDetails';
@@ -15,21 +12,7 @@ import { BackToDashboard } from '../../../components/BackLink';
 import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
 import { getHouseEditRoute } from '../../../constants';
 
-type OwnProps = {
-  match: { params: { houseId?: string } },
-};
-
-type MapStateProps = $ReadOnly<{|
-  house: ?House,
-  houses: ?Array<House>,
-|}>;
-
-type Props = {
-  ...OwnProps,
-  ...MapStateProps,
-};
-
-const HouseDetails: React.StatelessFunctionalComponent<Props> = ({ house }) => {
+const HouseDetails = ({ house }) => {
   const { setStep0, setStep1, setStep2, setStep3, currentStep } = useTabStep();
 
   if (!house) {
@@ -73,7 +56,7 @@ const HouseDetails: React.StatelessFunctionalComponent<Props> = ({ house }) => {
   );
 };
 
-const mapStateToProps = (state: ReduxState, ownProps: OwnProps): MapStateProps => {
+const mapStateToProps = (state, ownProps) => {
   const selectHouseById = makeSelectHouseById();
 
   return {
@@ -82,7 +65,4 @@ const mapStateToProps = (state: ReduxState, ownProps: OwnProps): MapStateProps =
   };
 };
 
-export default connect<Props, *, MapStateProps, *, ReduxState, *>(
-  mapStateToProps,
-  null,
-)(HouseDetails);
+export default connect(mapStateToProps, null)(HouseDetails);

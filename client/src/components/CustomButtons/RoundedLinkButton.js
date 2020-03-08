@@ -1,4 +1,3 @@
-// @flow
 import { Box, Button, Flex, Icon, Text } from '@chakra-ui/core';
 import { StyledRouterLink } from '../StyledLink';
 import * as React from 'react';
@@ -16,16 +15,7 @@ const buttonProps = {
   height: '48px',
 };
 
-type Props = {
-  to: string,
-  text: string,
-  icon?: string,
-};
-
-const ButtonContent: React.StatelessFunctionalComponent<{
-  text: string,
-  icon?: string,
-}> = ({ text, icon }) => {
+const ButtonContent = ({ text, icon }) => {
   return (
     <Box {...buttonProps} p={4} borderRadius="24px" width="auto" _hover={{ bg: 'blackAlpha.700' }}>
       <Flex align="center">
@@ -36,15 +26,7 @@ const ButtonContent: React.StatelessFunctionalComponent<{
   );
 };
 
-export const RoundedButton = ({
-  text,
-  icon,
-  onClick,
-}: {
-  text: string,
-  icon?: string,
-  onClick: MouseEventHandler,
-}) => (
+export const RoundedButton = ({ text, icon, onClick }) => (
   <Button
     {...buttonProps}
     borderRadius="24px"
@@ -58,11 +40,7 @@ export const RoundedButton = ({
   </Button>
 );
 
-export const RoundedLinkButton: React.StatelessFunctionalComponent<Props> = ({
-  to,
-  text,
-  icon,
-}) => {
+export const RoundedLinkButton = ({ to, text, icon }) => {
   return (
     <StyledRouterLink to={to}>
       <ButtonContent text={text} icon={icon} />

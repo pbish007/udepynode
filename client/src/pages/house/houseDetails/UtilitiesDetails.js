@@ -1,17 +1,8 @@
-// @flow
 import * as React from 'react';
 import { Box, Flex, Grid, Stack, Text } from '@chakra-ui/core';
-import type { NamedUtility, Utilities, Utility } from '../models';
 import { DetailListItem } from '../../../components/DetailListItem';
 
-interface UtilitiesProps {
-  data: Utilities;
-}
-
-const UtilityColumn: React.StatelessFunctionalComponent<{ title: string, value: string }> = ({
-  title,
-  value,
-}) => {
+const UtilityColumn = ({ title, value }) => {
   return (
     <Flex direction="column" fontSize="sm">
       <Text fontWeight="bold">{title}:</Text>
@@ -20,7 +11,7 @@ const UtilityColumn: React.StatelessFunctionalComponent<{ title: string, value: 
   );
 };
 
-const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, label: string }) => {
+const UtilityInfo = ({ utility, label }) => {
   const { account, monthlyCost, supportNumber } = utility;
 
   let companyName;
@@ -46,7 +37,7 @@ const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, labe
   );
 };
 
-export const UtilitiesDetails: React.StatelessFunctionalComponent<UtilitiesProps> = ({ data }) => {
+export const UtilitiesDetails = ({ data }) => {
   const { electricity, gas, hulu, internet, netflix, oil, tv_provider } = data;
   return (
     <Box pt={8}>

@@ -1,14 +1,3 @@
-// @flow
-
-import type { House } from './models';
-import type {
-  ADD_HOUSE_ACTION,
-  FETCH_HOUSES_ERROR_ACTION,
-  FETCH_HOUSES_LOADING_ACTION,
-  FETCH_HOUSES_SUCCESS_ACTION,
-  UPDATE_HOUSE_ACTION,
-} from './actions';
-import type { ErrorMessage } from '../../models/ErrorMessage';
 import {
   ADD_HOUSE,
   FETCH_HOUSES_ERROR,
@@ -17,26 +6,13 @@ import {
   UPDATE_HOUSE,
 } from '../../actions/types';
 
-export type HouseState = {
-  isLoading: boolean,
-  error: ?ErrorMessage,
-  data: Array<House> | null,
-};
-
-const DEFAULT_STATE: HouseState = {
+const DEFAULT_STATE = {
   isLoading: false,
   error: null,
   data: null,
 };
 
-type Action =
-  | ADD_HOUSE_ACTION
-  | UPDATE_HOUSE_ACTION
-  | FETCH_HOUSES_SUCCESS_ACTION
-  | FETCH_HOUSES_LOADING_ACTION
-  | FETCH_HOUSES_ERROR_ACTION;
-
-export const houseReducer = (state: HouseState = DEFAULT_STATE, action: Action): HouseState => {
+export const houseReducer = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case ADD_HOUSE: {
       return {
@@ -46,7 +22,7 @@ export const houseReducer = (state: HouseState = DEFAULT_STATE, action: Action):
     }
     case UPDATE_HOUSE: {
       const updatedHouse = action.payload;
-      const updatedData = (state.data || []).map((house: House) => {
+      const updatedData = (state.data || []).map(house => {
         if (house._id === updatedHouse._id) {
           return updatedHouse;
         }

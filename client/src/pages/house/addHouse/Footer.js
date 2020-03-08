@@ -1,21 +1,7 @@
-// @flow
 import * as React from 'react';
 import { Button, Flex } from '@chakra-ui/core';
 
-type ButtonProps = {
-  text: string,
-  variant?: 'outline' | 'solid',
-  onClick?: Function,
-  type?: 'button' | 'submit',
-};
-
-export const Footer = ({
-  leftButton,
-  rightButton,
-}: {
-  leftButton?: ButtonProps,
-  rightButton: ButtonProps,
-}) => {
+export const Footer = ({ leftButton, rightButton }) => {
   const justifyContent = !!leftButton ? 'space-between' : 'flex-end';
   return (
     <Flex justifyContent={justifyContent} mt={10}>
@@ -42,7 +28,7 @@ export const Footer = ({
   );
 };
 
-export const SupportFooter = ({ goToPreviousStep }: { goToPreviousStep: () => void }) => {
+export const SupportFooter = ({ goToPreviousStep }) => {
   return (
     <Footer
       rightButton={{ text: 'Submit', variant: 'solid' }}
@@ -51,7 +37,7 @@ export const SupportFooter = ({ goToPreviousStep }: { goToPreviousStep: () => vo
   );
 };
 
-export const UtilitiesFooter = ({ goToPreviousStep }: { goToPreviousStep: () => void }) => {
+export const UtilitiesFooter = ({ goToPreviousStep }) => {
   return (
     <Footer
       rightButton={{ text: 'Support' }}
@@ -60,7 +46,7 @@ export const UtilitiesFooter = ({ goToPreviousStep }: { goToPreviousStep: () => 
   );
 };
 
-export const FinancialsFooter = ({ goToPreviousStep }: { goToPreviousStep: () => void }) => {
+export const FinancialsFooter = ({ goToPreviousStep }) => {
   return (
     <Footer
       rightButton={{ text: 'Utilities' }}
@@ -69,6 +55,6 @@ export const FinancialsFooter = ({ goToPreviousStep }: { goToPreviousStep: () =>
   );
 };
 
-export const AddressFooter = ({ goToNextStep }: { goToNextStep?: () => void }) => (
+export const AddressFooter = ({ goToNextStep }) => (
   <Footer rightButton={{ text: 'Financials', onClick: goToNextStep }} />
 );

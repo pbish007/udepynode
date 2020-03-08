@@ -1,4 +1,3 @@
-// @flow
 import { Box, CheckboxGroup, Grid, Stack, Checkbox } from '@chakra-ui/core';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -15,13 +14,6 @@ import {
   MORTGAGE_LABEL,
   MORTGAGE_PAYMENT_LABEL,
 } from '../constants';
-import type { Financials, Insurance } from '../models';
-
-type FinancialsFormProps = {|
-  goToNextStep: () => void,
-  goToPreviousStep: () => void,
-  initialValues?: { financials: Financials, insurance: Insurance },
-|};
 
 const MORTGAGE_FIELD = 'financials.mortgage';
 const MORTGAGE_PAYMENT_FIELD = 'financials.mortgagePayment';
@@ -34,13 +26,8 @@ const INSURANCE_COMPANY_PHONE_FIELD = 'insurance.companyPhone';
 const INSURANCE_COMPANY_FIELD = 'insurance.company';
 const INSURANCE_BROKER_FIELD = 'insurance.broker';
 
-export type FinancialsFormModel = {|
-  financials: Object,
-  insurance: Object,
-|};
-
-export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
-  ({ goToNextStep, goToPreviousStep, initialValues }: FinancialsFormProps, ref: any) => {
+export const FinancialsForm = React.forwardRef(
+  ({ goToNextStep, goToPreviousStep, initialValues }, ref) => {
     const [selectedValues, setSelectedValues] = useState([]);
     const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const { handleSubmit, errors, formState, getValues, register, setValue } = formProps;
@@ -50,7 +37,7 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
     }, [register]);
 
     React.useImperativeHandle(ref, () => ({
-      getValues: (): FinancialsFormModel => {
+      getValues: () => {
         return getValues({ nest: true });
       },
     }));

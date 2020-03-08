@@ -1,22 +1,8 @@
-// @flow
 import * as React from 'react';
 import { Box, Grid, Stack, Text } from '@chakra-ui/core';
-import type { Support, SupportType } from '../models';
 import { DetailListItem } from '../../../components/DetailListItem';
 
-type SupportProps = {|
-  data: Support,
-|};
-
-const SupportItemRow = ({
-  children,
-  fontSize = 'sm',
-  fontWeight = 'normal',
-}: {
-  children: React.Node,
-  fontSize?: string,
-  fontWeight?: string,
-}) => {
+const SupportItemRow = ({ children, fontSize = 'sm', fontWeight = 'normal' }) => {
   return (
     <Grid
       templateColumns={['repeat(1, 1fr)', null, 'repeat(4, 1fr)']}
@@ -30,13 +16,7 @@ const SupportItemRow = ({
   );
 };
 
-export const SupportDetail = ({
-  supportData,
-  title,
-}: {
-  supportData: Array<SupportType>,
-  title: string,
-}) => {
+export const SupportDetail = ({ supportData, title }) => {
   return (
     <DetailListItem title={title}>
       <SupportItemRow fontSize="sm" fontWeight="bold">
@@ -60,7 +40,7 @@ export const SupportDetail = ({
   );
 };
 
-export const SupportDetails: React.StatelessFunctionalComponent<SupportProps> = ({ data }) => {
+export const SupportDetails = ({ data }) => {
   const { electrician, hvac, plumber } = data;
   return (
     <Box pt={8}>
