@@ -6,6 +6,8 @@ import { getHouseDetailsRoute, ROUTES } from '../../../constants';
 import { StyledRouterLink } from '../../../components/StyledLink';
 import { ValueCard } from './ValueCard';
 import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
+import { fetchLocationFromAddress } from '../../../api/map';
+import { StaticStreetMap } from '../../../components/Map';
 
 type Props = {
   houses: ?Array<House>,
@@ -26,7 +28,16 @@ const cardProps = {
 };
 
 export const HouseCard = ({ house }: { house: House }) => {
+  const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
   const route = getHouseDetailsRoute(house._id);
+
+  React.useEffect(() => {
+    fetchLocationFromAddress({ address: house.address }).then(locationData => {
+      if (locationData) {
+        setLocation(locationData);
+      }
+    });
+  }, [house.address]);
 
   return (
     <StyledRouterLink to={route}>
@@ -37,13 +48,16 @@ export const HouseCard = ({ house }: { house: House }) => {
         justifyContent="space-between"
         p={2}>
         <Flex direction="row" justify="space-between">
-          <Image
-            size="70px"
-            objectFit="cover"
-            src="https://loremflickr.com/150/200/house"
-            fallbackSrc="https://via.placeholder.com/150"
-            alt="Placeholder image"
-          />
+          {location ? (
+            <StaticStreetMap location={location} size="70px" />
+          ) : (
+            <Image
+              size="70px"
+              objectFit="cover"
+              src="https://via.placeholder.com/150"
+              alt="Placeholder image"
+            />
+          )}
           <Box fontSize="sm" flex={1} ml="2.25rem">
             <Text>{house.address.street}</Text>
             <Text>{house.address.city}</Text>
