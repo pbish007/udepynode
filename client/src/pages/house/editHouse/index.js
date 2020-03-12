@@ -45,7 +45,10 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   updateHouse,
   history,
 }) => {
+  // get houseID from route params
   const { houseId } = useParams();
+  // get the house corresponding to that houseId. useMemo caches the result so that it doesn't have to do the calculation
+  // again for the same params. https://reactjs.org/docs/hooks-reference.html#usememo
   const houseById: ?House = React.useMemo((): ?House => houses?.find(h => h._id === houseId), [
     houseId,
     houses,
@@ -94,6 +97,8 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
     return null;
   }
 
+  // Display message if there is no house for that ID. This is a defensive check,
+  // for scenarios like when the user has a bookmarked url and the house has been deleted, or the user doesn't have access to it.
   if (!houseById) {
     return (
       <PageContent heading="Edit House">

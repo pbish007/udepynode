@@ -31,32 +31,38 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
     const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
     const { handleSubmit, errors, register, formState, getValues } = formProps;
 
+    // https://reactjs.org/docs/hooks-reference.html#useimperativehandle
     React.useImperativeHandle(ref, () => ({
+      // used by the parent to get form values
       getValues: (): AddressFormModel => {
         return getValues({ nest: true });
       },
     }));
 
+    // informs the parent if the validity of the form changes. This is to control the disabled state of other tabs.
     React.useEffect(() => {
       setIsAddressFormValid(formState.isValid);
     }, [formState.isValid, setIsAddressFormValid]);
 
+    // if form is valid, and form is submitted, take the user to next step/tab.
     const onSubmit = () => {
       if (formState.isValid) {
         goToNextStep();
       }
     };
 
+    // fetch the location from address, and display the images
     const fetchImages = async () => {
       const address: AddressFormModel = getValues({ nest: true });
+      // fetch location from address
       const data = await fetchLocationFromAddress(address);
 
       if (data) {
+        // set the location attributes on state. If the location is fetched successfully, the maps are displayed.
+        // See StaticStreetMap and StaticMap components, and the render below.
         setLocation(data);
       }
     };
-
-    console.log('state', location);
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>

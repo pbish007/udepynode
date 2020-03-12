@@ -15,6 +15,8 @@ type Props = $ReadOnly<{|
   ...MapStateProps,
 |}>;
 
+// Dashboard entry page. All houses are loaded on App load, and the page shows spinner until the houses are loaded.
+// See componentDidMount in components/App.js
 export const HouseDashboard: React.StatelessFunctionalComponent<Props> = ({ houseData }) => {
   const { data, error, isLoading } = houseData;
 

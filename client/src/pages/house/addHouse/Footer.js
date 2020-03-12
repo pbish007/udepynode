@@ -4,9 +4,9 @@ import { Button, Flex } from '@chakra-ui/core';
 
 type ButtonProps = {
   text: string,
-  variant?: 'outline' | 'solid',
+  variant?: 'outline' | 'solid', // can only be outline or solid
   onClick?: Function,
-  type?: 'button' | 'submit',
+  type?: 'button' | 'submit', // can only be button or submit
 };
 
 export const Footer = ({
@@ -16,7 +16,7 @@ export const Footer = ({
   leftButton?: ButtonProps,
   rightButton: ButtonProps,
 }) => {
-  const justifyContent = !!leftButton ? 'space-between' : 'flex-end';
+  const justifyContent = !!leftButton ? 'space-between' : 'flex-end'; // if there is only one button align right
   return (
     <Flex justifyContent={justifyContent} mt={10}>
       {!!leftButton && (

@@ -66,3 +66,25 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Local development
+
+### Routing
+All client-side routes are declared in components/App.js. The route names are listed in constants.js. At the moment only routes related to House dashboard are there. Other routes that are hardcoded should also move there.
+The benefit of having the routes in constants file is that if you need to change any url in the future, you will need to change it in only one place, and there will be less scope of error.
+
+### House Dashboard
+All pages related to House Dashboard are inside src/pages/House folder.
+Inside the main folder, each functionality (list, add, edit, view details) has it's own folder to keep logic separate.
+
+#### Forms
+The House dashboard uses https://react-hook-form.com/ for the forms, which is a popular form library, and unlike redux-form is not dependent on redux. 
+
+#### Chakra UI
+The app uses Chakra UI, which is a CSS-in-JS component library, based on Emotion and Styled-system.
+The components are totally accessible and are very easy to make mobile friendly using responsive styling props.
+They are also totally customizable and themeable. For more information, see https://chakra-ui.com/getting-started
+
+The building block for all the components is the Box component, which renders a div element by default. See
+ https://chakra-ui.com/box for more details. 
+

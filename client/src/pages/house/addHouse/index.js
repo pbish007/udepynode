@@ -33,12 +33,17 @@ type Props = $ReadOnly<{
 }>;
 
 export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHouse, history }) => {
+  // these refs are passed to the respective forms.
   const addressFormRef = React.createRef();
   const financialsFormRef = React.createRef();
   const utilitiesFormRef = React.createRef();
+
+  // value of isAddressFormValid determines whether the address form has valid data or not. If address data is not valid,
+  // the other tabs are hidden
   const [isAddressFormValid, setIsAddressFormValid] = React.useState(false);
 
   const onSubmit = (supportData: SupportFormModel) => {
+    // The form data is fetched using the refs. See https://reactjs.org/docs/hooks-reference.html#useimperativehandle for more details.
     const address: AddressFormModel = addressFormRef.current
       ? addressFormRef.current.getValues()
       : { address: defaultAddress };
@@ -49,6 +54,7 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
       ? utilitiesFormRef.current.getValues()
       : { utilities: defaultUtilities };
 
+    // merge the 4 house attributes to make house object to add
     const formData: AddHouse = {
       ...address,
       ...financials,
@@ -56,15 +62,18 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
       ...supportData,
     };
 
+    // dispatch action to add the house to the database and redirect to dashboard
     addHouse(formData, history);
   };
 
+  // custom hook to manage the steps in the wizard journey. Also used in View/Edit pages
   const { setStep0, setStep1, setStep2, setStep3, currentStep } = useTabStep();
 
   return (
     <PageContent heading="Add a new House">
       <BackToDashboard />
 
+      {/* https://chakra-ui.com/tabs */}
       <Tabs index={currentStep}>
         <TabList style={{ flexWrap: 'wrap' }}>
           <Tab onClick={setStep0}>Address</Tab>
