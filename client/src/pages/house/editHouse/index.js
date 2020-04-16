@@ -18,7 +18,7 @@ import type { House } from '../models';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
 import { updateHouse } from '../../../actions/house';
-import { RoundedButton } from '../../../components/CustomButtons/RoundedLinkButton';
+import { RoundedButton} from '../../../components/CustomButtons/RoundedLinkButton';
 
 type StateProps = $ReadOnly<{
   isLoading: boolean,
@@ -122,7 +122,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
     <PageContent heading="Edit House">
       <Flex justify="space-between">
         <BackToDashboard />
-        <RoundedButton text="Save" onClick={handleSave} />
+        <RoundedButton icon="check" onClick={handleSave} />
       </Flex>
       <Tabs index={currentStep}>
         <TabList style={{ flexWrap: 'wrap' }}>

@@ -67,9 +67,9 @@ export const HouseCard = ({ house }: { house: House }) => {
           </Box>
         </Flex>
         <Grid templateColumns={'repeat(3, 1fr)'} gap={4}>
-          <ValueCard label="Estimate" value={60000} />
-          <ValueCard label="Liability" value={30000} />
-          <ValueCard label="Equity" value={30000} />
+          <ValueCard label="Asset Value" value={"750,000"} />
+          <ValueCard label="Mortage" value={"300,000"} />
+          <ValueCard label="Equity" value={"300,000"} />
         </Grid>
       </Flex>
     </StyledRouterLink>
@@ -79,10 +79,8 @@ export const HouseCard = ({ house }: { house: House }) => {
 export const HouseList: React.StatelessFunctionalComponent<Props> = ({ houses }) => {
   return (
     <React.Fragment>
-      <Flex mt={6} mb={6} justify="flex-end">
-        <RoundedLinkButton to={ROUTES.ADD_HOUSE} text="Add New" icon="add" />
-      </Flex>
-      {houses && houses.length ? (
+
+        {houses && houses.length ? (
         <Grid
           templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)', null, 'repeat(3, 1fr)']}
           gap={[4, 6]}>
