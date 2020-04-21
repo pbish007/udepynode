@@ -2,7 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../constants';
-//import Payments from './Payments';
+import Payments from './Payments';
+import { MdDirectionsCar,
+MdDirectionsBoat,
+MdHome,
+MdDashboard
+ } from "react-icons/md";
+import {
+  Box,
+  Flex,
+  Image,
+  Text,
+  Menu,
+  Icon,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuGroup,
+  MenuDivider,
+  MenuOptionGroup,
+  MenuItemOption,
+  Button,
+  Divider
+} from "@chakra-ui/core";
 
 class Header extends Component {
   renderContent() {
@@ -14,81 +36,118 @@ class Header extends Component {
       default:
         //returning an array for the header
         return (
-          <ul className="navbar-nav">
-            <li>
-              <div className="dropdown">
-                <button
-                  className="btn btn-dark dropdown-toggle btn-md"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-                  <img
-                    alt="User profile"
-                    className="rounded-circle"
-                    width="40"
-                    height="40"
-                    src={this.props.auth.userImg}
-                  />
-                </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a className="dropdown-item" href="/profiles">
-                    Profile
-                  </a>
-                  <a className="dropdown-item" href="/api/logout">
-                    Logout
-                  </a>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <Menu>
+            <MenuButton as={Button} variantColor="black" rightIcon="chevron-down">
+            <Image
+              size="2rem"
+              rounded="full"
+              src= {this.props.auth.userImg}
+              alt="Profile Image"
+              mr="12px"
+            />
+            <span>Profile</span>
+            </MenuButton>
+            <MenuList>
+              <MenuGroup title="Profile">
+                <MenuItem><a href="/profiles">My Acccount</a></MenuItem>
+                <MenuItem><a href="/api/logout">Logout</a></MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup title="Payment Center">
+                <MenuItem><Payments /></MenuItem>
+                <MenuItem>FAQ</MenuItem>
+              </MenuGroup>
+            </MenuList>
+          </Menu>
         );
     }
   }
+// This is the menu for the Dashboad House Auto Boat
+    renderMenuContent() {
+      switch (this.props.auth) {
+        case null:
+          return;
+        case false:
+          return;
+        default:
+          //returning an array for the header
+          return (
+            <div>
+            <Flex
+            bg="white"
+            w="100%"
+            px={3}
+            py={1}
+            justifyContent="space-between"
+            alignItems="center"
+            >
+            <Flex flexDirection="row" justifyContent="center" alignItems="center">
+            <Link to={this.props.auth ? '/dashboard' : '/'} >
+                  <Text pl={3} color="Black" >
+                  Dashboard
+                </Text>
+            </Link>
+            <Link to={this.props.auth ? ROUTES.HOUSE : '/'} >
+            <Text pl={3} color="black">
+              Properties
+            </Text>
+            </Link>
+            {/*  blocked this until I have Auto and Boats
+            <Link to={this.props.auth ? '/auto' : '/'} >
+            <Text pl={3} color="black">
+              Autos
+            </Text>
+            </Link>
+            <Link to={this.props.auth ? '/boat' : '/'} >
+            <Text pl={3} color="black">
+              Boats
+            </Text>
+            </Link>
+            */}
+
+            </Flex>
+            <Box>
+
+            </Box>
+            </Flex>
+            <Divider />
+            </div>
+          );
+      }
+    }
+
+// This will Render the header
   render() {
     return (
       <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <Link to={this.props.auth ? '/' : '/'} className="navbar-brand">
-            Tamzoo
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarText"
-            aria-controls="navbarText"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarText">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="/profiles">
-                  Dashboard <span className="sr-only">(current)</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <Link to={this.props.auth ? ROUTES.HOUSE : '/'} className="nav-link">
-                  House
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={this.props.auth ? '/surveys' : '/'} className="nav-link">
-                  Auto
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={this.props.auth ? '/surveys' : '/'} className="nav-link">
-                  Boat
-                </Link>
-              </li>
-            </ul>
-            {this.renderContent()}
-          </div>
-        </nav>
+            <Flex
+            bg="black"
+            w="100%"
+            px={5}
+            py={2}
+            justifyContent="space-between"
+            alignItems="center"
+            >
+            <Flex flexDirection="row" justifyContent="center" alignItems="center">
+            <Link to={this.props.auth ? '/' : '/'}>
+              <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png"
+                size={30}
+              />
+            </Link>
+            <Link to={this.props.auth ? '/' : '/'}>
+              <Text pl={3} color="white">
+                Tamzoo
+              </Text>
+            </Link>
+            </Flex>
+            <Box>
+              {this.renderContent()}
+            </Box>
+
+          </Flex>
+              {this.renderMenuContent()}
+
       </div>
     );
   }

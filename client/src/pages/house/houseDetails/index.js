@@ -44,8 +44,11 @@ const HouseDetails: React.StatelessFunctionalComponent<Props> = ({ house }) => {
     <PageContent heading="House Details">
       <Flex justify="space-between">
         <BackToDashboard />
+
+      <box>
         <RoundedLinkButton to={editRoute}  icon="edit" />
         <RoundedLinkButton to={editRoute}  icon="delete" />
+      </box>
       </Flex>
       <Tabs index={currentStep}>
         <TabList style={{ flexWrap: 'wrap' }}>

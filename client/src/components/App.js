@@ -34,7 +34,7 @@ class App extends Component {
           <Route exact path={ROUTES.HOUSE_DETAILS} component={HouseDetails} />
           <Route exact path={ROUTES.HOUSE_EDIT} component={EditHouse} />
           <Route exact path="/udetail" component={UdetailForm} />
-          <Route exact path="/surveys" component={Dashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/surveys/new" component={SurveyNew} />
           <Route exact path="/profiles" component={Profiles} />
           <Footer />

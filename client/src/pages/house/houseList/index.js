@@ -68,8 +68,8 @@ export const HouseCard = ({ house }: { house: House }) => {
         </Flex>
         <Grid templateColumns={'repeat(3, 1fr)'} gap={4}>
           <ValueCard label="Asset Value" value={"750,000"} />
-          <ValueCard label="Mortage" value={"300,000"} />
-          <ValueCard label="Equity" value={"300,000"} />
+          <ValueCard label="Mortage" value={house.financials.mortgage} />
+          <ValueCard label="Equity" value={750000-house.financials.mortgage} />
         </Grid>
       </Flex>
     </StyledRouterLink>

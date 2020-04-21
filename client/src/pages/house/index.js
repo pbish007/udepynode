@@ -41,7 +41,7 @@ export const HouseDashboard: React.StatelessFunctionalComponent<Props> = ({ hous
 
   return (
     <PageContent heading="My Properties" >
-      <Flex mt={2} mb={2} justify="flex-end">
+      <Flex mt={1} mb={1} justify="flex-end">
         <RoundedLinkButton to={ROUTES.ADD_HOUSE}  icon="add" />
       </Flex>
         <HouseList houses={data} />

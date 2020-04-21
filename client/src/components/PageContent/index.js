@@ -4,7 +4,7 @@ import { Box, Divider, Text } from '@chakra-ui/core';
 
 export const PageContent = ({ children, heading }: { children: React.Node, heading?: string }) => {
   return (
-    <Box pl={15} pr={15} pt={6} pb={6}>
+    <Box pl={15} pr={15} pt={0} pb={0}>
       {heading ? (
         <React.Fragment>
           <Text fontSize={28} textAlign="center">
@@ -13,7 +13,7 @@ export const PageContent = ({ children, heading }: { children: React.Node, headi
           <Divider />
         </React.Fragment>
       ) : null}
-      <Box pt={4} pb={4}>
+      <Box pt={2} pb={2}>
         {children}
       </Box>
     </Box>

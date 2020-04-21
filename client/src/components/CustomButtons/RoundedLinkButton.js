@@ -8,11 +8,10 @@ const buttonProps = {
   direction: 'row',
   alignItems: 'center',
   justifyContent: 'center',
-  border: '1px',
-  borderColor: 'blackAlpha.200',
-  boxShadow: 'md',
-  bg: 'blackAlpha.700',
-  color: 'white',
+  border: '0px',
+  borderColor: 'white',
+  bg: 'white',
+  color: 'black',
   height: '24px',
 };
 
@@ -27,7 +26,7 @@ const ButtonContent: React.StatelessFunctionalComponent<{
   icon?: string,
 }> = ({ text, icon }) => {
   return (
-    <Box {...buttonProps} p={4} borderRadius="5px" width="auto" _hover={{ bg: 'blackAlpha.700' }}>
+    <Box {...buttonProps} p={2} borderRadius="5px" width="auto" _hover={{ bg: 'blackAlpha.700' }}>
       <Flex align="center">
         {icon ? <Icon name={icon} mr={1} /> : null}
         <Text>{text}</Text>
@@ -51,7 +50,7 @@ export const RoundedButton = ({
     borderRadius="5px"
     width="auto"
     onClick={onClick}
-    _hover={{ bg: 'blackAlpha.800' }}>
+    _hover={{ bg: 'white' }}>
     <Flex align="center">
       {icon ? <Icon name={icon} mr={2} /> : null}
       <Text>{text}</Text>
