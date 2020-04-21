@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Payments from './Payments';
+import {
+Box,
+Image,
+StarIcon,
+Avatar,
+Badge
+} from "@chakra-ui/core";
+
+const property = {
+  imageUrl: "https://bit.ly/2Z4KKcF",
+  imageAlt: "Rear view of modern home with pool",
+  beds: 3,
+  baths: 2,
+  title: "Modern home in city center in the heart of historic Los Angeles",
+  formattedPrice: "$1,900.00",
+  reviewCount: 34,
+  rating: 4
+};
 
 class Profiles extends Component {
   renderContent() {
@@ -50,6 +67,8 @@ class Profiles extends Component {
                 </div>
               </div>
             </div>
+
+
           </div>
         );
     }
@@ -62,19 +81,58 @@ class Profiles extends Component {
       case false:
         return <li> NOT Authorized</li>;
       default:
-        return <Payments />;
+        return (
+          <div>
+          <Box pl="10" pr="10" pt="10" pb="10" maxW="xs" borderWidth="1px" rounded="lg" overflow="hidden" width="250px">
+             <Avatar  size="2xl" name={this.props.auth.firstName} src={this.props.auth.userImg} />
+             <Box p="4">
+              <Box d="flex" alignItems="baseline">
+                <Badge rounded="full" px="2" variantColor="teal">
+                  Credits: {this.props.auth.credits}
+                </Badge>
+              </Box>
+
+              <Box
+                mt="1"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated
+              >
+                {this.props.auth.fullName}
+              </Box>
+
+              <Box
+                color="gray.500"
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="xs"
+                textTransform="uppercase"
+                >
+                {this.props.auth.userEmail}
+              </Box>
+
+
+            </Box>
+          </Box>
+          
+
+        </div>
+        );
     }
   }
 
+
+
+
+
+
   render() {
     return (
-      <div className="container p-container">
-        <div className="row">
-          <div className="col-2">{this.renderSideContent()}</div>
-
-          <div className="col-10">{this.renderContent()}</div>
-        </div>
+      <div className="container">
+      {this.renderSideContent()}
       </div>
+
     );
   }
 }

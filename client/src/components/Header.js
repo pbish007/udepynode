@@ -45,7 +45,7 @@ class Header extends Component {
               alt="Profile Image"
               mr="12px"
             />
-            <span>Profile</span>
+            <span>{this.props.auth.firstName}</span>
             </MenuButton>
             <MenuList>
               <MenuGroup title="Profile">
