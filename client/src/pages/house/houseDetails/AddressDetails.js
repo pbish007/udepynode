@@ -36,8 +36,8 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
           <DisplayField text={state} label={STATE_LABEL} />
           <DisplayField text={country} label={COUNTRY_LABEL} />
         </Box>
-        <StaticMap location={location} />
         <StaticStreetMap location={location} />
+        <StaticMap location={location} />
       </Grid>
     </Box>
   );
