@@ -12,6 +12,11 @@ export type UPDATE_HOUSE_ACTION = {
   payload: House,
 };
 
+export type DELETE_HOUSE_ACTION = {
+  type: 'DELETE_HOUSE',
+  payload: House,
+};
+
 export type FETCH_HOUSES_SUCCESS_ACTION = {
   type: 'FETCH_HOUSES_SUCCESS',
   payload: Array<House>,

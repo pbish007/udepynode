@@ -60,16 +60,16 @@ export const HouseCard = ({ house }: { house: House }) => {
           )}
           <Box fontSize="sm" flex={1} ml="2.25rem">
             <Text>{house.address.street}</Text>
-            <Text>{house.address.city}</Text>
+            <Text>{house.address.city}, {house.address.state}</Text>
             <Text>
               {house.address.zip}, {house.address.country}
             </Text>
           </Box>
         </Flex>
         <Grid templateColumns={'repeat(3, 1fr)'} gap={4}>
-          <ValueCard label="Asset Value" value={"750,000"} />
-          <ValueCard label="Mortage" value={house.financials.mortgage} />
-          <ValueCard label="Equity" value={750000-house.financials.mortgage} />
+          <ValueCard label="Asset Value" value={house.financials.assetValue} />
+          <ValueCard label="Liability" value={house.financials.mortgage} />
+          <ValueCard label="Equity" value={house.financials.assetValue-house.financials.mortgage} />
         </Grid>
       </Flex>
     </StyledRouterLink>

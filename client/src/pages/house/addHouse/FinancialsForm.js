@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../../components/form/FormField';
 import { FinancialsFooter } from './Footer';
 import {
+  ASSET_VALUE_LABEL,
   INSURANCE_BROKER_LABEL,
   INSURANCE_COMPANY_LABEL,
   INSURANCE_COMPANY_PHONE_LABEL,
@@ -23,6 +24,7 @@ type FinancialsFormProps = {|
   initialValues?: { financials: Financials, insurance: Insurance },
 |};
 
+const ASSET_VALUE_FIELD = 'financials.assetValue';
 const MORTGAGE_FIELD = 'financials.mortgage';
 const MORTGAGE_PAYMENT_FIELD = 'financials.mortgagePayment';
 const PAYMENT_FREQ_FIELD = 'financials.paymentFrequency';
@@ -72,6 +74,14 @@ export const FinancialsForm = React.forwardRef<FinancialsFormProps, any>(
         <Box p={4}>
           <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[0, null, 10]}>
             <Box>
+              <FormNumberInput
+                leftContent="$"
+                errors={errors}
+                fieldName={ASSET_VALUE_FIELD}
+                label={ASSET_VALUE_LABEL}
+                registerFn={register}
+                defaultValue={initialValues?.financials?.assetValue}
+              />
               <FormNumberInput
                 leftContent="$"
                 errors={errors}

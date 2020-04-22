@@ -18,4 +18,4 @@ export const BackLink: React.StatelessFunctionalComponent<{ route: string, text:
   );
 };
 
-export const BackToDashboard = () => <BackLink route={ROUTES.HOUSE} text="Dashboard" />;
+export const BackToDashboard = () => <BackLink route={ROUTES.HOUSE} text="Back to Properties" />;

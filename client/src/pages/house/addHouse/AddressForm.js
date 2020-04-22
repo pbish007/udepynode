@@ -6,13 +6,14 @@ import { useForm } from 'react-hook-form';
 import { FormInput } from '../../../components/form/FormField';
 import { AddressFooter } from './Footer';
 import type { Address } from '../models';
-import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, ZIP_LABEL } from '../constants';
+import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, STATE_LABEL, ZIP_LABEL } from '../constants';
 import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticMap, StaticStreetMap } from '../../../components/Map';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
 const ZIP_FIELD = 'address.zip';
+const STATE_FIELD = 'address.state';
 const COUNTRY_FIELD = 'address.country';
 
 type AddressFormProps = {|
@@ -86,6 +87,12 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 fieldName={ZIP_FIELD}
                 label={ZIP_LABEL}
                 registerFn={register({ required: 'Zip/Postal is required' })}
+              />
+              <FormInput
+                errors={errors}
+                fieldName={STATE_FIELD}
+                label={STATE_LABEL}
+                registerFn={register({ required: 'State/Prov is required' })}
               />
               <FormInput
                 errors={errors}

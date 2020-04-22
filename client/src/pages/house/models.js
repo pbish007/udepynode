@@ -4,6 +4,7 @@ export const defaultAddress = {
   street: '',
   city: '',
   zip: '',
+  state: '',
   country: '',
 };
 
@@ -24,6 +25,7 @@ export type Address = {|
   street: string,
   city: string,
   zip: string,
+  state: string,
   country: string,
 |};
 
@@ -75,6 +77,7 @@ export type Utilities = {|
 |};
 
 export type Financials = {|
+  assetValue: sting, 
   mortgage: string,
   mortgagePayment: string,
   interest: string,

@@ -2,8 +2,10 @@
 export const STREET_LABEL = 'Street';
 export const CITY_LABEL = 'City/Town';
 export const ZIP_LABEL = 'Zip/Postal';
+export const STATE_LABEL = 'State/Prov';
 export const COUNTRY_LABEL = 'Country';
 
+export const ASSET_VALUE_LABEL = 'Asset Value';
 export const MORTGAGE_LABEL = 'Mortgage';
 export const MORTGAGE_PAYMENT_LABEL = 'Mortgage Payment';
 export const MORTGAGE_COMPANY_LABEL = 'Mortgage Company';

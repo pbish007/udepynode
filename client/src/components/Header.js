@@ -3,25 +3,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../constants';
 import Payments from './Payments';
-import { MdDirectionsCar,
-MdDirectionsBoat,
-MdHome,
-MdDashboard
- } from "react-icons/md";
 import {
   Box,
   Flex,
   Image,
   Text,
   Menu,
-  Icon,
   MenuButton,
   MenuList,
   MenuItem,
   MenuGroup,
   MenuDivider,
-  MenuOptionGroup,
-  MenuItemOption,
   Button,
   Divider
 } from "@chakra-ui/core";

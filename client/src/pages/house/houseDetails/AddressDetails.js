@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
 import type { Address } from '../models';
-import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, ZIP_LABEL } from '../constants';
+import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, STATE_LABEL, ZIP_LABEL } from '../constants';
 import { DisplayField } from '../../../components/DisplayField';
 import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticMap, StaticStreetMap } from '../../../components/Map';
@@ -14,7 +14,7 @@ type AddressFormProps = {|
 export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps> = ({ data }) => {
   const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
 
-  const { street, city, zip, country } = data;
+  const { street, city, zip, state, country } = data;
 
   React.useEffect(() => {
     fetchLocationFromAddress({ address: data }).then(locationData => {
@@ -33,6 +33,7 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
           <DisplayField text={street} label={STREET_LABEL} />
           <DisplayField text={city} label={CITY_LABEL} />
           <DisplayField text={zip} label={ZIP_LABEL} />
+          <DisplayField text={state} label={STATE_LABEL} />
           <DisplayField text={country} label={COUNTRY_LABEL} />
         </Box>
         <StaticMap location={location} />

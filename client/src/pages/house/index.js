@@ -5,7 +5,7 @@ import { getHouseDetailsRoute, ROUTES } from '../../constants';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../models/ReduxState';
 import type { HouseState } from './reducers';
-import { Spinner, Text, Heading, Flex, IconButton } from '@chakra-ui/core';
+import { Spinner, Text, Heading, Flex } from '@chakra-ui/core';
 import { RoundedLinkButton } from '../../components/CustomButtons/RoundedLinkButton';
 import { HouseList } from './houseList';
 

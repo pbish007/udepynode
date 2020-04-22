@@ -6,6 +6,7 @@ const addressSchema = new Schema(
     street: { type: String, required: true },
     city: { type: String, required: true },
     zip: { type: String, required: true },
+    state: { type: String, required: true },
     country: { type: String, required: true }
   },
   {
@@ -16,6 +17,7 @@ const addressSchema = new Schema(
 
 const financialsSchema = new Schema(
   {
+    assetValue: Number,
     mortgage: Number,
     mortgagePayment: Number,
     interest: Number,

@@ -4,6 +4,7 @@ import { Box, Grid } from '@chakra-ui/core';
 import type { Financials, Insurance } from '../models';
 import { DisplayField } from '../../../components/DisplayField';
 import {
+  ASSET_VALUE_LABEL,
   INSURANCE_BROKER_LABEL,
   INSURANCE_COMPANY_LABEL,
   INSURANCE_COMPANY_PHONE_LABEL,
@@ -24,6 +25,7 @@ export const FinancialsDetails: React.StatelessFunctionalComponent<FinancialsPro
 }) => {
   const { financials, insurance } = data;
   const {
+    assetValue,
     interest,
     mortgage,
     mortgageCompany,
@@ -37,6 +39,7 @@ export const FinancialsDetails: React.StatelessFunctionalComponent<FinancialsPro
     <Box pt={8}>
       <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[0, null, 10]}>
         <Box>
+          <DisplayField label={ASSET_VALUE_LABEL} text={`$${assetValue || 0}`} />
           <DisplayField label={MORTGAGE_LABEL} text={`$${mortgage || 0}`} />
           <DisplayField
             label={MORTGAGE_PAYMENT_LABEL}
