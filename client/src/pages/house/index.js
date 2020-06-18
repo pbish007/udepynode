@@ -1,14 +1,13 @@
 // @flow
 import * as React from 'react';
 import { PageContent } from '../../components/PageContent';
-import { getHouseDetailsRoute, ROUTES } from '../../constants';
+import { ROUTES } from '../../constants';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../models/ReduxState';
 import type { HouseState } from './reducers';
-import { Spinner, Text, Heading, Flex } from '@chakra-ui/core';
+import { Spinner, Text, Flex } from '@chakra-ui/core';
 import { RoundedLinkButton } from '../../components/CustomButtons/RoundedLinkButton';
 import { HouseList } from './houseList';
-
 
 type MapStateProps = $ReadOnly<{|
   houseData: HouseState,
@@ -40,11 +39,11 @@ export const HouseDashboard: React.StatelessFunctionalComponent<Props> = ({ hous
   }
 
   return (
-    <PageContent heading="My Properties" >
+    <PageContent heading="My Properties">
       <Flex mt={1} mb={1} justify="flex-end">
-        <RoundedLinkButton to={ROUTES.ADD_HOUSE}  icon="add" />
+        <RoundedLinkButton to={ROUTES.ADD_HOUSE} icon="add" />
       </Flex>
-        <HouseList houses={data} />
+      <HouseList houses={data} />
     </PageContent>
   );
 };

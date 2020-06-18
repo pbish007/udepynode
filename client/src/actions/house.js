@@ -5,6 +5,7 @@ import { API_ROUTES } from './apiRoutes';
 import type { House, AddHouse } from '../pages/house/models';
 import type {
   ADD_HOUSE_ACTION,
+  DELETE_HOUSE_ACTION,
   FETCH_HOUSES_ERROR_ACTION,
   FETCH_HOUSES_LOADING_ACTION,
   FETCH_HOUSES_SUCCESS_ACTION,
@@ -13,6 +14,7 @@ import type {
 import type { Dispatch } from './types';
 import {
   ADD_HOUSE,
+  DELETE_HOUSE,
   FETCH_HOUSES_ERROR,
   FETCH_HOUSES_LOADING,
   FETCH_HOUSES_SUCCESS,
@@ -50,6 +52,26 @@ export const updateHouse = (houseId: string, values: House, history: { push: Fun
     dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
   } catch (err) {
     console.log('error updating', Object.keys(err), err);
+    //console.log('error', Object.keys(err));
+  }
+};
+
+export const deleteHouse = (houseId: string, history: { push: Function }) => async (
+  dispatch: Dispatch,
+) => {
+  try {
+    const res: { data: { success: boolean } } = await axios.delete(API_ROUTES.HOUSE, {
+      data: {
+        _id: houseId,
+      },
+    });
+
+    console.log('response', res.data.success);
+
+    history.push(ROUTES.HOUSE);
+    dispatch<DELETE_HOUSE_ACTION>({ type: DELETE_HOUSE, payload: houseId });
+  } catch (err) {
+    console.log('error deleting', Object.keys(err), err);
     //console.log('error', Object.keys(err));
   }
 };

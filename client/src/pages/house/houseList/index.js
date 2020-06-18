@@ -2,10 +2,9 @@
 import * as React from 'react';
 import type { House } from '../models';
 import { Box, Flex, Grid, Image, Text } from '@chakra-ui/core';
-import { getHouseDetailsRoute, ROUTES } from '../../../constants';
+import { getHouseDetailsRoute } from '../../../constants';
 import { StyledRouterLink } from '../../../components/StyledLink';
 import { ValueCard } from './ValueCard';
-import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
 import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticStreetMap } from '../../../components/Map';
 
@@ -60,7 +59,9 @@ export const HouseCard = ({ house }: { house: House }) => {
           )}
           <Box fontSize="sm" flex={1} ml="2.25rem">
             <Text>{house.address.street}</Text>
-            <Text>{house.address.city}, {house.address.state}</Text>
+            <Text>
+              {house.address.city}, {house.address.state}
+            </Text>
             <Text>
               {house.address.zip}, {house.address.country}
             </Text>
@@ -69,7 +70,10 @@ export const HouseCard = ({ house }: { house: House }) => {
         <Grid templateColumns={'repeat(3, 1fr)'} gap={4}>
           <ValueCard label="Asset Value" value={house.financials.assetValue} />
           <ValueCard label="Liability" value={house.financials.mortgage} />
-          <ValueCard label="Equity" value={house.financials.assetValue-house.financials.mortgage} />
+          <ValueCard
+            label="Equity"
+            value={house.financials.assetValue - house.financials.mortgage}
+          />
         </Grid>
       </Flex>
     </StyledRouterLink>
@@ -79,8 +83,7 @@ export const HouseCard = ({ house }: { house: House }) => {
 export const HouseList: React.StatelessFunctionalComponent<Props> = ({ houses }) => {
   return (
     <React.Fragment>
-
-        {houses && houses.length ? (
+      {houses && houses.length ? (
         <Grid
           templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)', null, 'repeat(3, 1fr)']}
           gap={[4, 6]}>

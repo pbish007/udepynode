@@ -1,5 +1,5 @@
 // @flow
-import { Box, Button, Flex, Icon, Text } from '@chakra-ui/core';
+import { Box, Button, Flex, Icon, IconButton as ChakraIconButton, Text } from '@chakra-ui/core';
 import { StyledRouterLink } from '../StyledLink';
 import * as React from 'react';
 
@@ -17,12 +17,12 @@ const buttonProps = {
 
 type Props = {
   to: string,
-  text: string,
+  text?: string,
   icon?: string,
 };
 
 const ButtonContent: React.StatelessFunctionalComponent<{
-  text: string,
+  text?: string,
   icon?: string,
 }> = ({ text, icon }) => {
   return (
@@ -40,7 +40,7 @@ export const RoundedButton = ({
   icon,
   onClick,
 }: {
-  text: string,
+  text?: string,
   icon?: string,
   onClick: MouseEventHandler,
 }) => (
@@ -68,4 +68,19 @@ export const RoundedLinkButton: React.StatelessFunctionalComponent<Props> = ({
       <ButtonContent text={text} icon={icon} />
     </StyledRouterLink>
   );
+};
+
+const iconButtonProps = {
+  bg: 'transparent',
+  _hover: { bg: 'transparent' },
+  _focus: { outline: 'none' },
+  _active: { backgroundColor: 'transparent' },
+};
+
+export const IconButton: React.StatelessFunctionalComponent<{
+  icon: string,
+  onClick: MouseEventHandler,
+  ...
+}> = ({ icon, onClick, ...props }) => {
+  return <ChakraIconButton {...props} {...iconButtonProps} icon={icon} onClick={onClick} />;
 };

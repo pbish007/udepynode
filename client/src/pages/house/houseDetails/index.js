@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { withRouter } from 'react-router-dom';
 import { PageContent } from '../../../components/PageContent';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
@@ -12,11 +13,14 @@ import { FinancialsDetails } from './FinancialsDetails';
 import { UtilitiesDetails } from './UtilitiesDetails';
 import { SupportDetails } from './SupportDetails';
 import { BackToDashboard } from '../../../components/BackLink';
-import { RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
+import { IconButton, RoundedLinkButton } from '../../../components/CustomButtons/RoundedLinkButton';
 import { getHouseEditRoute } from '../../../constants';
+import { DeleteConfirmationModal } from './DeleteConfirmationModal';
+import { deleteHouse } from '../../../actions/house';
 
 type OwnProps = {
   match: { params: { houseId?: string } },
+  history: { push: Function },
 };
 
 type MapStateProps = $ReadOnly<{|
@@ -24,12 +28,22 @@ type MapStateProps = $ReadOnly<{|
   houses: ?Array<House>,
 |}>;
 
-type Props = {
+type DispatchProps = $ReadOnly<{
+  deleteHouse: (string, Object) => void,
+}>;
+
+type Props = {|
   ...OwnProps,
   ...MapStateProps,
-};
+  ...DispatchProps,
+|};
 
-const HouseDetails: React.StatelessFunctionalComponent<Props> = ({ house }) => {
+const HouseDetails: React.StatelessFunctionalComponent<Props> = ({
+  house,
+  deleteHouse,
+  history,
+}) => {
+  const [shouldDisplayDeleteModal, setShouldDisplayDeleteModal] = React.useState(false);
   const { setStep0, setStep1, setStep2, setStep3, currentStep } = useTabStep();
 
   if (!house) {
@@ -45,10 +59,10 @@ const HouseDetails: React.StatelessFunctionalComponent<Props> = ({ house }) => {
       <Flex justify="space-between">
         <BackToDashboard />
 
-      <box>
-        <RoundedLinkButton to={editRoute}  icon="edit" />
-        <RoundedLinkButton to={editRoute}  icon="delete" />
-      </box>
+        <Flex direction="row" alignItems="center">
+          <RoundedLinkButton to={editRoute} icon="edit" />
+          <IconButton mt={-1} icon="delete" onClick={() => setShouldDisplayDeleteModal(true)} />
+        </Flex>
       </Flex>
       <Tabs index={currentStep}>
         <TabList style={{ flexWrap: 'wrap' }}>
@@ -73,6 +87,11 @@ const HouseDetails: React.StatelessFunctionalComponent<Props> = ({ house }) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
+      <DeleteConfirmationModal
+        onCancel={() => setShouldDisplayDeleteModal(false)}
+        isOpen={shouldDisplayDeleteModal}
+        onClick={() => deleteHouse(house._id, history)}
+      />
     </PageContent>
   );
 };
@@ -86,7 +105,6 @@ const mapStateToProps = (state: ReduxState, ownProps: OwnProps): MapStateProps =
   };
 };
 
-export default connect<Props, *, MapStateProps, *, ReduxState, *>(
-  mapStateToProps,
-  null,
-)(HouseDetails);
+export default connect<Props, *, MapStateProps, *, ReduxState, *>(mapStateToProps, { deleteHouse })(
+  withRouter(HouseDetails),
+);

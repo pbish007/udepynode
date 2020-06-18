@@ -14,7 +14,7 @@ export type UPDATE_HOUSE_ACTION = {
 
 export type DELETE_HOUSE_ACTION = {
   type: 'DELETE_HOUSE',
-  payload: House,
+  payload: string,
 };
 
 export type FETCH_HOUSES_SUCCESS_ACTION = {
