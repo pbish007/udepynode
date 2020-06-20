@@ -20,7 +20,7 @@ import { BackToDashboard } from '../../../components/BackLink';
 import { useTabStep } from '../useTabStep';
 
 type DispatchProps = $ReadOnly<{
-  addHouse: (AddHouse, Object) => void,
+  addHouse: (AddHouse<string>, Object) => void,
 }>;
 
 type OwnProps = $ReadOnly<{
@@ -55,7 +55,7 @@ export const HouseWizard: React.StatelessFunctionalComponent<Props> = ({ addHous
       : { utilities: defaultUtilities };
 
     // merge the 4 house attributes to make house object to add
-    const formData: AddHouse = {
+    const formData: AddHouse<string> = {
       ...address,
       ...financials,
       ...utilities,

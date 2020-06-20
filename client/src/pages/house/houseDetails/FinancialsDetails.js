@@ -17,7 +17,7 @@ import {
 } from '../constants';
 
 type FinancialsProps = {|
-  data: { financials: Financials, insurance: Insurance },
+  data: { financials: Financials<number>, insurance: Insurance<number> },
 |};
 
 export const FinancialsDetails: React.StatelessFunctionalComponent<FinancialsProps> = ({

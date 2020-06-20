@@ -18,7 +18,7 @@ import type { House } from '../models';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
 import { updateHouse } from '../../../actions/house';
-import { RoundedButton} from '../../../components/CustomButtons/RoundedLinkButton';
+import { RoundedButton } from '../../../components/CustomButtons/RoundedLinkButton';
 
 type StateProps = $ReadOnly<{
   isLoading: boolean,

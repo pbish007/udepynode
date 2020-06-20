@@ -76,32 +76,32 @@ export type Utilities = {|
   tv_provider: NamedUtility,
 |};
 
-export type Financials = {|
-  assetValue: sting, 
-  mortgage: string,
-  mortgagePayment: string,
-  interest: string,
+export type Financials<T> = {|
+  assetValue: T,
+  mortgage: T,
+  mortgagePayment: T,
+  interest: T,
   mortgageCompany: string,
   mortgageCompanyPhone: string,
   paymentFrequency: string,
 |};
 
-export type Insurance = {|
-  cost: string,
+export type Insurance<T> = {|
+  cost: T,
   company: string,
   companyPhone: string,
   broker: string,
 |};
 
-export type AddHouse = {|
+export type AddHouse<T> = {|
   address: Address,
-  financials: Financials,
-  insurance: Insurance,
+  financials: Financials<T>,
+  insurance: Insurance<T>,
   support: Support,
   utilities: Utilities,
 |};
 
 export type House = {|
   _id: string,
-  ...AddHouse,
+  ...AddHouse<number>,
 |};

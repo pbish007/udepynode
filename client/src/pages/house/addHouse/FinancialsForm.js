@@ -21,7 +21,10 @@ import type { Financials, Insurance } from '../models';
 type FinancialsFormProps = {|
   goToNextStep: () => void,
   goToPreviousStep: () => void,
-  initialValues?: { financials: Financials, insurance: Insurance },
+  initialValues?: {
+    financials: Financials<number> | Financials<string>,
+    insurance: Insurance<number> | Insurance<string>,
+  },
 |};
 
 const ASSET_VALUE_FIELD = 'financials.assetValue';

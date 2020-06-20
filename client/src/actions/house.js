@@ -21,7 +21,7 @@ import {
   UPDATE_HOUSE,
 } from './types';
 
-export const addHouse = (values: AddHouse, history: { push: Function }) => async (
+export const addHouse = (values: AddHouse<string>, history: { push: Function }) => async (
   dispatch: Dispatch,
 ) => {
   try {
@@ -37,9 +37,11 @@ export const addHouse = (values: AddHouse, history: { push: Function }) => async
   }
 };
 
-export const updateHouse = (houseId: string, values: House, history: { push: Function }) => async (
-  dispatch: Dispatch,
-) => {
+export const updateHouse = (
+  houseId: string,
+  values: House<string>,
+  history: { push: Function },
+) => async (dispatch: Dispatch) => {
   try {
     const res: { data: { meta: House } } = await axios.put(API_ROUTES.HOUSE, {
       _id: houseId,
