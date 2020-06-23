@@ -37,11 +37,9 @@ export const addHouse = (values: AddHouse<string>, history: { push: Function }) 
   }
 };
 
-export const updateHouse = (
-  houseId: string,
-  values: House<string>,
-  history: { push: Function },
-) => async (dispatch: Dispatch) => {
+export const updateHouse = (houseId: string, values: House, history: { push: Function }) => async (
+  dispatch: Dispatch,
+) => {
   try {
     const res: { data: { meta: House } } = await axios.put(API_ROUTES.HOUSE, {
       _id: houseId,

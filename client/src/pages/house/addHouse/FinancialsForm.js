@@ -2,7 +2,6 @@
 import { Box, CheckboxGroup, Grid, Stack, Checkbox } from '@chakra-ui/core';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormInput, FormNumberInput } from '../../../components/form/FormField';
 import { FinancialsFooter } from './Footer';
 import {
   ASSET_VALUE_LABEL,
@@ -17,6 +16,7 @@ import {
   MORTGAGE_PAYMENT_LABEL,
 } from '../constants';
 import type { Financials, Insurance } from '../models';
+import {FormInput, FormNumberInput} from "../../../components/form/FormInput";
 
 type FinancialsFormProps = {|
   goToNextStep: () => void,

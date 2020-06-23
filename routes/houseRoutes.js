@@ -28,6 +28,8 @@ module.exports = app => {
   app.post("/api/house", requireLogin, async (req, res) => {
     const { address, financials, insurance, utilities, support } = req.body;
 
+    console.log('req.body', req.body);
+
     if (!req.user) {
       res
         .status(401)

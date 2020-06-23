@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
 import { Box, Flex, Grid, Stack, Text } from '@chakra-ui/core';
-import type { NamedUtility, Utilities, Utility } from '../models';
+import type { NamedUtility, Utility } from '../models';
 import { DetailListItem } from '../../../components/DetailListItem';
+import { capitalize } from '../../../utils/string';
 
 interface UtilitiesProps {
-  data: Utilities;
+  utilities: Array<Utility>;
 }
 
 const UtilityColumn: React.StatelessFunctionalComponent<{ title: string, value: string }> = ({
@@ -21,7 +22,7 @@ const UtilityColumn: React.StatelessFunctionalComponent<{ title: string, value: 
 };
 
 const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, label: string }) => {
-  const { account, monthlyCost, supportNumber } = utility;
+  const { account, monthlyCost, supportNumber, utilityType } = utility;
 
   let companyName;
   if (typeof utility.companyName !== 'undefined') {
@@ -31,33 +32,43 @@ const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, labe
   }
 
   return (
-    <DetailListItem title={label}>
-      <Grid
-        templateColumns={['repeat(1, 1fr)', null, 'repeat(4, 1fr)']}
-        gap={[0, null, 3]}
-        p={2}
-        alignItems="center">
-        <UtilityColumn value={companyName} title="Company Name" />
-        <UtilityColumn value={account || '-'} title="Account" />
-        <UtilityColumn value={monthlyCost || '-'} title="Cost" />
-        <UtilityColumn value={supportNumber || '-'} title="Support Number" />
-      </Grid>
-    </DetailListItem>
+    <Grid
+      templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr)']}
+      gap={[0, null, 3]}
+      p={2}
+      alignItems="center">
+      <Text>{utilityType ? capitalize(utilityType) : '-'}</Text>
+      <Text>{companyName}</Text>
+      <Text>{account || '-'}</Text>
+      <Text>{monthlyCost || '-'}</Text>
+      <Text>{supportNumber || '-'}</Text>
+    </Grid>
   );
 };
 
-export const UtilitiesDetails: React.StatelessFunctionalComponent<UtilitiesProps> = ({ data }) => {
-  const { electricity, gas, hulu, internet, netflix, oil, tv_provider } = data;
+export const UtilitiesDetails: React.StatelessFunctionalComponent<UtilitiesProps> = ({
+  utilities,
+}) => {
   return (
-    <Box pt={8}>
+    <Box pt={8} pb={8}>
+      <Grid
+        templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr)']}
+        gap={[0, null, 3]}
+        p={2}
+        alignItems="center"
+        fontWeight="bold"
+        borderBottom="1px solid #eee">
+        <Text>Utility Type</Text>
+        <Text>Company Name</Text>
+        <Text>Account</Text>
+        <Text>Cost</Text>
+        <Text>Support Number</Text>
+      </Grid>
+
       <Stack>
-        <UtilityInfo utility={electricity} label="Electricity" />
-        <UtilityInfo utility={internet} label="Internet" />
-        <UtilityInfo utility={tv_provider} label="TV Provider" />
-        <UtilityInfo utility={gas} label="Gas" />
-        <UtilityInfo utility={oil} label="Oil" />
-        <UtilityInfo utility={netflix} label="Netflix" />
-        <UtilityInfo utility={hulu} label="Hulu" />
+        {utilities.map(u => {
+          return <UtilityInfo utility={u} key={u.id} label={u.utilityType} />;
+        })}
       </Stack>
     </Box>
   );

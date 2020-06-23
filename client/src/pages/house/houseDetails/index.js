@@ -80,7 +80,7 @@ const HouseDetails: React.StatelessFunctionalComponent<Props> = ({
             <FinancialsDetails data={{ financials, insurance }} />
           </TabPanel>
           <TabPanel>
-            <UtilitiesDetails data={utilities} />
+            <UtilitiesDetails utilities={utilities} />
           </TabPanel>
           <TabPanel>
             <SupportDetails data={support} />

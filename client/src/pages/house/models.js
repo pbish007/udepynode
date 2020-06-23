@@ -1,24 +1,21 @@
 // @flow
 
+import type { Option } from '../../components/form/Option';
+import { capitalize } from '../../utils/string';
+
+const utilityTypes = ['electricity', 'gas', 'internet', 'oil', 'tv'];
+type UtilityType = 'electricity' | 'gas' | 'internet' | 'oil' | 'tv';
+export const UTILITY_OPTIONS: Array<Option> = utilityTypes.map(u => ({
+  value: u,
+  label: capitalize(u),
+}));
+
 export const defaultAddress = {
   street: '',
   city: '',
   zip: '',
   state: '',
   country: '',
-};
-
-const defaultNamedUtility = { account: '', monthlyCost: '', supportNumber: '', companyName: '' };
-const defaultUtility = { account: '', monthlyCost: '', supportNumber: '' };
-
-export const defaultUtilities = {
-  electricity: defaultNamedUtility,
-  gas: defaultNamedUtility,
-  hulu: defaultUtility,
-  netflix: defaultUtility,
-  internet: defaultNamedUtility,
-  oil: defaultNamedUtility,
-  tv_provider: defaultNamedUtility,
 };
 
 export type Address = {|
@@ -56,25 +53,20 @@ export const defaultSupportData = {
 };
 
 export type Utility = {
+  id: string,
   account: string,
   monthlyCost: string,
   supportNumber: string,
+  companyName: string,
+  utilityType: UtilityType,
 };
+
+export const defaultUtilities: Array<Utility> = [];
 
 export type NamedUtility = {
   companyName: string,
   ...Utility,
 };
-
-export type Utilities = {|
-  electricity: NamedUtility,
-  gas: NamedUtility,
-  hulu: Utility,
-  netflix: Utility,
-  internet: NamedUtility,
-  oil: NamedUtility,
-  tv_provider: NamedUtility,
-|};
 
 export type Financials<T> = {|
   assetValue: T,
@@ -98,7 +90,7 @@ export type AddHouse<T> = {|
   financials: Financials<T>,
   insurance: Insurance<T>,
   support: Support,
-  utilities: Utilities,
+  utilities: Array<Utility>,
 |};
 
 export type House = {|

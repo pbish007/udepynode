@@ -46,14 +46,15 @@ const insuranceSchema = new Schema(
 
 const utilitiesSchema = new Schema(
   {
+    utilityType: String,
     companyName: String,
     account: String,
     monthlyCost: Number,
     supportNumber: Number
   },
   {
-    id: false,
-    _id: false
+    id: true,
+    _id: true
   }
 );
 
@@ -76,15 +77,7 @@ const houseSchema = new Schema(
     address: addressSchema,
     financials: financialsSchema,
     insurance: insuranceSchema,
-    utilities: {
-      electricity: utilitiesSchema,
-      internet: utilitiesSchema,
-      tv_provider: utilitiesSchema,
-      gas: utilitiesSchema,
-      oil: utilitiesSchema,
-      netflix: utilitiesSchema,
-      hulu: utilitiesSchema
-    },
+    utilities: [utilitiesSchema],
     support: {
       plumber: [supportSchema],
       electrician: [supportSchema],

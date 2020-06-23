@@ -3,12 +3,12 @@ import * as React from 'react';
 import { Box, Button, Grid } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 
-import { FormInput } from '../../../components/form/FormField';
 import { AddressFooter } from './Footer';
 import type { Address } from '../models';
 import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, STATE_LABEL, ZIP_LABEL } from '../constants';
 import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticMap, StaticStreetMap } from '../../../components/Map';
+import {FormInput} from "../../../components/form/FormInput";
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
