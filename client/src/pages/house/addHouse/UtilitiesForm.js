@@ -38,7 +38,7 @@ const createEmptyItem = () => {
     fieldData[f.name] = '';
   });
 
-  fieldData.id = id;
+  fieldData._id = id;
   id++;
   console.log('field data', fieldData);
   return fieldData;
@@ -52,12 +52,10 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
     });
     const { handleSubmit, errors, formState, register, getValues, control } = formProps;
 
-    const { fields, append } = useFieldArray<Utility>({
+    const { fields, append, remove } = useFieldArray<Utility>({
       control,
       name: 'utilities',
     });
-
-    console.log('fields', fields);
 
     React.useImperativeHandle(ref, () => ({
       getValues: (): UtilitiesFormModel => {
@@ -96,12 +94,12 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
                     templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr) 40px']}
                     gap={[0, null, 3]}
                     mb={4}
-                    key={item.id}>
+                    key={item._id || item.id}>
                     <FormInput
                       errors={errors}
                       fieldName={`utilities[${index}].account`}
                       placeholder="Account"
-                      registerFn={register}
+                      registerFn={register()}
                       mb={[2, 0]}
                       defaultValue={`${item.account}` || ''}
                     />
@@ -109,7 +107,7 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
                       errors={errors}
                       fieldName={`utilities[${index}].companyName`}
                       placeholder="Company Name"
-                      registerFn={register}
+                      registerFn={register()}
                       mb={[2, 0]}
                       defaultValue={`${item.companyName}` || ''}
                     />
@@ -117,7 +115,7 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
                       errors={errors}
                       fieldName={`utilities[${index}].monthlyCost`}
                       placeholder="Monthly Cost"
-                      registerFn={register}
+                      registerFn={register()}
                       mb={[2, 0]}
                       defaultValue={item.monthlyCost || ''}
                     />
@@ -125,7 +123,7 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
                       errors={errors}
                       fieldName={`utilities[${index}].supportNumber`}
                       placeholder="Support Number"
-                      registerFn={register}
+                      registerFn={register()}
                       mb={[2, 0]}
                       defaultValue={item.supportNumber || ''}
                     />
@@ -134,11 +132,11 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
                       fieldName={`utilities[${index}].utilityType`}
                       options={UTILITY_OPTIONS}
                       placeholder="Select Type"
-                      registerFn={register}
+                      registerFn={register()}
                       mb={[2, 0]}
-                      defaultValue={item.utilityType || 'gas'}
+                      defaultValue={item.utilityType || ''}
                     />
-                    <IconButton icon="delete" onClick={() => alert(`removing ${item.id}`)} />
+                    <IconButton icon="delete" onClick={() => remove(index)} />
                   </Grid>
                 );
               })}
