@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type { House } from '../models';
+import type { House } from '../../../models/house';
 import { Box, Flex, Grid, Image, Text } from '@chakra-ui/core';
 import { getHouseDetailsRoute } from '../../../constants';
 import { StyledRouterLink } from '../../../components/StyledLink';

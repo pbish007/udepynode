@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
 import type { ReduxState } from '../models/ReduxState';
-import type { House } from '../pages/house/models';
+import type { House } from '../models/house';
 
 export const selectHouses = (state: ReduxState): Array<House> | null => state.houses.data;
 

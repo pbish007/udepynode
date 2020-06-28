@@ -1,6 +1,6 @@
 // @flow
 
-import type { House } from './models';
+import type { House } from '../../models/house';
 import type {
   ADD_HOUSE_ACTION,
   DELETE_HOUSE_ACTION,

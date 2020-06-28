@@ -6,10 +6,7 @@ const Dashboard = () => {
   return (
     // NEW Stuff
 
-    <div>
-    This is the Dashboad for all properties, boats, autos
-    </div>
-
+    <div>This is the Dashboad for all properties, boats, autos</div>
   );
 };
 

@@ -3,7 +3,7 @@ import React from 'react';
 import type { Errors } from './types';
 import { FormField } from './FormField';
 import { Select } from '@chakra-ui/core';
-import type {Option} from "./Option";
+import type { Option } from '../../models/Option';
 
 type FormSelectProps = {|
   errors: Errors,

@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { ROUTES } from '../constants';
 import { API_ROUTES } from './apiRoutes';
-import type { House, AddHouse } from '../pages/house/models';
+import type { House, AddHouse } from '../models/house';
 import type {
   ADD_HOUSE_ACTION,
   DELETE_HOUSE_ACTION,

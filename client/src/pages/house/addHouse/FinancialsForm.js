@@ -15,8 +15,8 @@ import {
   MORTGAGE_LABEL,
   MORTGAGE_PAYMENT_LABEL,
 } from '../constants';
-import type { Financials, Insurance } from '../models';
-import {FormInput, FormNumberInput} from "../../../components/form/FormInput";
+import type { Financials, Insurance } from '../../../models/house';
+import { FormInput, FormNumberInput } from '../../../components/form/FormInput';
 
 type FinancialsFormProps = {|
   goToNextStep: () => void,

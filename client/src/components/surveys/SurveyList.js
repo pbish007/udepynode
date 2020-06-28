@@ -21,7 +21,7 @@ class SurveyList extends Component {
             <a>No: {survey.no}</a>
           </div>
           <div className="btn-floating red btn-small white-text bottom">
-                <i className="large material-icons">delete</i>
+            <i className="large material-icons">delete</i>
           </div>
         </div>
       );

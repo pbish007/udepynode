@@ -3,11 +3,11 @@ import { Box, Button, Flex, Grid, Stack, Text } from '@chakra-ui/core';
 import * as React from 'react';
 import { UtilitiesFooter } from './Footer';
 import { useForm, useFieldArray } from 'react-hook-form';
-import type { Utility } from '../models';
 import { FormInput, FormNumberInput } from '../../../components/form/FormInput';
 import { FormSelect } from '../../../components/form/FormSelect';
-import { UTILITY_OPTIONS } from '../models';
 import { IconButton } from '../../../components/CustomButtons/RoundedLinkButton';
+import type { Utility } from '../../../models/Utility';
+import { UTILITY_OPTIONS } from '../../../models/Utility';
 
 type UtilitiesFormProps = {|
   goToNextStep: () => void,

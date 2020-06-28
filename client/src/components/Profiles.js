@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-Box,
-Avatar,
-Badge
-} from "@chakra-ui/core";
-
-
+import { Box, Avatar, Badge } from '@chakra-ui/core';
 
 class Profiles extends Component {
   renderContent() {
@@ -56,8 +50,6 @@ class Profiles extends Component {
                 </div>
               </div>
             </div>
-
-
           </div>
         );
     }
@@ -72,57 +64,45 @@ class Profiles extends Component {
       default:
         return (
           <div>
-          <Box pl="10" pr="10" pt="10" pb="10" maxW="xs" borderWidth="1px" rounded="lg" overflow="hidden" width="250px">
-             <Avatar  size="2xl" name={this.props.auth.firstName} src={this.props.auth.userImg} />
-             <Box p="4">
-              <Box d="flex" alignItems="baseline">
-                <Badge rounded="full" px="2" variantColor="teal">
-                  Credits: {this.props.auth.credits}
-                </Badge>
+            <Box
+              pl="10"
+              pr="10"
+              pt="10"
+              pb="10"
+              maxW="xs"
+              borderWidth="1px"
+              rounded="lg"
+              overflow="hidden"
+              width="250px">
+              <Avatar size="2xl" name={this.props.auth.firstName} src={this.props.auth.userImg} />
+              <Box p="4">
+                <Box d="flex" alignItems="baseline">
+                  <Badge rounded="full" px="2" variantColor="teal">
+                    Credits: {this.props.auth.credits}
+                  </Badge>
+                </Box>
+
+                <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+                  {this.props.auth.fullName}
+                </Box>
+
+                <Box
+                  color="gray.500"
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="xs"
+                  textTransform="uppercase">
+                  {this.props.auth.userEmail}
+                </Box>
               </Box>
-
-              <Box
-                mt="1"
-                fontWeight="semibold"
-                as="h4"
-                lineHeight="tight"
-                isTruncated
-              >
-                {this.props.auth.fullName}
-              </Box>
-
-              <Box
-                color="gray.500"
-                fontWeight="semibold"
-                letterSpacing="wide"
-                fontSize="xs"
-                textTransform="uppercase"
-                >
-                {this.props.auth.userEmail}
-              </Box>
-
-
             </Box>
-          </Box>
-
-
-        </div>
+          </div>
         );
     }
   }
 
-
-
-
-
-
   render() {
-    return (
-      <div className="container">
-      {this.renderSideContent()}
-      </div>
-
-    );
+    return <div className="container">{this.renderSideContent()}</div>;
   }
 }
 

@@ -1,25 +1,13 @@
 // @flow
 import * as React from 'react';
-import { Box, Flex, Grid, Stack, Text } from '@chakra-ui/core';
-import type { NamedUtility, Utility } from '../models';
-import { DetailListItem } from '../../../components/DetailListItem';
+import { Box, Grid, Stack, Text } from '@chakra-ui/core';
+import type { NamedUtility } from '../../../models/house';
 import { capitalize } from '../../../utils/string';
+import type { Utility } from '../../../models/Utility';
 
 interface UtilitiesProps {
   utilities: Array<Utility>;
 }
-
-const UtilityColumn: React.StatelessFunctionalComponent<{ title: string, value: string }> = ({
-  title,
-  value,
-}) => {
-  return (
-    <Flex direction="column" fontSize="sm">
-      <Text fontWeight="bold">{title}:</Text>
-      <Text>{value}</Text>
-    </Flex>
-  );
-};
 
 const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, label: string }) => {
   const { account, monthlyCost, supportNumber, utilityType } = utility;

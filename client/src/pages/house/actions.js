@@ -1,5 +1,5 @@
 // @flow
-import type { House } from './models';
+import type { House } from '../../models/house';
 import type { ErrorMessage } from '../../models/ErrorMessage';
 
 export type ADD_HOUSE_ACTION = {

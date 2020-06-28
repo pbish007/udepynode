@@ -5,7 +5,7 @@ import { PageContent } from '../../../components/PageContent';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
 import { makeSelectHouseById, selectHouses } from '../../../selectors';
-import type { House } from '../models';
+import type { House } from '../../../models/house';
 import { useTabStep } from '../useTabStep';
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
 import { AddressDetails } from './AddressDetails';

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
-import type { Financials, Insurance } from '../models';
+import type { Financials, Insurance } from '../../../models/house';
 import { DisplayField } from '../../../components/DisplayField';
 import {
   ASSET_VALUE_LABEL,

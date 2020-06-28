@@ -13,11 +13,12 @@ import { addHouse } from '../../../actions/house';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { PageContent } from '../../../components/PageContent';
-import type { AddHouse } from '../models';
-import { defaultAddress, defaultUtilities } from '../models';
+import type { AddHouse } from '../../../models/house';
+import { defaultAddress} from '../../../models/house';
 import type { ReduxState } from '../../../models/ReduxState';
 import { BackToDashboard } from '../../../components/BackLink';
 import { useTabStep } from '../useTabStep';
+import {defaultUtilities} from "../../../models/Utility";
 
 type DispatchProps = $ReadOnly<{
   addHouse: (AddHouse<string>, Object) => void,

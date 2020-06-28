@@ -1,7 +1,7 @@
 // @flow
 
-import type { Option } from '../../components/form/Option';
-import { capitalize } from '../../utils/string';
+import type { Option } from '../components/form/Option';
+import { capitalize } from '../utils/string';
 
 const utilityTypes = ['electricity', 'gas', 'internet', 'oil', 'tv'];
 type UtilityType = 'electricity' | 'gas' | 'internet' | 'oil' | 'tv';

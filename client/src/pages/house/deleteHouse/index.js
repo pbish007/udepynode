@@ -11,14 +11,16 @@ import { UtilitiesForm } from '../addHouse/UtilitiesForm';
 import { SupportForm } from '../addHouse/SupportForm';
 import type { SupportFormModel } from '../addHouse/SupportForm';
 import type { AddressFormModel } from '../addHouse/AddressForm';
-import { defaultAddress, defaultSupportData, defaultUtilities } from '../models';
+import { defaultAddress } from '../../../models/house';
 import type { FinancialsFormModel } from '../addHouse/FinancialsForm';
 import type { UtilitiesFormModel } from '../addHouse/UtilitiesForm';
-import type { House } from '../models';
+import type { House } from '../../../models/house';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
 import { updateHouse } from '../../../actions/house';
 import { RoundedButton } from '../../../components/CustomButtons/RoundedLinkButton';
+import { defaultUtilities } from '../../../models/Utility';
+import { defaultSupportData } from '../../../models/Support';
 
 type StateProps = $ReadOnly<{
   isLoading: boolean,

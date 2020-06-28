@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Box, Grid } from '@chakra-ui/core';
-import type { Address } from '../models';
+import type { Address } from '../../../models/house';
 import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, STATE_LABEL, ZIP_LABEL } from '../constants';
 import { DisplayField } from '../../../components/DisplayField';
 import { fetchLocationFromAddress } from '../../../api/map';
