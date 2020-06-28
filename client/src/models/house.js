@@ -1,14 +1,7 @@
 // @flow
 
-import type { Option } from '../components/form/Option';
-import { capitalize } from '../utils/string';
-
-const utilityTypes = ['electricity', 'gas', 'internet', 'oil', 'tv'];
-type UtilityType = 'electricity' | 'gas' | 'internet' | 'oil' | 'tv';
-export const UTILITY_OPTIONS: Array<Option> = utilityTypes.map(u => ({
-  value: u,
-  label: capitalize(u),
-}));
+import type { Utility } from './Utility';
+import type { Support } from './Support';
 
 export const defaultAddress = {
   street: '',
@@ -25,43 +18,6 @@ export type Address = {|
   state: string,
   country: string,
 |};
-
-export type SupportType = {|
-  companyName?: string,
-  personName?: string,
-  phoneNumber?: string,
-  mobile?: string,
-|};
-
-const defaultSupportType: SupportType = {
-  companyName: '',
-  personName: '',
-  phoneNumber: '',
-  mobile: '',
-};
-
-export type Support = {|
-  plumber: Array<SupportType>,
-  electrician: Array<SupportType>,
-  hvac: Array<SupportType>,
-|};
-
-export const defaultSupportData = {
-  plumber: [{ ...defaultSupportType }],
-  electrician: [{ ...defaultSupportType }],
-  hvac: [{ ...defaultSupportType }],
-};
-
-export type Utility = {
-  id: string,
-  account: string,
-  monthlyCost: string,
-  supportNumber: string,
-  companyName: string,
-  utilityType: UtilityType,
-};
-
-export const defaultUtilities: Array<Utility> = [];
 
 export type NamedUtility = {
   companyName: string,
