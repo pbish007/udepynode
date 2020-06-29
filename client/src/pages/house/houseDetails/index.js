@@ -7,7 +7,7 @@ import type { ReduxState } from '../../../models/ReduxState';
 import { makeSelectHouseById, selectHouses } from '../../../selectors';
 import type { House } from '../../../models/house';
 import { useTabStep } from '../useTabStep';
-import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
+import { Box, Divider, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
 import { AddressDetails } from './AddressDetails';
 import { FinancialsDetails } from './FinancialsDetails';
 import { UtilitiesDetails } from './UtilitiesDetails';
@@ -38,6 +38,23 @@ type Props = {|
   ...DispatchProps,
 |};
 
+export const SectionHeading = ({ children }: { children: React.Node }) => {
+  return (
+    <React.Fragment>
+      <Box
+        fontWeight="normal"
+        fontSize={24}
+        as="h2"
+        marginBottom={4}
+        padding={2}
+        bg="#fafafa"
+        textAlign="center">
+        {children}
+      </Box>
+    </React.Fragment>
+  );
+};
+
 const HouseDetails: React.StatelessFunctionalComponent<Props> = ({
   house,
   deleteHouse,
@@ -64,29 +81,12 @@ const HouseDetails: React.StatelessFunctionalComponent<Props> = ({
           <IconButton mt={-1} icon="delete" onClick={() => setShouldDisplayDeleteModal(true)} />
         </Flex>
       </Flex>
-      <Tabs index={currentStep}>
-        <TabList style={{ flexWrap: 'wrap' }}>
-          <Tab onClick={setStep0}>Address</Tab>
-          <Tab onClick={setStep1}>Financials</Tab>
-          <Tab onClick={setStep2}>Utilities</Tab>
-          <Tab onClick={setStep3}>Support</Tab>
-        </TabList>
-
-        <TabPanels>
-          <TabPanel>
-            <AddressDetails data={address} />
-          </TabPanel>
-          <TabPanel>
-            <FinancialsDetails data={{ financials, insurance }} />
-          </TabPanel>
-          <TabPanel>
-            <UtilitiesDetails utilities={utilities} />
-          </TabPanel>
-          <TabPanel>
-            <SupportDetails data={support} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+      <Box>
+        <AddressDetails data={address} title="Address" />
+        <FinancialsDetails data={{ financials, insurance }} title="Financials" />
+        <UtilitiesDetails utilities={utilities} title="Utilities" />
+        <SupportDetails data={support} title="Support" />
+      </Box>
       <DeleteConfirmationModal
         onCancel={() => setShouldDisplayDeleteModal(false)}
         isOpen={shouldDisplayDeleteModal}

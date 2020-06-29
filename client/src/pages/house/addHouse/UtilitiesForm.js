@@ -143,7 +143,7 @@ export const UtilitiesForm = React.forwardRef<UtilitiesFormProps, any>(
           </Stack>
           <Flex justifyContent="flex-end">
             <Button onClick={addEmptyItem} variant="outline">
-              Add
+              Add New Row
             </Button>
           </Flex>
           <UtilitiesFooter goToPreviousStep={goToPreviousStep} />

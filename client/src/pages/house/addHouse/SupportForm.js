@@ -5,13 +5,18 @@ import { SupportFooter } from './Footer';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FormInput, FormNumberInput } from '../../../components/form/FormInput';
 import type { Support } from '../../../models/Support';
+import { FormSelect } from '../../../components/form/FormSelect';
+import { IconButton } from '../../../components/CustomButtons/RoundedLinkButton';
+import { SUPPORT_OPTIONS } from '../../../models/Support';
 
-const PLUMBER_TYPE = 'plumber';
-const ELECTRICIAN_TYPE = 'electrician';
-const HVAC_TYPE = 'hvac';
+type SupportFormProps = {|
+  submitForm: Object => void,
+  goToPreviousStep: () => void,
+  initialValues?: { support: Array<Support> },
+|};
 
 export type SupportFormModel = {|
-  support: Support,
+  support: Array<Support>,
 |};
 
 const SUPPORT_FIELDS: Array<{
@@ -34,82 +39,18 @@ const createEmptyItem = () => {
   return fieldData;
 };
 
-export const SupportFields = ({
-  errors,
-  register,
-  type,
-  title,
-  control,
-}: {|
-  type: string,
-  title: string,
-  errors: Object,
-  register: Function,
-  control: any,
-|}) => {
-  const { fields, append } = useFieldArray({ control, name: `support.${type}` });
-
-  const addEmptyItem = () => {
-    append(createEmptyItem());
-  };
-
-  return (
-    <Stack>
-      <Flex>
-        <Text fontWeight="bold">{title}</Text>
-      </Flex>
-      {!!fields &&
-        fields.map((item, index) => {
-          return (
-            <Grid
-              templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr)']}
-              gap={[0, null, 3]}
-              key={item.id}>
-              {SUPPORT_FIELDS.map(field => {
-                const Field = field.renderField || FormInput;
-                return (
-                  <Field
-                    key={field.name}
-                    errors={errors}
-                    fieldName={`support.${type}[${index}].${field.name}`}
-                    defaultValue={`${item[field.name]}`}
-                    placeholder={field.title}
-                    registerFn={register}
-                    mb={[2, 0]}
-                  />
-                );
-              })}
-            </Grid>
-          );
-        })}
-      <Flex justifyContent="flex-end">
-        <Button onClick={addEmptyItem} variant="outline">
-          Add
-        </Button>
-      </Flex>
-    </Stack>
-  );
-};
-
-type SupportFormProps = {|
-  submitForm: Object => void,
-  goToPreviousStep: () => void,
-  initialValues?: Object,
-|};
-
 export const SupportForm = React.forwardRef<SupportFormProps, any>(
-  ({ goToPreviousStep, submitForm, initialValues }: SupportFormProps, ref: any) => {
-    const formProps = useForm({
+  ({ submitForm, goToPreviousStep, initialValues }: SupportFormProps, ref: any) => {
+    const formProps = useForm<Array<Support>>({
       mode: 'onChange',
-      defaultValues: initialValues || {
-        support: {
-          [PLUMBER_TYPE]: [createEmptyItem()],
-          [HVAC_TYPE]: [createEmptyItem()],
-          [ELECTRICIAN_TYPE]: [createEmptyItem()],
-        },
-      },
+      defaultValues: initialValues || { support: [] },
     });
     const { handleSubmit, errors, formState, register, getValues, control } = formProps;
+
+    const { fields, append, remove } = useFieldArray<Support>({
+      control,
+      name: 'support',
+    });
 
     React.useImperativeHandle(ref, () => ({
       getValues: (): SupportFormModel => {
@@ -123,32 +64,84 @@ export const SupportForm = React.forwardRef<SupportFormProps, any>(
       }
     };
 
+    const addEmptyItem = () => {
+      append(createEmptyItem());
+    };
+
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box p={4}>
-          <Stack>
-            <SupportFields
-              errors={errors}
-              register={register}
-              control={control}
-              type={PLUMBER_TYPE}
-              title="Plumber"
-            />
-            <SupportFields
-              errors={errors}
-              register={register}
-              control={control}
-              type={ELECTRICIAN_TYPE}
-              title="Electrician"
-            />
-            <SupportFields
-              errors={errors}
-              register={register}
-              control={control}
-              type={HVAC_TYPE}
-              title="HVAC"
-            />
+          <Stack mb={[4]}>
+            <Grid
+              templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr) 40px']}
+              gap={[0, null, 3]}
+              mb={4}>
+              <Text>Support Type</Text>
+              <Text>Company</Text>
+              <Text>Name</Text>
+              <Text>Phone Number</Text>
+              <Text>Mobile Number</Text>
+            </Grid>
+            {!!fields &&
+              fields.map((item: Support, index) => {
+                return (
+                  <Grid
+                    templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr) 40px']}
+                    gap={[0, null, 3]}
+                    mb={4}
+                    key={item._id || item.id}>
+                    <FormSelect
+                      errors={errors}
+                      fieldName={`support[${index}].supportType`}
+                      options={SUPPORT_OPTIONS}
+                      placeholder="Select Type"
+                      registerFn={register()}
+                      mb={[2, 0]}
+                      defaultValue={item.supportType || ''}
+                    />
+                    <FormInput
+                      errors={errors}
+                      fieldName={`support[${index}].companyName`}
+                      placeholder="Company Name"
+                      registerFn={register()}
+                      mb={[2, 0]}
+                      defaultValue={`${item.companyName || ''}`}
+                    />
+                    <FormInput
+                      errors={errors}
+                      fieldName={`support[${index}].personName`}
+                      placeholder="Name"
+                      registerFn={register()}
+                      mb={[2, 0]}
+                      defaultValue={`${item.personName || ''}`}
+                    />
+                    <FormNumberInput
+                      errors={errors}
+                      fieldName={`support[${index}].phoneNumber`}
+                      placeholder="Phone Number"
+                      registerFn={register()}
+                      mb={[2, 0]}
+                      defaultValue={item.phoneNumber || ''}
+                    />
+                    <FormNumberInput
+                      errors={errors}
+                      fieldName={`support[${index}].mobile`}
+                      placeholder="Mobile Number"
+                      registerFn={register()}
+                      mb={[2, 0]}
+                      defaultValue={item.mobile || ''}
+                    />
+
+                    <IconButton icon="delete" onClick={() => remove(index)} />
+                  </Grid>
+                );
+              })}
           </Stack>
+          <Flex justifyContent="flex-end">
+            <Button onClick={addEmptyItem} variant="outline">
+              Add New Row
+            </Button>
+          </Flex>
           <SupportFooter goToPreviousStep={goToPreviousStep} />
         </Box>
       </form>

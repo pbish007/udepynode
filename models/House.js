@@ -60,14 +60,15 @@ const utilitiesSchema = new Schema(
 
 const supportSchema = new Schema(
   {
+    supportType: String,
     personName: String,
     companyName: String,
     phoneNumber: Number,
     mobile: Number
   },
   {
-    id: false,
-    _id: false
+    id: true,
+    _id: true
   }
 );
 
@@ -78,11 +79,7 @@ const houseSchema = new Schema(
     financials: financialsSchema,
     insurance: insuranceSchema,
     utilities: [utilitiesSchema],
-    support: {
-      plumber: [supportSchema],
-      electrician: [supportSchema],
-      hvac: [supportSchema]
-    }
+    support: [supportSchema]
   },
   {
     timestamps: true

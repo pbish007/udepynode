@@ -1,23 +1,17 @@
 // @flow
 import * as React from 'react';
 import { Box, Grid, Stack, Text } from '@chakra-ui/core';
-import type { NamedUtility } from '../../../models/house';
 import { capitalize } from '../../../utils/string';
 import type { Utility } from '../../../models/Utility';
+import { SectionHeading } from './index';
 
-interface UtilitiesProps {
-  utilities: Array<Utility>;
-}
+type UtilitiesProps = {|
+  utilities: Array<Utility>,
+  title: string,
+|};
 
-const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, label: string }) => {
-  const { account, monthlyCost, supportNumber, utilityType } = utility;
-
-  let companyName;
-  if (typeof utility.companyName !== 'undefined') {
-    companyName = utility.companyName || '-';
-  } else {
-    companyName = label;
-  }
+const UtilityInfo = ({ utility }: { utility: Utility }) => {
+  const { account, monthlyCost, supportNumber, utilityType, companyName } = utility;
 
   return (
     <Grid
@@ -26,7 +20,7 @@ const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, labe
       p={2}
       alignItems="center">
       <Text>{utilityType ? capitalize(utilityType) : '-'}</Text>
-      <Text>{companyName}</Text>
+      <Text>{companyName || '-'}</Text>
       <Text>{account || '-'}</Text>
       <Text>{monthlyCost || '-'}</Text>
       <Text>{supportNumber || '-'}</Text>
@@ -36,9 +30,11 @@ const UtilityInfo = ({ utility, label }: { utility: Utility | NamedUtility, labe
 
 export const UtilitiesDetails: React.StatelessFunctionalComponent<UtilitiesProps> = ({
   utilities,
+  title,
 }) => {
   return (
     <Box pt={8} pb={8}>
+      <SectionHeading>{title}</SectionHeading>
       <Grid
         templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr)']}
         gap={[0, null, 3]}
@@ -55,7 +51,7 @@ export const UtilitiesDetails: React.StatelessFunctionalComponent<UtilitiesProps
 
       <Stack>
         {utilities.map(u => {
-          return <UtilityInfo utility={u} key={u.id} label={u.utilityType} />;
+          return <UtilityInfo utility={u} key={u.id} />;
         })}
       </Stack>
     </Box>

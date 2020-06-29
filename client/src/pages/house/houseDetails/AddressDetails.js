@@ -6,12 +6,17 @@ import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, STATE_LABEL, ZIP_LABEL } from 
 import { DisplayField } from '../../../components/DisplayField';
 import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticMap, StaticStreetMap } from '../../../components/Map';
+import { SectionHeading } from './index';
 
 type AddressFormProps = {|
   data: Address,
+  title: string,
 |};
 
-export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps> = ({ data }) => {
+export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps> = ({
+  data,
+  title,
+}) => {
   const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
 
   const { street, city, zip, state, country } = data;
@@ -28,6 +33,7 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
 
   return (
     <Box pt={8}>
+      <SectionHeading>{title}</SectionHeading>
       <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)']} gap={[0, null, 4]}>
         <Box>
           <DisplayField text={street} label={STREET_LABEL} />

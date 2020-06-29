@@ -45,7 +45,7 @@ export type AddHouse<T> = {|
   address: Address,
   financials: Financials<T>,
   insurance: Insurance<T>,
-  support: Support,
+  support: Array<Support>,
   utilities: Array<Utility>,
 |};
 

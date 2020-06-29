@@ -15,13 +15,16 @@ import {
   MORTGAGE_LABEL,
   MORTGAGE_PAYMENT_LABEL,
 } from '../constants';
+import { SectionHeading } from './index';
 
 type FinancialsProps = {|
   data: { financials: Financials<number>, insurance: Insurance<number> },
+  title: string,
 |};
 
 export const FinancialsDetails: React.StatelessFunctionalComponent<FinancialsProps> = ({
   data,
+  title,
 }) => {
   const { financials, insurance } = data;
   const {
@@ -37,6 +40,7 @@ export const FinancialsDetails: React.StatelessFunctionalComponent<FinancialsPro
 
   return (
     <Box pt={8}>
+      <SectionHeading>{title}</SectionHeading>
       <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[0, null, 10]}>
         <Box>
           <DisplayField label={ASSET_VALUE_LABEL} text={`$${assetValue || 0}`} />

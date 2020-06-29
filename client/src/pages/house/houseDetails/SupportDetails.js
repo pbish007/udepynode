@@ -1,73 +1,59 @@
 // @flow
 import * as React from 'react';
 import { Box, Grid, Stack, Text } from '@chakra-ui/core';
-import { DetailListItem } from '../../../components/DetailListItem';
-import type { Support, SupportType } from '../../../models/Support';
+import type { Support } from '../../../models/Support';
+import { capitalize } from '../../../utils/string';
+import { SectionHeading } from './index';
 
 type SupportProps = {|
-  data: Support,
+  data: Array<Support>,
+  title: string,
 |};
 
-const SupportItemRow = ({
-  children,
-  fontSize = 'sm',
-  fontWeight = 'normal',
-}: {
-  children: React.Node,
-  fontSize?: string,
-  fontWeight?: string,
-}) => {
+const SupportInfo = ({ support }: { support: Support }) => {
+  const { companyName, personName, supportType, mobile, phoneNumber } = support;
+
   return (
     <Grid
-      templateColumns={['repeat(1, 1fr)', null, 'repeat(4, 1fr)']}
+      templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr)']}
       gap={[0, null, 3]}
       p={2}
-      alignItems="center"
-      fontWeight={fontWeight}
-      fontSize={fontSize}>
-      {children}
+      alignItems="center">
+      <Text>{supportType ? capitalize(supportType) : '-'}</Text>
+      <Text>{companyName || '-'}</Text>
+      <Text>{personName || '-'}</Text>
+      <Text>{phoneNumber || '-'}</Text>
+      <Text>{mobile || '-'}</Text>
     </Grid>
   );
 };
 
-export const SupportDetail = ({
-  supportData,
+export const SupportDetails: React.StatelessFunctionalComponent<SupportProps> = ({
+  data,
   title,
-}: {
-  supportData: Array<SupportType>,
-  title: string,
 }) => {
+  console.log('support data', data);
   return (
-    <DetailListItem title={title}>
-      <SupportItemRow fontSize="sm" fontWeight="bold">
+    <Box pt={8} pb={8}>
+      <SectionHeading>{title}</SectionHeading>
+      <Grid
+        templateColumns={['repeat(1, 1fr)', null, 'repeat(5, 1fr)']}
+        gap={[0, null, 3]}
+        p={2}
+        alignItems="center"
+        fontWeight="bold"
+        borderBottom="1px solid #eee">
+        <Text>Utility Type</Text>
         <Text>Company Name</Text>
-        <Text>Name</Text>
-        <Text>Office Phone Number</Text>
-        <Text>Mobile Number</Text>
-      </SupportItemRow>
+        <Text>Account</Text>
+        <Text>Cost</Text>
+        <Text>Support Number</Text>
+      </Grid>
 
-      {supportData.map((p, i) => {
-        return (
-          <SupportItemRow key={i}>
-            <Text>{p.companyName || '-'}</Text>
-            <Text>{p.personName || '-'}</Text>
-            <Text>{p.phoneNumber || '-'}</Text>
-            <Text>{p.mobile || '-'}</Text>
-          </SupportItemRow>
-        );
-      })}
-    </DetailListItem>
-  );
-};
-
-export const SupportDetails: React.StatelessFunctionalComponent<SupportProps> = ({ data }) => {
-  const { electrician, hvac, plumber } = data;
-  return (
-    <Box pt={8}>
       <Stack>
-        <SupportDetail supportData={plumber} title="Plumber" />
-        <SupportDetail supportData={electrician} title="Electrician" />
-        <SupportDetail supportData={hvac} title="HVAC" />
+        {data.map(u => {
+          return <SupportInfo support={u} key={u.id} />;
+        })}
       </Stack>
     </Box>
   );

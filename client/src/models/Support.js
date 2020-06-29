@@ -1,23 +1,23 @@
 // @flow
-export type SupportType = {|
+import type { Option } from './Option';
+import { capitalize } from '../utils/string';
+
+const supportTypes = ['plumber', 'electrician', 'hvac'];
+type SupportType = 'plumber' | 'electrician' | 'hvac';
+
+export const SUPPORT_OPTIONS: Array<Option> = supportTypes.map(support => ({
+  value: support,
+  label: capitalize(support),
+}));
+
+export type Support = {|
+  _id?: string,
+  id?: string,
+  supportType: SupportType,
   companyName?: string,
   personName?: string,
   phoneNumber?: string,
   mobile?: string,
 |};
-const defaultSupportType: SupportType = {
-  companyName: '',
-  personName: '',
-  phoneNumber: '',
-  mobile: '',
-};
-export type Support = {|
-  plumber: Array<SupportType>,
-  electrician: Array<SupportType>,
-  hvac: Array<SupportType>,
-|};
-export const defaultSupportData = {
-  plumber: [{ ...defaultSupportType }],
-  electrician: [{ ...defaultSupportType }],
-  hvac: [{ ...defaultSupportType }],
-};
+
+export const defaultSupportData = [];
