@@ -14,10 +14,10 @@ import type { AddressFormModel } from '../addHouse/AddressForm';
 import { defaultAddress } from '../../../models/house';
 import type { FinancialsFormModel } from '../addHouse/FinancialsForm';
 import type { UtilitiesFormModel } from '../addHouse/UtilitiesForm';
-import type { House } from '../../../models/house';
+import type { Address, House } from '../../../models/house';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
-import { updateHouse } from '../../../actions/house';
+import { addHouseImage, updateHouse } from '../../../actions/house';
 import { RoundedButton } from '../../../components/CustomButtons/RoundedLinkButton';
 import { defaultUtilities } from '../../../models/Utility';
 import { defaultSupportData } from '../../../models/Support';
@@ -29,6 +29,7 @@ type StateProps = $ReadOnly<{
 
 type DispatchProps = $ReadOnly<{
   updateHouse: (string, House, Object) => void,
+  addHouseImage: (string, Address, string) => void,
 }>;
 
 type OwnProps = $ReadOnly<{
@@ -46,6 +47,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   houses,
   updateHouse,
   history,
+  addHouseImage,
 }) => {
   // get houseID from route params
   const { houseId } = useParams();
@@ -146,6 +148,8 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
               goToNextStep={setStep1}
               setIsAddressFormValid={setIsAddressFormValid}
               initialValues={{ address }}
+              addHouseImage={addHouseImage}
+              houseId={houseId}
             />
           </TabPanel>
           <TabPanel>
@@ -187,4 +191,5 @@ const mapStateToProps = (state: ReduxState): StateProps => {
 
 export default connect<Props, OwnProps, StateProps, *, ReduxState, *>(mapStateToProps, {
   updateHouse,
+  addHouseImage,
 })(withRouter(EditHouse));

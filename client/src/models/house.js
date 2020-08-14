@@ -17,6 +17,7 @@ export type Address = {|
   zip: string,
   state: string,
   country: string,
+  images?: ?Array<string>,
 |};
 
 export type NamedUtility = {

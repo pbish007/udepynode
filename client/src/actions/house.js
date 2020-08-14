@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { ROUTES } from '../constants';
 import { API_ROUTES } from './apiRoutes';
-import type { House, AddHouse } from '../models/house';
+import type { House, AddHouse, Address } from '../models/house';
 import type {
   ADD_HOUSE_ACTION,
   DELETE_HOUSE_ACTION,
@@ -90,6 +90,25 @@ export const fetchHouses = () => async (dispatch: Dispatch) => {
       payload: 'Error loading houses.',
     });
     console.log('error adding', Object.keys(err), err.toJSON());
+    //console.log('error', Object.keys(err));
+  }
+};
+
+export const addHouseImage = (houseId: string, address: Address, imageUrl: string) => async (
+  dispatch: Dispatch,
+) => {
+  try {
+    const res: { data: { meta: House } } = await axios.patch(API_ROUTES.ADD_IMAGE, {
+      _id: houseId,
+      address,
+      imageUrl,
+    });
+
+    console.log('res.data', res.data.meta);
+
+    dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
+  } catch (err) {
+    console.log('error updating', Object.keys(err), err);
     //console.log('error', Object.keys(err));
   }
 };

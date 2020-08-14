@@ -4,6 +4,9 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
+
+require('./services/s3Upload');
+
 require('./models/user');
 require('./models/Survey');
 require('./models/Udetail');
