@@ -59,6 +59,8 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
 
     const images = initialValues?.address?.images || [];
 
+    const isEditMode = !!houseId;
+
     // https://reactjs.org/docs/hooks-reference.html#useimperativehandle
     React.useImperativeHandle(ref, () => ({
       // used by the parent to get form values
@@ -172,7 +174,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 </Button>
               ) : null}
 
-              {houseId && images?.length < 5 ? (
+              {isEditMode && images?.length < 5 ? (
                 <Button width={200} marginTop="20px">
                   Upload your images
                   <FileUploadHidden type="file" onChange={handleChange} />
@@ -189,7 +191,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 </Grid>
               </React.Fragment>
             ) : (
-              <ImageList images={images} />
+              <ImageList images={images} isEditMode/>
             )}
           </Grid>
 

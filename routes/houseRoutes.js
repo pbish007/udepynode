@@ -38,7 +38,11 @@ module.exports = app => {
 
     const existingData = await House.findOne({_id}).lean().exec();
     const images = existingData.address.images || [];
-    const updatedImages = images.concat({ url: imageUrl });
+
+    const hasDefaultImage = images.find(i => i.isDefault);
+    console.log('hasDefaultImage', hasDefaultImage);
+
+    const updatedImages = images.concat({ url: imageUrl, isDefault: !hasDefaultImage });
 
     console.log('updatedImages', images, updatedImages);
 
