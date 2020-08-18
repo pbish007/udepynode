@@ -11,13 +11,18 @@ export const defaultAddress = {
   country: '',
 };
 
+export type Image = {
+  url: string,
+  isDefault?: boolean,
+};
+
 export type Address = {|
   street: string,
   city: string,
   zip: string,
   state: string,
   country: string,
-  images?: ?Array<string>,
+  images?: ?Array<Image>,
 |};
 
 export type NamedUtility = {

@@ -20,6 +20,8 @@ module.exports = app => {
       .lean()
       .exec();
 
+    console.log('House', house);
+
     res.send(house);
   });
 
@@ -36,7 +38,7 @@ module.exports = app => {
 
     const existingData = await House.findOne({_id}).lean().exec();
     const images = existingData.address.images || [];
-    const updatedImages = images.concat(imageUrl);
+    const updatedImages = images.concat({ url: imageUrl });
 
     console.log('updatedImages', images, updatedImages);
 

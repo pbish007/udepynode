@@ -26,6 +26,42 @@ const cardProps = {
   _hover: { textDecoration: 'none' },
 };
 
+const ThumbnailImage = ({
+  defaultImage,
+  location,
+}: {
+  defaultImage: Image,
+  location: { lat: string, lng: string } | null,
+}) => {
+  if (defaultImage) {
+    return <Image size="70px" objectFit="cover" src={defaultImage.url} alt="Placeholder image" />;
+  }
+
+  return location ? (
+    <StaticStreetMap location={location} size="70px" />
+  ) : (
+    <Image
+      size="70px"
+      objectFit="cover"
+      src="https://via.placeholder.com/150"
+      alt="Placeholder image"
+    />
+  );
+};
+
+const getDefaultImage = (images?: ?Array<Image>): Image | null => {
+  if (!images || !images.length) {
+    return null;
+  }
+  const defaultImage = images.find((image: Image) => image.isDefault);
+
+  if (defaultImage) {
+    return defaultImage;
+  }
+
+  return images[0];
+};
+
 export const HouseCard = ({ house }: { house: House }) => {
   const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
   const route = getHouseDetailsRoute(house._id);
@@ -38,6 +74,14 @@ export const HouseCard = ({ house }: { house: House }) => {
     });
   }, [house.address]);
 
+  const {
+    address: { images },
+  } = house;
+
+  const defaultImage = getDefaultImage(images);
+
+  console.log('defaultImage', defaultImage);
+
   return (
     <StyledRouterLink to={route}>
       <Flex
@@ -47,16 +91,8 @@ export const HouseCard = ({ house }: { house: House }) => {
         justifyContent="space-between"
         p={2}>
         <Flex direction="row" justify="space-between">
-          {location ? (
-            <StaticStreetMap location={location} size="70px" />
-          ) : (
-            <Image
-              size="70px"
-              objectFit="cover"
-              src="https://via.placeholder.com/150"
-              alt="Placeholder image"
-            />
-          )}
+          <ThumbnailImage defaultImage={defaultImage} location={location} />
+
           <Box fontSize="sm" flex={1} ml="2.25rem">
             <Text>{house.address.street}</Text>
             <Text>

@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+const ImageSchema = new Schema({
+    url: String,
+    isDefault: Boolean
+})
+
 const addressSchema = new Schema(
   {
     street: { type: String, required: true },
@@ -8,7 +13,7 @@ const addressSchema = new Schema(
     zip: { type: String, required: true },
     state: { type: String, required: true },
     country: { type: String, required: true },
-      images: [String]
+      images: [ImageSchema]
   },
   {
     id: false,

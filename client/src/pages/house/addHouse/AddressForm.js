@@ -12,6 +12,7 @@ import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticMap, StaticStreetMap } from '../../../components/Map';
 import { FormInput } from '../../../components/form/FormInput';
 import { API_ROUTES } from '../../../actions/apiRoutes';
+import { ImageList } from '../../../components/ImageList';
 
 const ADDRESS1_FIELD = 'address.street';
 const CITY_FIELD = 'address.city';
@@ -56,13 +57,20 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
     const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
     const { handleSubmit, errors, register, formState, getValues } = formProps;
 
-    const images = initialValues?.address?.images;
+    const images = initialValues?.address?.images || [];
 
     // https://reactjs.org/docs/hooks-reference.html#useimperativehandle
     React.useImperativeHandle(ref, () => ({
       // used by the parent to get form values
       getValues: (): AddressFormModel => {
-        return getValues({ nest: true });
+        const formData: AddressFormModel = getValues({ nest: true });
+        const data: AddressFormModel = {
+          address: {
+            ...formData.address,
+            images,
+          },
+        };
+        return data;
       },
     }));
 
@@ -126,7 +134,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box p={4}>
-          <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)']} gap={[0, null, 4]}>
+          <Grid templateColumns={['repeat(1, 1fr)', null, '1fr 2fr']} gap={[0, null, 4]}>
             <Box>
               <FormInput
                 errors={errors}
@@ -158,26 +166,30 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 label={COUNTRY_LABEL}
                 registerFn={register({ required: 'Country is required' })}
               />
-              {!images ? (
+              {!images || !images.length ? (
                 <Button onClick={fetchImages} style={{ marginRight: 20 }}>
                   Get images from Google
                 </Button>
               ) : null}
 
-              {houseId ? (
+              {houseId && images?.length < 5 ? (
                 <Button width={200} marginTop="20px">
                   Upload your images
                   <FileUploadHidden type="file" onChange={handleChange} />
                 </Button>
               ) : null}
             </Box>
-            {!images ? (
+            {!images || !images.length ? (
               <React.Fragment>
-                <StaticMap location={location} pt="1.75rem" />
-                <StaticStreetMap location={location} pt="1.75rem" />
+                <Grid
+                  templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']}
+                  gap={[0, null, 4]}>
+                  <StaticMap location={location} pt="1.75rem" />
+                  <StaticStreetMap location={location} pt="1.75rem" />
+                </Grid>
               </React.Fragment>
             ) : (
-              <div>User images - {images?.length}</div>
+              <ImageList images={images} />
             )}
           </Grid>
 

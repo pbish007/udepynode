@@ -7,6 +7,7 @@ import { DisplayField } from '../../../components/DisplayField';
 import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticMap, StaticStreetMap } from '../../../components/Map';
 import { SectionHeading } from './index';
+import { ImageList } from '../../../components/ImageList';
 
 type AddressFormProps = {|
   data: Address,
@@ -19,7 +20,7 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
 }) => {
   const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
 
-  const { street, city, zip, state, country } = data;
+  const { street, city, zip, state, country, images } = data;
 
   React.useEffect(() => {
     fetchLocationFromAddress({ address: data }).then(locationData => {
@@ -29,12 +30,12 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
     });
   }, [data]);
 
-  console.log('state', location);
+  console.log('house', data);
 
   return (
     <Box pt={8}>
       <SectionHeading>{title}</SectionHeading>
-      <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)']} gap={[0, null, 4]}>
+      <Grid templateColumns={['repeat(1, 1fr)', null, '1fr 2fr']} gap={[0, null, 4]}>
         <Box>
           <DisplayField text={street} label={STREET_LABEL} />
           <DisplayField text={city} label={CITY_LABEL} />
@@ -42,8 +43,16 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
           <DisplayField text={state} label={STATE_LABEL} />
           <DisplayField text={country} label={COUNTRY_LABEL} />
         </Box>
-        <StaticStreetMap location={location} />
-        <StaticMap location={location} />
+        {!images ? (
+          <React.Fragment>
+            <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[0, null, 4]}>
+              <StaticStreetMap location={location} />
+              <StaticMap location={location} />
+            </Grid>
+          </React.Fragment>
+        ) : (
+          <ImageList images={images} />
+        )}
       </Grid>
     </Box>
   );
