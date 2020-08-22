@@ -94,14 +94,43 @@ export const fetchHouses = () => async (dispatch: Dispatch) => {
   }
 };
 
-export const addHouseImage = (houseId: string, address: Address, imageUrl: string) => async (
-  dispatch: Dispatch,
-) => {
+export const addHouseImage = (
+  houseId: string,
+  address: Address,
+  imageUrl: string,
+  toast: Function,
+) => async (dispatch: Dispatch) => {
   try {
     const res: { data: { meta: House } } = await axios.patch(API_ROUTES.ADD_IMAGE, {
       _id: houseId,
       address,
       imageUrl,
+    });
+
+    console.log('res.data', res.data.meta);
+
+    toast({
+      title: 'Image uploaded',
+      description: 'The image has been successfully uploaded.',
+      status: 'info',
+      duration: 9000,
+      isClosable: true,
+    });
+
+    dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
+  } catch (err) {
+    console.log('error updating', Object.keys(err), err);
+    //console.log('error', Object.keys(err));
+  }
+};
+
+export const setDefaultHouseImage = (houseId: string, imageId: string) => async (
+  dispatch: Dispatch,
+) => {
+  try {
+    const res: { data: { meta: House } } = await axios.patch(API_ROUTES.SET_DEFAULT_IMAGE, {
+      _id: houseId,
+      imageId,
     });
 
     console.log('res.data', res.data.meta);

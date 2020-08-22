@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import axios from 'axios';
-import { Box, Button, Grid } from '@chakra-ui/core';
+import { Box, Button, Grid, useToast } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 
@@ -33,7 +33,8 @@ const FileUploadHidden = styled.input`
 type AddressFormProps = {|
   initialValues?: { address: Address },
   goToNextStep: () => void,
-  addHouseImage?: (string, Address, string) => void,
+  addHouseImage?: (string, Address, string, Function) => void,
+  setDefaultHouseImage?: (string, string) => void,
   setIsAddressFormValid: boolean => void,
   houseId?: string,
 |};
@@ -50,12 +51,15 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       initialValues,
       addHouseImage,
       houseId,
+      setDefaultHouseImage,
     }: AddressFormProps,
     ref: any,
   ) => {
     const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
     const { handleSubmit, errors, register, formState, getValues } = formProps;
+
+    const toast = useToast();
 
     const images = initialValues?.address?.images || [];
 
@@ -107,6 +111,15 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       let fileName = fileParts[0];
       let fileType = fileParts[1];
 
+      toast({
+        title: 'Uploading Image',
+        description:
+          'The image is being uploaded. You will get a notification when the image is successfully uploaded.',
+        status: 'info',
+        duration: 9000,
+        isClosable: true,
+      });
+
       const response = await axios.post(API_ROUTES.S3_UPLOAD, {
         fileName: `${fileName}_${Date.now()}`,
         fileType: fileType,
@@ -126,10 +139,16 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
         console.log('Response from s3', result);
         if (addHouseImage && houseId) {
           const address = getValues({ nest: true }).address;
-          addHouseImage(houseId, address, url);
+          addHouseImage(houseId, address, url, toast);
         }
       } catch (err) {
         console.log('ERROR ' + JSON.stringify(err));
+      }
+    };
+
+    const setDefaultImage = (imageId: string) => {
+      if (houseId && setDefaultHouseImage) {
+        setDefaultHouseImage(houseId, imageId);
       }
     };
 
@@ -191,7 +210,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 </Grid>
               </React.Fragment>
             ) : (
-              <ImageList images={images} isEditMode/>
+              <ImageList images={images} isEditMode setDefault={setDefaultImage} />
             )}
           </Grid>
 

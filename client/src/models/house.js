@@ -11,7 +11,8 @@ export const defaultAddress = {
   country: '',
 };
 
-export type Image = {
+export type HouseImage = {
+  _id: string,
   url: string,
   isDefault?: boolean,
 };
@@ -22,7 +23,7 @@ export type Address = {|
   zip: string,
   state: string,
   country: string,
-  images?: ?Array<Image>,
+  images?: ?Array<HouseImage>,
 |};
 
 export type NamedUtility = {

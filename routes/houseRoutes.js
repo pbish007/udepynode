@@ -26,25 +26,20 @@ module.exports = app => {
   });
 
   app.put("/api/house", requireLogin, async (req, res) => {
-    console.log('updating');
     const { _id, updatedHouse } = req.body;
     await House.updateOne({ _id }, { $set: updatedHouse });
     res.send({ success: true, meta: updatedHouse });
   });
 
   app.patch("/api/house-image", requireLogin, async (req, res) => {
-    console.log('updating', req.body);
     const { _id, imageUrl, address } = req.body;
 
     const existingData = await House.findOne({_id}).lean().exec();
     const images = existingData.address.images || [];
 
     const hasDefaultImage = images.find(i => i.isDefault);
-    console.log('hasDefaultImage', hasDefaultImage);
 
     const updatedImages = images.concat({ url: imageUrl, isDefault: !hasDefaultImage });
-
-    console.log('updatedImages', images, updatedImages);
 
     const updatedData = {
       ...existingData,
@@ -53,8 +48,32 @@ module.exports = app => {
         images: updatedImages,
       }
     };
-    console.log('existing', existingData);
-    console.log('updated', updatedData);
+
+    await House.updateOne({ _id }, { $set: updatedData });
+    res.send({ success: true, meta: updatedData });
+  });
+
+  app.patch("/api/house-image/default", requireLogin, async (req, res) => {
+    const { _id, imageId } = req.body;
+
+    const existingData = await House.findOne({_id}).lean().exec();
+    const images = existingData.address.images || [];
+
+    const updatedImages = images.map((image) => {
+        console.log('image._id === imageId', image._id, typeof imageId)
+        return {
+          ...image,
+          isDefault: String(image._id) === imageId
+        }
+    });
+
+    const updatedData = {
+      ...existingData,
+      address: {
+        ...existingData.address,
+        images: updatedImages,
+      }
+    };
     await House.updateOne({ _id }, { $set: updatedData });
     res.send({ success: true, meta: updatedData });
   });
