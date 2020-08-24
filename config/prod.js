@@ -8,4 +8,7 @@ module.exports = {
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
   sendGridKey: process.env.SEND_GRID_KEY,
   redirectDomain: process.env.REDIRECT_DOMAIN
+  AWSAccessKeyId=AKIAJJJPYETET2HGZU3A,
+  AWSSecretKey=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,
+  bucket=tamzoo.com
 };
