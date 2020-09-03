@@ -17,7 +17,12 @@ import type { UtilitiesFormModel } from '../addHouse/UtilitiesForm';
 import type { Address, House } from '../../../models/house';
 import { connect } from 'react-redux';
 import type { ReduxState } from '../../../models/ReduxState';
-import { addHouseImage, updateHouse, setDefaultHouseImage } from '../../../actions/house';
+import {
+  addHouseImage,
+  updateHouse,
+  setDefaultHouseImage,
+  deleteHouseImage,
+} from '../../../actions/house';
 import { RoundedButton } from '../../../components/CustomButtons/RoundedLinkButton';
 import { defaultUtilities } from '../../../models/Utility';
 import { defaultSupportData } from '../../../models/Support';
@@ -31,6 +36,7 @@ type DispatchProps = $ReadOnly<{
   updateHouse: (string, House, Object) => void,
   addHouseImage: (string, Address, string) => void,
   setDefaultHouseImage: (string, string) => void,
+  deleteHouseImage: (string, string) => void,
 }>;
 
 type OwnProps = $ReadOnly<{
@@ -50,6 +56,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   history,
   addHouseImage,
   setDefaultHouseImage,
+  deleteHouseImage,
 }) => {
   // get houseID from route params
   const { houseId } = useParams();
@@ -153,6 +160,7 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
               addHouseImage={addHouseImage}
               houseId={houseId}
               setDefaultHouseImage={setDefaultHouseImage}
+              deleteHouseImage={deleteHouseImage}
             />
           </TabPanel>
           <TabPanel>
@@ -196,4 +204,5 @@ export default connect<Props, OwnProps, StateProps, *, ReduxState, *>(mapStateTo
   updateHouse,
   addHouseImage,
   setDefaultHouseImage,
+  deleteHouseImage,
 })(withRouter(EditHouse));

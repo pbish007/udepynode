@@ -78,6 +78,27 @@ module.exports = app => {
     res.send({ success: true, meta: updatedData });
   });
 
+  app.patch("/api/house-image/delete", requireLogin, async (req, res) => {
+    const { _id, imageId } = req.body;
+
+    const existingData = await House.findOne({_id}).lean().exec();
+    const images = existingData.address.images || [];
+
+    const updatedImages = images.filter((image) => {
+        return String(image._id) !== imageId;
+    });
+
+    const updatedData = {
+      ...existingData,
+      address: {
+        ...existingData.address,
+        images: updatedImages,
+      }
+    };
+    await House.updateOne({ _id }, { $set: updatedData });
+    res.send({ success: true, meta: updatedData });
+  });
+
   app.delete("/api/house", requireLogin, async (req, res) => {
     const { _id } = req.body;
     console.log('deleting', req.body);
