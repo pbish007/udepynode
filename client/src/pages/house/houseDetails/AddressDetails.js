@@ -43,7 +43,7 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
           <DisplayField text={state} label={STATE_LABEL} />
           <DisplayField text={country} label={COUNTRY_LABEL} />
         </Box>
-        {!images ? (
+        {!images || !images.length ? (
           <React.Fragment>
             <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[0, null, 4]}>
               <StaticStreetMap location={location} />
