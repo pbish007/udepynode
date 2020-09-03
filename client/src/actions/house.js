@@ -141,3 +141,21 @@ export const setDefaultHouseImage = (houseId: string, imageId: string) => async 
     //console.log('error', Object.keys(err));
   }
 };
+
+export const deleteHouseImage = (houseId: string, imageId: string) => async (
+  dispatch: Dispatch,
+) => {
+  try {
+    const res: { data: { meta: House } } = await axios.patch(API_ROUTES.DELETE_IMAGE, {
+      _id: houseId,
+      imageId,
+    });
+
+    console.log('res.data', res.data.meta);
+
+    dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
+  } catch (err) {
+    console.log('error updating', Object.keys(err), err);
+    //console.log('error', Object.keys(err));
+  }
+};

@@ -35,6 +35,7 @@ type AddressFormProps = {|
   goToNextStep: () => void,
   addHouseImage?: (string, Address, string, Function) => void,
   setDefaultHouseImage?: (string, string) => void,
+  deleteHouseImage?: (string, string) => void,
   setIsAddressFormValid: boolean => void,
   houseId?: string,
 |};
@@ -52,6 +53,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       addHouseImage,
       houseId,
       setDefaultHouseImage,
+      deleteHouseImage,
     }: AddressFormProps,
     ref: any,
   ) => {
@@ -152,6 +154,12 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       }
     };
 
+    const deleteImage = (imageId: string) => {
+      if (houseId && deleteHouseImage) {
+        deleteHouseImage(houseId, imageId);
+      }
+    };
+
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box p={4}>
@@ -210,7 +218,12 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 </Grid>
               </React.Fragment>
             ) : (
-              <ImageList images={images} isEditMode setDefault={setDefaultImage} />
+              <ImageList
+                images={images}
+                isEditMode
+                setDefault={setDefaultImage}
+                deleteImage={deleteImage}
+              />
             )}
           </Grid>
 

@@ -80,7 +80,16 @@ const iconButtonProps = {
 export const IconButton: React.StatelessFunctionalComponent<{
   icon: string,
   onClick: MouseEventHandler,
+  _hover?: any,
   ...
-}> = ({ icon, onClick, ...props }) => {
-  return <ChakraIconButton {...props} {...iconButtonProps} icon={icon} onClick={onClick} />;
+}> = ({ icon, onClick, _hover, ...props }) => {
+  return (
+    <ChakraIconButton
+      {...props}
+      {...iconButtonProps}
+      _hover={_hover}
+      icon={icon}
+      onClick={onClick}
+    />
+  );
 };
