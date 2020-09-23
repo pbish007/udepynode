@@ -5,7 +5,7 @@ import type { Address } from '../../../models/house';
 import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, STATE_LABEL, ZIP_LABEL } from '../constants';
 import { DisplayField } from '../../../components/DisplayField';
 import { fetchLocationFromAddress } from '../../../api/map';
-import { StaticMap, StaticStreetMap } from '../../../components/Map';
+import { StaticStreetMap } from '../../../components/Map';
 import { SectionHeading } from './index';
 import { ImageList } from '../../../components/ImageList';
 
@@ -45,7 +45,6 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
           <React.Fragment>
             <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[0, null, 4]}>
               <StaticStreetMap location={location} />
-              <StaticMap location={location} />
             </Grid>
           </React.Fragment>
         ) : (

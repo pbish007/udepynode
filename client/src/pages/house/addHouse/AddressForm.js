@@ -9,7 +9,7 @@ import { AddressFooter } from './Footer';
 import type { Address } from '../../../models/house';
 import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, STATE_LABEL, ZIP_LABEL } from '../constants';
 import { fetchLocationFromAddress } from '../../../api/map';
-import { StaticMap, StaticStreetMap } from '../../../components/Map';
+import { StaticStreetMap } from '../../../components/Map';
 import { FormInput } from '../../../components/form/FormInput';
 import { API_ROUTES } from '../../../actions/apiRoutes';
 import { ImageList } from '../../../components/ImageList';
@@ -137,7 +137,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
         },
       };
       try {
-        const result = await axios.put(signedRequest, file, options);
+        await axios.put(signedRequest, file, options);
         if (addHouseImage && houseId) {
           const address = getValues({ nest: true }).address;
           addHouseImage(houseId, address, url, toast);
@@ -212,7 +212,6 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 <Grid
                   templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']}
                   gap={[0, null, 4]}>
-                  <StaticMap location={location} pt="1.75rem" />
                   <StaticStreetMap location={location} pt="1.75rem" />
                 </Grid>
               </React.Fragment>
