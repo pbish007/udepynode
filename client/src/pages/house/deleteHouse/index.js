@@ -91,7 +91,6 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
   const onSubmit = () => {
     const formData: House = getFormData();
 
-    console.log('formData', formData);
     updateHouse(houseId, formData, history);
   };
 
@@ -114,7 +113,6 @@ export const EditHouse: React.StatelessFunctionalComponent<Props> = ({
 
   const handleSave = () => {
     const formData: House = getFormData();
-    console.log('handleSave', formData);
     updateHouse(houseId, formData, history);
   };
 

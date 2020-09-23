@@ -80,8 +80,6 @@ export const HouseCard = ({ house }: { house: House }) => {
 
   const defaultImage = getDefaultImage(images);
 
-  console.log('defaultImage', defaultImage);
-
   return (
     <StyledRouterLink to={route}>
       <Flex

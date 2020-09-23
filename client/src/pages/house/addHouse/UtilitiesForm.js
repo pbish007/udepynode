@@ -40,7 +40,6 @@ const createEmptyItem = () => {
 
   fieldData._id = id;
   id++;
-  console.log('field data', fieldData);
   return fieldData;
 };
 

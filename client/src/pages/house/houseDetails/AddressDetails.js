@@ -30,8 +30,6 @@ export const AddressDetails: React.StatelessFunctionalComponent<AddressFormProps
     });
   }, [data]);
 
-  console.log('house', data);
-
   return (
     <Box pt={8}>
       <SectionHeading>{title}</SectionHeading>

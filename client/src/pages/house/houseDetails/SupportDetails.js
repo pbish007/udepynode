@@ -32,7 +32,6 @@ export const SupportDetails: React.StatelessFunctionalComponent<SupportProps> = 
   data,
   title,
 }) => {
-  console.log('support data', data);
   return (
     <Box pt={8} pb={8}>
       <SectionHeading>{title}</SectionHeading>

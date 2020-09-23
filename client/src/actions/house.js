@@ -27,8 +27,6 @@ export const addHouse = (values: AddHouse<string>, history: { push: Function }) 
   try {
     const res: { data: { meta: House } } = await axios.post(API_ROUTES.HOUSE, values);
 
-    console.log('res.data', res.data.meta);
-
     history.push(ROUTES.HOUSE);
     dispatch<ADD_HOUSE_ACTION>({ type: ADD_HOUSE, payload: res.data.meta });
   } catch (err) {
@@ -45,8 +43,6 @@ export const updateHouse = (houseId: string, values: House, history: { push: Fun
       _id: houseId,
       updatedHouse: values,
     });
-
-    console.log('res.data', res.data.meta);
 
     history.push(ROUTES.HOUSE);
     dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
@@ -66,8 +62,6 @@ export const deleteHouse = (houseId: string, history: { push: Function }) => asy
       },
     });
 
-    console.log('response', res.data.success);
-
     history.push(ROUTES.HOUSE);
     dispatch<DELETE_HOUSE_ACTION>({ type: DELETE_HOUSE, payload: houseId });
   } catch (err) {
@@ -80,8 +74,6 @@ export const fetchHouses = () => async (dispatch: Dispatch) => {
   try {
     dispatch<FETCH_HOUSES_LOADING_ACTION>({ type: FETCH_HOUSES_LOADING });
     const res: { data: Array<House> } = await axios.get(API_ROUTES.HOUSE);
-
-    console.log('houses', res);
 
     dispatch<FETCH_HOUSES_SUCCESS_ACTION>({ type: FETCH_HOUSES_SUCCESS, payload: res.data });
   } catch (err) {
@@ -107,8 +99,6 @@ export const addHouseImage = (
       imageUrl,
     });
 
-    console.log('res.data', res.data.meta);
-
     toast({
       title: 'Image uploaded',
       description: 'The image has been successfully uploaded.',
@@ -133,8 +123,6 @@ export const setDefaultHouseImage = (houseId: string, imageId: string) => async 
       imageId,
     });
 
-    console.log('res.data', res.data.meta);
-
     dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
   } catch (err) {
     console.log('error updating', Object.keys(err), err);
@@ -150,8 +138,6 @@ export const deleteHouseImage = (houseId: string, imageId: string) => async (
       _id: houseId,
       imageId,
     });
-
-    console.log('res.data', res.data.meta);
 
     dispatch<UPDATE_HOUSE_ACTION>({ type: UPDATE_HOUSE, payload: res.data.meta });
   } catch (err) {

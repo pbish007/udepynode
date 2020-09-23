@@ -138,7 +138,6 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       };
       try {
         const result = await axios.put(signedRequest, file, options);
-        console.log('Response from s3', result);
         if (addHouseImage && houseId) {
           const address = getValues({ nest: true }).address;
           addHouseImage(houseId, address, url, toast);

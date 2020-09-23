@@ -3,8 +3,6 @@ const { House } = require("../models/House");
 const aws = require('aws-sdk');
 require('dotenv').config(); // Configure dotenv to load in the .env file
 
-console.log('process.env', process.env.AWSAccessKeyId);
-
 // Configure aws with your accessKeyId and your secretAccessKey
 aws.config.update({
   region: 'us-east-1', // Put your aws region here
@@ -19,8 +17,6 @@ module.exports = app => {
     const house = await House.find({ userId: req.user._id })
       .lean()
       .exec();
-
-    console.log('House', house);
 
     res.send(house);
   });
@@ -60,7 +56,6 @@ module.exports = app => {
     const images = existingData.address.images || [];
 
     const updatedImages = images.map((image) => {
-        console.log('image._id === imageId', image._id, typeof imageId)
         return {
           ...image,
           isDefault: String(image._id) === imageId
@@ -101,7 +96,6 @@ module.exports = app => {
 
   app.delete("/api/house", requireLogin, async (req, res) => {
     const { _id } = req.body;
-    console.log('deleting', req.body);
 
     await House.remove({ _id });
     res.send({ success: true });
@@ -109,8 +103,6 @@ module.exports = app => {
 
   app.post("/api/house", requireLogin, async (req, res) => {
     const { address, financials, insurance, utilities, support } = req.body;
-
-    console.log('req.body', req.body);
 
     if (!req.user) {
       res

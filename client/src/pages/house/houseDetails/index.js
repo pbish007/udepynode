@@ -67,8 +67,6 @@ const HouseDetails: React.StatelessFunctionalComponent<Props> = ({
     return null;
   }
 
-  console.log('house details', house);
-
   const { address, financials, insurance, support, utilities } = house;
 
   const editRoute = getHouseEditRoute(house._id);
