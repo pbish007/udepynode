@@ -59,15 +59,20 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
   ) => {
     const formProps = useForm({ mode: 'onChange', defaultValues: initialValues });
     const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
-    const { handleSubmit, errors, register, formState, getValues } = formProps;
+    const { handleSubmit, errors, register, formState, getValues, watch } = formProps;
 
+    const watchAddress1 = watch('address.street');
+    const watchCity = watch('address.city');
+    const watchZip = watch('address.zip');
+    const watchState = watch('address.state');
+    const watchCountry = watch('address.country');
+
+    const addressChanged = watchAddress1 || watchCity || watchZip || watchState || watchCountry;
     const toast = useToast();
 
     const images = initialValues?.address?.images || [];
 
     const isEditMode = !!houseId;
-
-    const address = getValues({ nest: true });
 
     // https://reactjs.org/docs/hooks-reference.html#useimperativehandle
     React.useImperativeHandle(ref, () => ({
@@ -113,7 +118,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       fetchImages().then(() => {
         console.log('fetched image');
       });
-    }, [address]);
+    }, [addressChanged]);
 
     const handleChange = async e => {
       const file = e.target.files[0];
@@ -202,7 +207,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 label={COUNTRY_LABEL}
                 registerFn={register({ required: 'Country is required' })}
               />
-{/*
+              {/*
               <Button onClick={fetchImages} style={{ marginRight: 20 }}>
                 Get images from Google
               </Button>
@@ -217,7 +222,11 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
             </Box>
             <React.Fragment>
               <Grid templateColumns={'repeat(1, 1fr)'} gap={[0, null, 4]}>
-                <StaticStreetMap location={location} pt="1.75rem" />
+                <StaticStreetMap
+                  location={location}
+                  canSetDefault={isEditMode}
+                  setDefault={() => console.log('set default')}
+                />
               </Grid>
             </React.Fragment>
           </Grid>
