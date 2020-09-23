@@ -10,7 +10,7 @@ const DefaultImage = ({
   deleteImage,
 }: {
   image: HouseImage,
-  setDefault?: string => void,
+  setDefault?: () => void,
   deleteImage?: string => void,
 }) => {
   return (
@@ -24,7 +24,7 @@ const DefaultImage = ({
           backgroundColor="rgba(255, 255, 255, 0.5)"
           padding="0 8px"
           marginRight={4}
-          onChange={() => (setDefault ? setDefault(image._id) : null)}>
+          onChange={() => (setDefault ? setDefault() : null)}>
           Set default
         </Checkbox>
       ) : null}
@@ -50,13 +50,25 @@ export const ImageList = ({
   deleteImage?: string => void,
 }) => {
   return (
-    <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']} gap={[4, null, 4]}>
+    <Grid templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)']} gap={4} mt={8} mb={8}>
       {images.map((image, index) => {
         return (
-          <Box key={index} position="relative">
+          <Box
+            key={index}
+            position="relative"
+            display="flex"
+            flexDirection="row"
+            alignItems="stretch"
+            maxWidth={300}
+            backgroundColor="#eaeaea"
+            justifyContent="center">
             <Image src={image.url} alt="House Image" />
             {isEditMode && (
-              <DefaultImage image={image} setDefault={setDefault} deleteImage={deleteImage} />
+              <DefaultImage
+                image={image}
+                setDefault={() => (setDefault ? setDefault(image._id) : undefined)}
+                deleteImage={deleteImage}
+              />
             )}
           </Box>
         );

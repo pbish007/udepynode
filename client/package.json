@@ -37,7 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext js",
-    "lint:watch": "onchange 'src/**/*.js' -- npm run lint",
+    "lint:watch": "onchange 'src/**/*.js' -- yarn lint",
     "flow": "flow",
     "flow:watch": "flow-watch --ignore node_modules/"
   },

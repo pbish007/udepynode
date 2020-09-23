@@ -67,6 +67,8 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
 
     const isEditMode = !!houseId;
 
+    const address = getValues({ nest: true });
+
     // https://reactjs.org/docs/hooks-reference.html#useimperativehandle
     React.useImperativeHandle(ref, () => ({
       // used by the parent to get form values
@@ -106,6 +108,12 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
         setLocation(data);
       }
     };
+
+    React.useEffect(() => {
+      fetchImages().then(() => {
+        console.log('fetched image');
+      });
+    }, [address]);
 
     const handleChange = async e => {
       const file = e.target.files[0];
@@ -194,12 +202,12 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 label={COUNTRY_LABEL}
                 registerFn={register({ required: 'Country is required' })}
               />
-              {!images || !images.length ? (
-                <Button onClick={fetchImages} style={{ marginRight: 20 }}>
-                  Get images from Google
-                </Button>
-              ) : null}
+{/*
+              <Button onClick={fetchImages} style={{ marginRight: 20 }}>
+                Get images from Google
+              </Button>
 
+*/}
               {isEditMode && images?.length < 5 ? (
                 <Button width={200} marginTop="20px">
                   Upload your images
@@ -207,24 +215,18 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 </Button>
               ) : null}
             </Box>
-            {!images || !images.length ? (
-              <React.Fragment>
-                <Grid
-                  templateColumns={['repeat(1, 1fr)', null, 'repeat(2, 1fr)']}
-                  gap={[0, null, 4]}>
-                  <StaticStreetMap location={location} pt="1.75rem" />
-                </Grid>
-              </React.Fragment>
-            ) : (
-              <ImageList
-                images={images}
-                isEditMode
-                setDefault={setDefaultImage}
-                deleteImage={deleteImage}
-              />
-            )}
+            <React.Fragment>
+              <Grid templateColumns={'repeat(1, 1fr)'} gap={[0, null, 4]}>
+                <StaticStreetMap location={location} pt="1.75rem" />
+              </Grid>
+            </React.Fragment>
           </Grid>
-
+          <ImageList
+            images={images}
+            isEditMode
+            setDefault={setDefaultImage}
+            deleteImage={deleteImage}
+          />
           <AddressFooter />
         </Box>
       </form>
