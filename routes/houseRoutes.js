@@ -1,16 +1,16 @@
 const requireLogin = require("../middlewares/requireLogin");
 const { House } = require("../models/House");
-const aws = require('aws-sdk');
-require('dotenv').config(); // Configure dotenv to load in the .env file
+const aws = require("aws-sdk");
+require("dotenv").config(); // Configure dotenv to load in the .env file
 
 // Configure aws with your accessKeyId and your secretAccessKey
 aws.config.update({
-  region: 'us-east-1', // Put your aws region here
+  region: "us-east-1", // Put your aws region here
   accessKeyId: process.env.AWSAccessKeyId,
   secretAccessKey: process.env.AWSSecretKey
-})
+});
 
-const S3_BUCKET = process.env.bucket
+const S3_BUCKET = process.env.bucket;
 
 module.exports = app => {
   app.get("/api/house", requireLogin, async (req, res) => {
@@ -30,18 +30,20 @@ module.exports = app => {
   app.patch("/api/house-image", requireLogin, async (req, res) => {
     const { _id, imageUrl, address } = req.body;
 
-    const existingData = await House.findOne({_id}).lean().exec();
+    const existingData = await House.findOne({ _id })
+      .lean()
+      .exec();
     const images = existingData.address.images || [];
 
-    const hasDefaultImage = images.find(i => i.isDefault);
+    // const hasDefaultImage = images.find(i => i.isDefault);
 
-    const updatedImages = images.concat({ url: imageUrl, isDefault: !hasDefaultImage });
+    const updatedImages = images.concat({ url: imageUrl, isDefault: false });
 
     const updatedData = {
       ...existingData,
       address: {
         ...address,
-        images: updatedImages,
+        images: updatedImages
       }
     };
 
@@ -52,21 +54,23 @@ module.exports = app => {
   app.patch("/api/house-image/default", requireLogin, async (req, res) => {
     const { _id, imageId } = req.body;
 
-    const existingData = await House.findOne({_id}).lean().exec();
+    const existingData = await House.findOne({ _id })
+      .lean()
+      .exec();
     const images = existingData.address.images || [];
 
-    const updatedImages = images.map((image) => {
-        return {
-          ...image,
-          isDefault: String(image._id) === imageId
-        }
+    const updatedImages = images.map(image => {
+      return {
+        ...image,
+        isDefault: String(image._id) === imageId
+      };
     });
 
     const updatedData = {
       ...existingData,
       address: {
         ...existingData.address,
-        images: updatedImages,
+        images: updatedImages
       }
     };
     await House.updateOne({ _id }, { $set: updatedData });
@@ -76,18 +80,20 @@ module.exports = app => {
   app.patch("/api/house-image/delete", requireLogin, async (req, res) => {
     const { _id, imageId } = req.body;
 
-    const existingData = await House.findOne({_id}).lean().exec();
+    const existingData = await House.findOne({ _id })
+      .lean()
+      .exec();
     const images = existingData.address.images || [];
 
-    const updatedImages = images.filter((image) => {
-        return String(image._id) !== imageId;
+    const updatedImages = images.filter(image => {
+      return String(image._id) !== imageId;
     });
 
     const updatedData = {
       ...existingData,
       address: {
         ...existingData.address,
-        images: updatedImages,
+        images: updatedImages
       }
     };
     await House.updateOne({ _id }, { $set: updatedData });
@@ -122,22 +128,22 @@ module.exports = app => {
   });
 
   app.post("/api/s3_sign", requireLogin, async (req, res) => {
-    const s3 = new aws.S3();  // Create a new instance of S3
+    const s3 = new aws.S3(); // Create a new instance of S3
     const fileName = req.body.fileName;
     const fileType = req.body.fileType;
-// Set up the payload of what we are sending to the S3 api
+    // Set up the payload of what we are sending to the S3 api
     const s3Params = {
       Bucket: S3_BUCKET,
       Key: fileName,
       Expires: 500,
       ContentType: fileType,
-      ACL: 'public-read'
+      ACL: "public-read"
     };
-// Make a request to the S3 API to get a signed URL which we can use to upload our file
-    s3.getSignedUrl('putObject', s3Params, (err, data) => {
-      if(err){
+    // Make a request to the S3 API to get a signed URL which we can use to upload our file
+    s3.getSignedUrl("putObject", s3Params, (err, data) => {
+      if (err) {
         console.log(err);
-        res.json({success: false, error: err})
+        res.json({ success: false, error: err });
       }
       // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved.
       const returnData = {
@@ -145,7 +151,7 @@ module.exports = app => {
         url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
       };
       // Send it all back
-      res.json({success:true, data:{returnData}});
+      res.json({ success: true, data: { returnData } });
     });
   });
 };

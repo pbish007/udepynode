@@ -35,7 +35,7 @@ type StateProps = $ReadOnly<{
 type DispatchProps = $ReadOnly<{
   updateHouse: (string, House, Object) => void,
   addHouseImage: (string, Address, string) => void,
-  setDefaultHouseImage: (string, string) => void,
+  setDefaultHouseImage: (string, string | null) => void,
   deleteHouseImage: (string, string) => void,
 }>;
 

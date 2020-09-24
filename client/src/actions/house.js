@@ -114,7 +114,7 @@ export const addHouseImage = (
   }
 };
 
-export const setDefaultHouseImage = (houseId: string, imageId: string) => async (
+export const setDefaultHouseImage = (houseId: string, imageId: string | null) => async (
   dispatch: Dispatch,
 ) => {
   try {

@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 
 import { AddressFooter } from './Footer';
 import type { Address } from '../../../models/house';
-import { CITY_LABEL, COUNTRY_LABEL, STREET_LABEL, STATE_LABEL, ZIP_LABEL } from '../constants';
+import { CITY_LABEL, COUNTRY_LABEL, STATE_LABEL, STREET_LABEL, ZIP_LABEL } from '../constants';
 import { fetchLocationFromAddress } from '../../../api/map';
 import { StaticStreetMap } from '../../../components/Map';
 import { FormInput } from '../../../components/form/FormInput';
@@ -34,7 +34,7 @@ type AddressFormProps = {|
   initialValues?: { address: Address },
   goToNextStep: () => void,
   addHouseImage?: (string, Address, string, Function) => void,
-  setDefaultHouseImage?: (string, string) => void,
+  setDefaultHouseImage?: (string, string | null) => void,
   deleteHouseImage?: (string, string) => void,
   setIsAddressFormValid: boolean => void,
   houseId?: string,
@@ -67,10 +67,10 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
     const watchState = watch('address.state');
     const watchCountry = watch('address.country');
 
-    const addressChanged = watchAddress1 || watchCity || watchZip || watchState || watchCountry;
     const toast = useToast();
 
     const images = initialValues?.address?.images || [];
+    const hasDefaultImage = images.some(i => i.isDefault);
 
     const isEditMode = !!houseId;
 
@@ -79,13 +79,12 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       // used by the parent to get form values
       getValues: (): AddressFormModel => {
         const formData: AddressFormModel = getValues({ nest: true });
-        const data: AddressFormModel = {
+        return {
           address: {
             ...formData.address,
             images,
           },
         };
-        return data;
       },
     }));
 
@@ -115,10 +114,10 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
     };
 
     React.useEffect(() => {
-      fetchImages().then(() => {
-        console.log('fetched image');
-      });
-    }, [addressChanged]);
+      if (isEditMode) {
+        fetchImages().then(() => {});
+      }
+    }, [isEditMode, watchAddress1, watchCity, watchZip, watchState, watchCountry]);
 
     const handleChange = async e => {
       const file = e.target.files[0];
@@ -160,7 +159,7 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
       }
     };
 
-    const setDefaultImage = (imageId: string) => {
+    const setDefaultImage = (imageId: string | null) => {
       if (houseId && setDefaultHouseImage) {
         setDefaultHouseImage(houseId, imageId);
       }
@@ -225,7 +224,8 @@ export const AddressForm = React.forwardRef<AddressFormProps, any>(
                 <StaticStreetMap
                   location={location}
                   canSetDefault={isEditMode}
-                  setDefault={() => console.log('set default')}
+                  isDefault={!hasDefaultImage}
+                  setDefault={() => setDefaultImage(null)}
                 />
               </Grid>
             </React.Fragment>

@@ -59,7 +59,7 @@ const getDefaultImage = (images?: ?Array<Image>): Image | null => {
     return defaultImage;
   }
 
-  return images[0];
+  return null;
 };
 
 export const HouseCard = ({ house }: { house: House }) => {

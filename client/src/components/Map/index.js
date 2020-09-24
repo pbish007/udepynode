@@ -6,6 +6,7 @@ import { Box, Checkbox, Image } from '@chakra-ui/core';
 type StreetMapProps = $Shape<{
   location: ?{ lat: string, lng: string },
   canSetDefault?: boolean,
+  isDefault?: boolean,
   setDefault: () => void,
   size?: string,
   [string]: any,
@@ -15,6 +16,7 @@ export const StaticStreetMap = ({
   location,
   size,
   canSetDefault,
+  isDefault,
   setDefault,
   ...props
 }: StreetMapProps) => {
@@ -23,11 +25,11 @@ export const StaticStreetMap = ({
   }
   return (
     <Box {...props} position="relative">
-      {canSetDefault ? (
+      {canSetDefault && !isDefault ? (
         <Box position="absolute" top="5px" left="5px" display="flex" alignItems="stretch">
           <Checkbox
             borderRadius={4}
-            isChecked={true}
+            isChecked={isDefault}
             marginBottom={0}
             border="0px solid #666"
             backgroundColor="rgba(255, 255, 255, 0.5)"
