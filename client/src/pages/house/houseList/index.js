@@ -63,12 +63,20 @@ const getDefaultImage = (images?: ?Array<Image>): Image | null => {
 };
 
 export const HouseCard = ({ house }: { house: House }) => {
+  const mountedRef = React.useRef(false);
   const [location, setLocation] = React.useState<{ lat: string, lng: string } | null>(null);
   const route = getHouseDetailsRoute(house._id);
 
   React.useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  React.useEffect(() => {
     fetchLocationFromAddress({ address: house.address }).then(locationData => {
-      if (locationData) {
+      if (locationData && !!mountedRef.current) {
         setLocation(locationData);
       }
     });
